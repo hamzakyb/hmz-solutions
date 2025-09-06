@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HMZ Solutions - Premium Digital Agency Website
 
-## Getting Started
+🚀 **Modern, responsive web sitesi with Apple-style premium design**
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🎨 **Premium Apple-Style Design** - Cinematic dark theme with glassmorphism effects
+- 📱 **Fully Responsive** - Perfect on all devices
+- ⚡ **Next.js 15** - Latest React framework with TypeScript
+- 🎭 **Framer Motion** - Smooth animations and interactive effects
+- 🎯 **Tailwind CSS** - Modern utility-first CSS framework
+- 🔧 **TypeScript** - Type-safe development
+- 🌟 **Interactive Elements** - Mouse-reactive effects and smooth transitions
+- 📊 **SEO Optimized** - Built-in metadata and sitemap
+
+## 🏗️ Tech Stack
+
+- **Framework:** Next.js 15.5.2
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Deployment:** Vercel Ready
+
+## 🚦 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/hamzakyb/hmz-solutions.git
+   cd hmz-solutions
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser**
+   ```
+   http://localhost:3000
+   ```
+
+## 📁 Project Structure
+
+```
+hmz-solutions/
+├── src/
+│   ├── app/                 # Next.js App Router
+│   ├── components/          # React Components
+│   │   ├── ui/             # UI Components
+│   │   └── sections/       # Page Sections
+│   └── lib/                # Utilities
+├── public/                 # Static Assets
+└── tailwind.config.ts      # Tailwind Configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Design Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Navigation:** Apple-style floating navigation with glassmorphism
+- **Hero Section:** Cinematic logo presentation with 3D effects
+- **Services:** Interactive service cards with hover animations
+- **About:** Premium company presentation
+- **Contact:** Modern contact form with gradient effects
+- **Footer:** Elegant footer with social links
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌟 Performance
 
-## Learn More
+- ⚡ Optimized loading times
+- 📱 Mobile-first responsive design
+- 🎭 Smooth 60fps animations
+- 🔍 SEO optimized
+- ♿ Accessibility compliant
 
-To learn more about Next.js, take a look at the following resources:
+## 📧 Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Website:** [HMZ Solutions](https://hmzsolutions.com)
+- **Email:** info@hmzsolutions.com
+- **GitHub:** [@hamzakyb](https://github.com/hamzakyb)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+💫 **Built with passion by HMZ Solutions** - Transforming visions into digital realities
