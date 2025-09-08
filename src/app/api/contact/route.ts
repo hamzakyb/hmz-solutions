@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
     // JWT token kontrolü
     const admin = requireAuth(request)
     
-    console.log('Admin user from token:', admin)
+    console.log('Admin user from token:', admin ? 'AUTHORIZED' : 'UNAUTHORIZED')
     
     if (!admin) {
       console.log('Unauthorized access attempt')
@@ -79,7 +79,10 @@ export async function GET(request: NextRequest) {
     }
 
     const db = await getDatabase()
+    console.log('Database connection established')
+    
     const collection = db.collection('contact_messages')
+    console.log('Collection accessed')
     
     const messages = await collection
       .find({})

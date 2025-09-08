@@ -10,7 +10,7 @@ export interface AdminUser {
 export function verifyToken(token: string): AdminUser | null {
   try {
     const jwtSecret = process.env.JWT_SECRET
-    console.log('JWT_SECRET from env:', jwtSecret)
+    console.log('JWT_SECRET from env:', jwtSecret ? 'SET' : 'NOT SET')
     
     if (!jwtSecret) {
       console.error('JWT_SECRET not configured')
@@ -18,7 +18,7 @@ export function verifyToken(token: string): AdminUser | null {
     }
 
     const decoded = jwt.verify(token, jwtSecret) as AdminUser
-    console.log('Token decoded successfully:', decoded)
+    console.log('Token decoded successfully:', { email: decoded.email, role: decoded.role, exp: decoded.exp })
     return decoded
   } catch (error) {
     console.error('Token verification failed:', error)
@@ -28,7 +28,7 @@ export function verifyToken(token: string): AdminUser | null {
 
 export function getTokenFromRequest(request: NextRequest): string | null {
   const authHeader = request.headers.get('authorization')
-  console.log('Authorization header:', authHeader)
+  console.log('Authorization header:', authHeader ? 'PRESENT' : 'MISSING')
   
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     console.log('No valid authorization header found')
@@ -36,13 +36,13 @@ export function getTokenFromRequest(request: NextRequest): string | null {
   }
   
   const token = authHeader.replace('Bearer ', '')
-  console.log('Extracted token:', token)
+  console.log('Extracted token length:', token.length)
   return token
 }
 
 export function requireAuth(request: NextRequest): AdminUser | null {
   const token = getTokenFromRequest(request)
-  console.log('Token extracted from request:', token)
+  console.log('Token extracted from request:', token ? 'FOUND' : 'NOT FOUND')
   
   if (!token) {
     console.log('No token found, returning null')
@@ -50,6 +50,6 @@ export function requireAuth(request: NextRequest): AdminUser | null {
   }
   
   const verified = verifyToken(token)
-  console.log('Token verification result:', verified)
+  console.log('Token verification result:', verified ? 'SUCCESS' : 'FAILED')
   return verified
 }
