@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Code, Smartphone, Globe, ArrowRight, Sparkles, Star } from 'lucide-react'
+import { ArrowsPointingOutIcon, CodeBracketIcon, DevicePhoneMobileIcon, GlobeAltIcon, LinkIcon, PaperAirplaneIcon, SparklesIcon, StarIcon, ComputerDesktopIcon, CpuChipIcon } from '@heroicons/react/24/outline'
 import { useRef } from 'react'
 
 const Services = () => {
@@ -16,42 +16,72 @@ const Services = () => {
 
   const services = [
     {
-      icon: Globe,
-      title: 'Web Excellence',
-      subtitle: 'Premium Digital Experiences',
-      description: 'Cutting-edge web technologies that transform your digital presence with unmatched performance and design.',
-      features: ['Next.js & React 18', 'Advanced Animations', 'Performance Optimization', 'SEO Mastery'],
-      gradient: 'from-blue-600 via-blue-500 to-cyan-400',
-      glowColor: 'blue',
+      icon: ComputerDesktopIcon,
+      title: 'Web Sitesi',
+      subtitle: 'Profesyonel Web Çözümleri',
+      description: 'Şirketiniz için modern, hızlı ve kolay kullanımlı web siteleri yapıyoruz.',
+      features: ['Hızlı Yükleme', 'Mobil Uyumlu', 'Arama Motorlarında Görünür', 'Kolay Yönetim'],
+      gradient: 'from-yellow-100 via-yellow-200 to-yellow-300',
+      glowColor: 'golden',
+      delay: 0.1
+    },
+    {
+      icon: DevicePhoneMobileIcon,
+      title: 'Mobil Uygulama',
+      subtitle: 'iOS & Android Uygulamalar',
+      description: 'iPhone ve Android telefonlar için kullanıcı dostu mobil uygulamalar geliştiriyoruz.',
+      features: ['iOS Uygulamaları', 'Android Uygulamaları', 'Kullanıcı Dostu Arayüz', 'Mağaza Yayınlama'],
+      gradient: 'from-yellow-200 via-yellow-300 to-yellow-400',
+      glowColor: 'golden',
       delay: 0.2
     },
     {
-      icon: Smartphone,
-      title: 'Mobile Innovation',
-      subtitle: 'Next-Gen App Development',
-      description: 'Revolutionary mobile experiences that set new standards for user engagement and technological innovation.',
-      features: ['React Native', 'SwiftUI & Jetpack', 'AR/VR Integration', 'AI-Powered Features'],
-      gradient: 'from-purple-600 via-purple-500 to-pink-400',
-      glowColor: 'purple',
+      icon: CodeBracketIcon,
+      title: 'Özel Yazılım',
+      subtitle: 'İşe Özel Teknoloji',
+      description: 'İş süreçlerinize özel yazılım çözümleri ile verimliliği artırıyoruz.',
+      features: ['İş Süreçleri Otomasyonu', 'Veri Analizi', 'Güvenli Sistemler', 'Teknik Destek'],
+      gradient: 'from-yellow-300 via-yellow-400 to-yellow-500',
+      glowColor: 'golden',
+      delay: 0.3
+    },
+    {
+      icon: SparklesIcon,
+      title: 'Yapay Zeka Cozumleri',
+      subtitle: 'Akilli Is Surecleri',
+      description: 'Is sureclerini otomatiklestiren ve verimliligi artiran yapay zeka tabanli cozumler gelistiriyoruz.',
+      features: ['Makine Ogrenmesi', 'Veri Analizi', 'Tahmine Dayali Modeller', 'Otomasyon'],
+      gradient: 'from-green-200 via-green-300 to-green-400',
+      glowColor: 'green',
       delay: 0.4
     },
     {
-      icon: Code,
-      title: 'AI Solutions',
-      subtitle: 'Intelligent Software Systems',
-      description: 'Future-ready AI solutions that automate processes and unlock new possibilities for your business.',
-      features: ['Machine Learning', 'Natural Language Processing', 'Computer Vision', 'Predictive Analytics'],
-      gradient: 'from-emerald-600 via-green-500 to-teal-400',
-      glowColor: 'emerald',
+      icon: ArrowsPointingOutIcon,
+      title: 'Artirilmis Gercelik',
+      subtitle: 'Yenilikci AR Cozumleri',
+      description: 'Musterilerinize etkileyici ve interaktif deneyimler sunan artirilmis gercelik uygulamalari gelistiriyoruz.',
+      features: ['3D Modelleme', 'Interaktif Deneyimler', 'Gercek Zamanli Isleme', 'Platformlar Arasi Uyumluluk'],
+      gradient: 'from-purple-200 via-purple-300 to-purple-400',
+      glowColor: 'purple',
+      delay: 0.5
+    },
+    {
+      icon: LinkIcon,
+      title: 'Blockchain Teknolojisi',
+      subtitle: 'Sefaf ve Guvenli Sistemler',
+      description: 'Sefaf, guvenli ve degistirilemez veri paylasimi saglayan blockchain cozumleri sunuyoruz.',
+      features: ['Akilli Sozlesmeler', 'Sefaf Kayit Sistemi', 'Kripto Para Entegrasyonu', 'Guvenli Veri Saklama'],
+      gradient: 'from-blue-200 via-blue-300 to-blue-400',
+      glowColor: 'blue',
       delay: 0.6
     }
   ]
 
   return (
-    <section ref={containerRef} id="services" className="py-32 bg-black relative overflow-hidden">
+    <section ref={containerRef} id="services" className="py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/80 to-gray-100/90" />
         
         {/* Animated Grid */}
         <motion.div 
@@ -62,25 +92,44 @@ const Services = () => {
         </motion.div>
         
         {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+        {[...Array(20)].map((_, i) => {
+          // Sabit pozisyonlar hydration hatası için
+          const positions = [
+            { left: 27.5, top: 56.6 }, { left: 10.1, top: 71.5 }, { left: 67.2, top: 75.0 },
+            { left: 29.1, top: 40.0 }, { left: 4.8, top: 21.2 }, { left: 60.1, top: 54.4 },
+            { left: 30.4, top: 69.4 }, { left: 55.3, top: 61.5 }, { left: 39.9, top: 55.1 },
+            { left: 11.3, top: 89.0 }, { left: 43.4, top: 78.3 }, { left: 77.9, top: 87.8 },
+            { left: 79.8, top: 88.3 }, { left: 67.6, top: 18.1 }, { left: 51.7, top: 91.2 },
+            { left: 96.4, top: 61.5 }, { left: 22.5, top: 45.4 }, { left: 22.2, top: 97.7 },
+            { left: 7.1, top: 14.6 }, { left: 40.2, top: 31.6 }
+          ]
+          const position = positions[i] || positions[0]
+          const delays = [0, 0.5, 1.0, 1.5, 2.0, 0.3, 0.8, 1.3, 1.8, 0.2, 0.7, 1.2, 1.7, 0.4, 0.9, 1.4, 1.9, 0.6, 1.1, 1.6]
+          const durations = [3, 4, 5, 6, 7, 3.5, 4.5, 5.5, 6.5, 3.2, 4.2, 5.2, 6.2, 3.8, 4.8, 5.8, 6.8, 3.3, 4.3, 5.3]
+          
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                left: `${position.left}%`,
+                top: `${position.top}%`,
+                backgroundColor: 'rgba(175, 160, 98, 0.4)', // RGB(175,160,98) ile altın rengi
+                boxShadow: '0 0 8px rgba(175, 160, 98, 0.3), 0 0 16px rgba(175, 160, 98, 0.2)' // Granüllü efekt
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 0.6, 0],
+                scale: [1, 1.2, 1] // Granüllü efekt için ölçek animasyonu
+              }}
+              transition={{
+                duration: durations[i] || 4,
+                repeat: Infinity,
+                delay: delays[i] || 0,
+              }}
+            />
+          )
+        })}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -95,11 +144,16 @@ const Services = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 mb-8"
+            className="inline-flex items-center space-x-3 backdrop-blur-xl border rounded-full px-6 py-3 mb-8"
+            style={{
+              backgroundColor: 'rgba(175, 160, 98, 0.1)',
+              borderColor: 'rgba(175, 160, 98, 0.3)',
+              boxShadow: '0 4px 16px rgba(175, 160, 98, 0.1), inset 0 1px 0 rgba(175, 160, 98, 0.2)' // Granüllü efekt
+            }}
           >
-            <Sparkles className="w-5 h-5 text-blue-400 animate-pulse" />
-            <span className="text-white/90 font-medium">Premium Services</span>
-            <Star className="w-4 h-4 text-purple-400" />
+            <SparklesIcon className="w-5 h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
+            <span className="font-medium" style={{ color: 'rgb(120, 100, 60)' }}>Premium Hizmetler</span>
+            <StarIcon className="w-4 h-4" style={{ color: 'rgb(175, 160, 98)' }} />
           </motion.div>
 
           <motion.h2
@@ -107,12 +161,17 @@ const Services = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-thin text-white mb-6 tracking-tight"
+            className="text-5xl md:text-7xl font-thin text-gray-900 mb-6 tracking-tight"
           >
-            <span className="font-extralight">Redefining</span>
+            <span className="font-extralight">Dijital</span>
             <br />
-            <span className="font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Excellence
+            <span className="font-bold text-transparent bg-clip-text"
+              style={{
+                backgroundImage: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 50%, rgb(175, 160, 98) 100%)',
+                textShadow: '0 2px 8px rgba(175, 160, 98, 0.3)' // Granüllü text efekti
+              }}
+            >
+              Hizmetlerimiz
             </span>
           </motion.h2>
           
@@ -121,9 +180,9 @@ const Services = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-xl md:text-2xl text-white/70 max-w-4xl mx-auto font-light leading-relaxed"
+            className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed"
           >
-            Where innovation meets perfection. Experience the future of digital solutions crafted with precision and passion.
+            İşletmenizin dijital ihtiyaçları için profesyonel çözümler sunuyoruz. Her projede müşteri memnuniyetini ön planda tutuyoruz.
           </motion.p>
         </motion.div>
 
@@ -159,11 +218,30 @@ const Services = () => {
                     perspective: "1000px"
                   }}
                 >
-                  {/* Premium Glow Effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-700`} />
+                  {/* Premium Glow Effect - Altın rengi ile */}
+                  <div 
+                    className="absolute inset-0 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-700"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.3) 0%, rgba(195, 180, 118, 0.4) 50%, rgba(175, 160, 98, 0.3) 100%)'
+                    }}
+                  />
                   
-                  {/* Main Card */}
-                  <div className="relative bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 group-hover:border-white/20 transition-all duration-500 h-full">
+                  {/* Main Card - Altın rengi ile hover efekti */}
+                  <div 
+                    className="relative bg-white/90 backdrop-blur-2xl rounded-3xl p-8 border transition-all duration-500 h-full"
+                    style={{
+                      borderColor: 'rgba(175, 160, 98, 0.2)',
+                      boxShadow: '0 4px 20px rgba(175, 160, 98, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)' // Granüllü kart efekti
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.5)'
+                      e.currentTarget.style.boxShadow = '0 8px 32px rgba(175, 160, 98, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.2)'
+                      e.currentTarget.style.boxShadow = '0 4px 20px rgba(175, 160, 98, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                    }}
+                  >
                     {/* Premium Icon */}
                     <div className="relative mb-8">
                       <motion.div
@@ -171,9 +249,21 @@ const Services = () => {
                         whileHover={{ scale: 1.1, rotateZ: 5 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-300`} />
-                        <div className={`relative w-20 h-20 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center shadow-2xl`}>
-                          <IconComponent className="w-10 h-10 text-white" />
+                        {/* Altın rengi background ile gradient efekt */}
+                        <div 
+                          className="absolute inset-0 rounded-2xl blur-xl opacity-30 group-hover:opacity-70 transition-opacity duration-300"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.4) 0%, rgba(195, 180, 118, 0.6) 50%, rgba(175, 160, 98, 0.4) 100%)'
+                          }}
+                        />
+                        <div 
+                          className="relative w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl"
+                          style={{
+                            background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 50%, rgb(175, 160, 98) 100%)',
+                            boxShadow: '0 8px 24px rgba(175, 160, 98, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)' // Granüllü icon efekti
+                          }}
+                        >
+                          <IconComponent className="w-10 h-10 text-white drop-shadow-lg" />
                         </div>
                       </motion.div>
                     </div>
@@ -181,15 +271,15 @@ const Services = () => {
                     {/* Content */}
                     <div className="space-y-6">
                       <div>
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 group-hover:bg-clip-text transition-all duration-300">
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-700 group-hover:bg-clip-text transition-all duration-300">
                           {service.title}
                         </h3>
-                        <p className="text-blue-400 font-medium text-sm tracking-wide uppercase">
+                        <p className="font-medium text-sm tracking-wide uppercase" style={{ color: 'rgb(175, 160, 98)' }}>
                           {service.subtitle}
                         </p>
                       </div>
                       
-                      <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                      <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
                         {service.description}
                       </p>
                       
@@ -198,13 +288,19 @@ const Services = () => {
                         {service.features.map((feature, i) => (
                           <motion.li 
                             key={i} 
-                            className="flex items-center text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300"
+                            className="flex items-center text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300"
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.8 + i * 0.1, duration: 0.3 }}
                             viewport={{ once: true }}
                           >
-                            <div className={`w-2 h-2 bg-gradient-to-r ${service.gradient} rounded-full mr-3 group-hover:shadow-lg group-hover:shadow-${service.glowColor}-500/50 transition-shadow duration-300`} />
+                            <div 
+                              className="w-2 h-2 rounded-full mr-3 transition-shadow duration-300"
+                              style={{
+                                background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)',
+                                boxShadow: '0 0 8px rgba(175, 160, 98, 0.4), 0 0 16px rgba(175, 160, 98, 0.2)' // Granüllü bullet efekti
+                              }}
+                            />
                             {feature}
                           </motion.li>
                         ))}
@@ -216,9 +312,24 @@ const Services = () => {
                         whileHover={{ x: 5 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div className="flex items-center text-white font-medium group-hover:text-blue-300 transition-colors duration-300 cursor-pointer">
-                          <span className="mr-3">Explore More</span>
-                          <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+                        <div 
+                          className="flex items-center font-medium transition-colors duration-300 cursor-pointer"
+                          style={{ color: 'rgb(175, 160, 98)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'rgb(195, 180, 118)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'rgb(175, 160, 98)'
+                          }}
+                          onClick={() => {
+                            const element = document.getElementById('contact')
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                            }
+                          }}
+                        >
+                          <span className="mr-3">Daha Fazla Keşfet</span>
+                          <PaperAirplaneIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                         </div>
                       </motion.div>
                     </div>
@@ -237,8 +348,8 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mt-20"
         >
-          <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            Ready to transform your vision into reality?
+          <p className="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
+            Projeyi birlikte hayata geçirmeye hazır mısınız?
           </p>
           
           <motion.div
@@ -246,10 +357,38 @@ const Services = () => {
             whileTap={{ scale: 0.95 }}
             className="relative inline-block group"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
-            <button className="relative bg-white/10 backdrop-blur-xl border border-white/20 text-white font-medium px-12 py-4 rounded-full text-lg shadow-2xl hover:bg-white/20 transition-all duration-300 group">
-              Start Your Project
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300 inline-block" />
+            <div 
+              className="absolute inset-0 rounded-full blur-2xl opacity-30 group-hover:opacity-70 transition-opacity duration-300"
+              style={{
+                background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.5) 0%, rgba(195, 180, 118, 0.6) 50%, rgba(175, 160, 98, 0.5) 100%)'
+              }}
+            />
+            <button 
+              className="relative backdrop-blur-xl border text-white font-medium px-12 py-4 rounded-full text-lg shadow-2xl transition-all duration-300 group cursor-pointer"
+              style={{
+                background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(155, 140, 78) 50%, rgb(175, 160, 98) 100%)',
+                borderColor: 'rgba(175, 160, 98, 0.3)',
+                boxShadow: '0 8px 32px rgba(175, 160, 98, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)' // Granüllü buton efekti
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, rgb(195, 180, 118) 0%, rgb(175, 160, 98) 50%, rgb(155, 140, 78) 100%)'
+                e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.4)'
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(175, 160, 98, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(155, 140, 78) 50%, rgb(175, 160, 98) 100%)'
+                e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.3)'
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(175, 160, 98, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+              }}
+              onClick={() => {
+                const element = document.getElementById('contact')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}
+            >
+              Projeyi Başlat
+              <PaperAirplaneIcon className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300 inline-block" />
             </button>
           </motion.div>
         </motion.div>

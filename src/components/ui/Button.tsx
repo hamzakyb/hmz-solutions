@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           'inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]',
           {
-            'bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-xl': variant === 'primary',
+            'text-white shadow-lg hover:shadow-xl': variant === 'primary',
             'bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-sm hover:shadow-md': variant === 'secondary',
             'border-2 border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 shadow-sm hover:shadow-md': variant === 'outline',
             'hover:bg-gray-100 hover:text-gray-900': variant === 'ghost',

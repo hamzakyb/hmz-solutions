@@ -4,6 +4,8 @@ import Services from '@/components/sections/Services'
 import About from '@/components/sections/About'
 import Contact from '@/components/sections/Contact'
 import Footer from '@/components/Footer'
+import Chatbot from '@/components/Chatbot'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <About />
       <Contact />
       <Footer />
+      <Chatbot />
+      <WhatsAppButton />
     </main>
   )
 }

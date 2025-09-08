@@ -2,6 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  
+  /* Gold gradient text */
+  .gold-gradient-text {
+    background: linear-gradient(to right, rgb(175, 160, 98), rgb(195, 180, 118), rgb(155, 140, 78));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    font-weight: 800;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0 2px 4px rgba(175, 160, 98, 0.1);
+    position: relative;
+    padding: 0 4px;
+  }
+  
+  .gold-gradient-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    z-index: -1;
+    filter: blur(2px);
+    opacity: 0.8;
+  }
+  
+  /* Section title gold gradient text */
+  .section-title-gold {
+    background: linear-gradient(to right, rgb(175, 160, 98), rgb(195, 180, 118), rgb(155, 140, 78));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    font-weight: 800;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
@@ -22,8 +80,8 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #f9fafb;
+    color: #111827;
     overflow-x: hidden;
   }
 }
@@ -50,21 +108,21 @@
   
   /* Premium gradient text effects */
   .gradient-text {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+    background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%, #854d0e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-blue {
-    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #475569 0%, #334155 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-purple {
-    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -98,7 +156,7 @@
   /* Premium button styles */
   .btn-premium {
     @apply relative inline-flex items-center justify-center rounded-full font-medium transition-all duration-300;
-    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black;
+    @apply focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 focus:ring-offset-black;
     @apply transform active:scale-[0.98];
   }
 
@@ -259,7 +317,7 @@
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+    background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
