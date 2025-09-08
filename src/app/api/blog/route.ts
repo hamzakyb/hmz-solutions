@@ -55,10 +55,15 @@ interface BlogQuery {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('POST /api/blog called')
+    
     // JWT token kontrolü
     const admin = requireAuth(request)
     
+    console.log('Admin user from token:', admin)
+    
     if (!admin) {
+      console.log('Unauthorized access attempt to blog creation')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -74,8 +79,11 @@ export async function POST(request: NextRequest) {
       seoDescription 
     } = await request.json()
     
+    console.log('Blog post data received:', { title, slug })
+    
     // Validation
     if (!title || !content || !slug) {
+      console.log('Validation failed:', { title, content, slug })
       return NextResponse.json(
         { error: 'Başlık, içerik ve slug alanları zorunludur' },
         { status: 400 }
@@ -88,6 +96,7 @@ export async function POST(request: NextRequest) {
     // Slug unique kontrolü
     const existingPost = await collection.findOne({ slug })
     if (existingPost) {
+      console.log('Slug already exists:', slug)
       return NextResponse.json(
         { error: 'Bu slug zaten kullanılıyor' },
         { status: 400 }
@@ -110,6 +119,8 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date(),
       views: 0
     })
+    
+    console.log('Blog post created successfully:', result.insertedId)
 
     return NextResponse.json({
       success: true,
