@@ -1,5 +1,15 @@
 import { newServiceBlogPosts } from './blog-posts'
 
+// Define the BlogPost interface
+interface BlogPost {
+  title: string
+  content: string
+  excerpt: string
+  featuredImage: string
+  slug: string
+  tags: string[]
+}
+
 // Blog API Client for adding new service blog posts
 class BlogAPIClient {
   private baseURL: string
@@ -34,7 +44,7 @@ class BlogAPIClient {
   }
 
   // Add a blog post
-  async addBlogPost(post: any): Promise<boolean> {
+  async addBlogPost(post: BlogPost): Promise<boolean> {
     if (!this.adminToken) {
       console.error('Not authenticated')
       return false
@@ -84,7 +94,16 @@ class BlogAPIClient {
 
     for (const post of newServiceBlogPosts) {
       console.log(`\nAdding: ${post.title}`)
-      const success = await this.addBlogPost(post)
+      // Create a properly typed BlogPost object
+      const blogPost: BlogPost = {
+        title: post.title,
+        content: post.content,
+        excerpt: post.excerpt,
+        featuredImage: post.featuredImage,
+        slug: post.slug,
+        tags: post.tags
+      };
+      const success = await this.addBlogPost(blogPost)
       
       if (success) {
         successCount++

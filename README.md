@@ -22,6 +22,22 @@
 - **Icons:** Lucide React
 - **Deployment:** Vercel Ready
 
+## 🔧 Environment Variables
+
+Before running the project, you need to set up environment variables. Copy the example file and update the values:
+
+```bash
+cp .env.example .env.local
+```
+
+Then edit `.env.local` with your actual values:
+
+- **MONGODB_URI**: Your MongoDB connection string
+- **JWT_SECRET**: A secret key for JWT token generation
+- **ADMIN_EMAIL**: Admin email for accessing admin panel
+- **ADMIN_PASSWORD**: Admin password for accessing admin panel
+- **EmailJS variables**: For contact form functionality (see EMAILJS_SETUP.md)
+
 ## 🚦 Getting Started
 
 1. **Clone the repository**
@@ -35,12 +51,18 @@
    npm install
    ```
 
-3. **Run development server**
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your values
+   ```
+
+4. **Run development server**
    ```bash
    npm run dev
    ```
 
-4. **Open in browser**
+5. **Open in browser**
    ```
    http://localhost:3000
    ```
