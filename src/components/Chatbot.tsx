@@ -377,7 +377,7 @@ const Chatbot = () => {
     // Contact and communication
     if (lowerInput.includes('iletişim') || lowerInput.includes('telefon') || lowerInput.includes('email') || lowerInput.includes('randevu')) {
       const contactResponses = [
-        `İletişime geçmek için birden fazla seçeneğiniz var:\n\n📞 Telefon: +90 (555) 123 45 67\n📧 E-posta: info@hmzsolutions.com\n💬 WhatsApp: Anında destek\n📅 Calendly: Online randevu\n\nHangi yöntem sizin için daha uygun?`,
+        `İletişime geçmek için birden fazla seçeneğiniz var:\n\n📞 Telefon: +90 (505) 095 99 50\n📧 E-posta: info@hmzsolutions.com\n💬 WhatsApp: Anında destek\n📅 Calendly: Online randevu\n\nHangi yöntem sizin için daha uygun?`,
         `Hemen konuşmak ister misiniz? \n\n• Şimdi arayabilirim (5 dk içinde)\n• WhatsApp'tan devam edelim\n• E-posta ile detayları gönderebilirim\n• Video görüşme ayarlayalım\n\nTercihiniz nedir?`,
         `Projenizi değerlendirmek için 15 dakikalık ücretsiz danışmanlık görüşmesi ayarlayabilirim. Bu görüşmede:\n\n✅ İhtiyaç analizi\n✅ Teknik öneriler\n✅ Fiyat tahmini\n✅ Zaman planlaması\n\nBu hafta uygun olduğunuz bir zaman var mı?`
       ]

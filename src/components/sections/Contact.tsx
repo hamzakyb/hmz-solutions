@@ -81,13 +81,13 @@ const Contact = () => {
     {
       icon: DevicePhoneMobileIcon,
       title: 'Telefon',
-      info: '+90 (555) 123 45 67',
+      info: '+90 (505) 095 99 50',
       description: 'Size hemen geri dönelim'
     },
     {
       icon: BuildingOfficeIcon,
       title: 'Adres',
-      info: 'İstanbul, Türkiye',
+      info: 'Nevşehir Merkez, Türkiye',
       description: 'Ofisimize bekliyoruz'
     },
     {
@@ -629,7 +629,7 @@ const Contact = () => {
                         e.currentTarget.style.boxShadow = '0 8px 24px rgba(175, 160, 98, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
                       }}
                       onClick={() => {
-                        window.open('tel:+905551234567', '_self')
+                        window.open('tel:+905050959950', '_self')
                       }}
                     >
                       <span className="relative z-10 flex items-center justify-center space-x-2">
@@ -647,7 +647,7 @@ const Contact = () => {
                       className="w-full group/wa relative overflow-hidden bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-600/25 active:scale-[0.98] cursor-pointer"
                       onClick={() => {
                         const message = encodeURIComponent('Merhaba! HMZ Solutions hizmetleri hakkında bilgi almak istiyorum.')
-                        window.open(`https://wa.me/+905551234567?text=${message}`, '_blank')
+                        window.open(`https://wa.me/+905050959950?text=${message}`, '_blank')
                       }}
                     >
                       <span className="relative z-10 flex items-center justify-center space-x-2">
