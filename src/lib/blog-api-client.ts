@@ -1,5 +1,19 @@
 import { newServiceBlogPosts } from './blog-posts'
 
+// API response types
+interface LoginResponse {
+  token: string
+}
+
+interface AddBlogResponse {
+  postId: string
+}
+
+interface ErrorResponse {
+  error?: string
+  message?: string
+}
+
 // Define the BlogPost interface
 interface BlogPost {
   title: string
@@ -32,13 +46,13 @@ class BlogAPIClient {
       })
 
       if (response.ok) {
-        const data = await response.json()
+        const data = (await response.json()) as LoginResponse
         this.adminToken = data.token
         return true
       }
       return false
-    } catch (error) {
-      console.error('Login failed:', error)
+    } catch (err: unknown) {
+      console.error('Login failed:', err)
       return false
     }
   }
@@ -71,16 +85,19 @@ class BlogAPIClient {
       })
 
       if (response.ok) {
-        const data = await response.json()
+        const data = (await response.json()) as AddBlogResponse
         console.log(`Successfully added: ${post.title} (ID: ${data.postId})`)
         return true
       } else {
-        const errorData = await response.json()
-        console.error(`Failed to add: ${post.title}`, errorData.error)
+        const errorData = (await response.json()) as ErrorResponse
+        console.error(
+          `Failed to add: ${post.title}`,
+          errorData.error ?? errorData.message ?? 'Unknown error'
+        )
         return false
       }
-    } catch (error) {
-      console.error(`Error adding ${post.title}:`, error)
+    } catch (err: unknown) {
+      console.error(`Error adding ${post.title}:`, err)
       return false
     }
   }
