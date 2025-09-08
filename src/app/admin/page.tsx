@@ -4,20 +4,20 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { 
-  Building, 
-  Calendar, 
-  User, 
-  MessageCircle, 
-  Eye, 
-  Trash2, 
+  Shield,
   RefreshCw,
   LogOut,
-  Shield,
-  Search,
+  MessageCircle,
   FileText,
   Settings,
+  Search,
+  User,
+  Building,
+  Calendar,
   Plus,
   Edit,
+  Trash2,
+  Eye,
   X
 } from 'lucide-react'
 
@@ -176,8 +176,8 @@ export default function AdminPanel() {
       } else {
         console.error('Mesajlar alınamadı')
       }
-    } catch (err) {
-      console.error('Mesajlar alınırken hata oluştu:', err)
+    } catch {
+      console.error('Mesajlar alınırken hata oluştu')
     }
   }
 

@@ -46,12 +46,12 @@ class BlogAPIClient {
       })
 
       if (response.ok) {
-        const data = (await response.json()) as LoginResponse
+        const data: LoginResponse = await response.json()
         this.adminToken = data.token
         return true
       }
       return false
-    } catch (err: unknown) {
+    } catch (err) {
       console.error('Login failed:', err)
       return false
     }
@@ -85,18 +85,18 @@ class BlogAPIClient {
       })
 
       if (response.ok) {
-        const data = (await response.json()) as AddBlogResponse
+        const data: AddBlogResponse = await response.json()
         console.log(`Successfully added: ${post.title} (ID: ${data.postId})`)
         return true
       } else {
-        const errorData = (await response.json()) as ErrorResponse
+        const errorData: ErrorResponse = await response.json()
         console.error(
           `Failed to add: ${post.title}`,
           errorData.error ?? errorData.message ?? 'Unknown error'
         )
         return false
       }
-    } catch (err: unknown) {
+    } catch (err) {
       console.error(`Error adding ${post.title}:`, err)
       return false
     }
