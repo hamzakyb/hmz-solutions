@@ -163,7 +163,7 @@ export default function AdminPanel() {
 
   const fetchMessages = async () => {
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('admin_token')
       const response = await fetch('/api/messages', {
         headers: {
           'Authorization': `Bearer ${token}`
