@@ -164,20 +164,28 @@ export default function AdminPanel() {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('admin_token')
-      const response = await fetch('/api/messages', {
+      console.log('Token being used:', token)
+      
+      const response = await fetch('/api/contact', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
+      
+      console.log('Response status:', response.status)
+      console.log('Response headers:', [...response.headers.entries()])
+      
       if (response.ok) {
         const data = await response.json()
-        setMessages(data)
-        setFilteredMessages(data)
+        console.log('Messages data:', data)
+        setMessages(data.messages)
+        setFilteredMessages(data.messages)
       } else {
-        console.error('Mesajlar alınamadı')
+        const errorData = await response.json()
+        console.error('Failed to fetch messages:', response.status, errorData)
       }
-    } catch {
-      console.error('Mesajlar alınırken hata oluştu')
+    } catch (error) {
+      console.error('Error fetching messages:', error)
     }
   }
 

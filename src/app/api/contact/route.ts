@@ -66,10 +66,15 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    console.log('GET /api/contact called')
+    
     // JWT token kontrolü
     const admin = requireAuth(request)
     
+    console.log('Admin user from token:', admin)
+    
     if (!admin) {
+      console.log('Unauthorized access attempt')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
@@ -81,6 +86,8 @@ export async function GET(request: NextRequest) {
       .sort({ createdAt: -1 })
       .limit(100)
       .toArray()
+    
+    console.log('Messages found:', messages.length)
 
     return NextResponse.json({ messages })
 
