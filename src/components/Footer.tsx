@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { SparklesIcon, StarIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { CodeBracketIcon, BriefcaseIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 import { useRef } from 'react'
 
 const Footer = () => {
@@ -180,10 +181,11 @@ const Footer = () => {
                     />
                     <div className="relative w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-xl flex items-center justify-center shadow-xl overflow-hidden p-2.5 sm:p-3">
                       {/* Logo with better sizing and padding */}
-                      <img 
+                      <Image 
                         src="/logo.png" 
                         alt="HMZ Solutions Logo" 
-                        className="w-full h-full object-contain max-w-none"
+                        fill
+                        className="object-contain"
                         onError={(e) => {
                           // Fallback to letter H if logo image fails to load
                           e.currentTarget.style.display = 'none';

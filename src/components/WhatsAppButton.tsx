@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 
 const WhatsAppButton = () => {
   const phoneNumber = "+905050959950" // WhatsApp numaranızı buraya ekleyin

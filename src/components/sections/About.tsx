@@ -148,14 +148,14 @@ const About = () => {
           viewport={{ once: true }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16 sm:mb-24"
         >
-          {stats.map((stat, index) => {
+          {stats.map((stat) => {
             const IconComponent = stat.icon
             return (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.8 + stat.label.length * 0.1 }}
                 viewport={{ once: true }}
                 className="group"
               >
@@ -168,7 +168,7 @@ const About = () => {
                   <div className="relative">
                     <div className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
                       style={{
-                        background: `linear-gradient(135deg, rgba(175, 160, 98, ${0.2 + index * 0.1}) 0%, rgba(195, 180, 118, ${0.3 + index * 0.1}) 100%)`
+                        background: `linear-gradient(135deg, rgba(175, 160, 98, 0.2) 0%, rgba(195, 180, 118, 0.3) 100%)`
                       }}
                     />
                     <div className="relative bg-white/90 backdrop-blur-2xl rounded-2xl p-4 sm:p-6 lg:p-8 border transition-all duration-500"
@@ -226,7 +226,7 @@ const About = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {values.map((value, index) => (
+          {values.map((value) => (
             <motion.div
               key={value.title}
               initial={{ opacity: 0, y: 60 }}

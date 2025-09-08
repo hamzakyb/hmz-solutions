@@ -5,6 +5,7 @@ import { Button } from './ui/Button'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 interface NavItem {
   label: string
@@ -111,10 +112,11 @@ const Navigation = () => {
                   />
                   <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden p-1.5 sm:p-2">
                     {/* Logo with better sizing and padding */}
-                    <img 
+                    <Image 
                       src="/logo.png" 
                       alt="HMZ Solutions Logo" 
-                      className="w-full h-full object-contain max-w-none"
+                      fill
+                      className="object-contain"
                       onError={(e) => {
                         // Fallback to letter H if logo image fails to load
                         e.currentTarget.style.display = 'none';

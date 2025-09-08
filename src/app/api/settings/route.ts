@@ -39,7 +39,7 @@ interface SiteSettings {
   updatedBy?: string;
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const db = await getDatabase()
     const collection = db.collection<SiteSettings>('site_settings')
@@ -95,19 +95,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const settingsData = await request.json()
+    const settings = await request.json()
 
     const db = await getDatabase()
     const collection = db.collection<SiteSettings>('site_settings')
     
     // Global settings'i upsert et
-    const result = await collection.replaceOne(
+    await collection.replaceOne(
       { _id: 'global' },
       {
         _id: 'global',
-        ...settingsData,
-        updatedAt: new Date(),
-        updatedBy: admin.email
+        ...settings
       },
       { upsert: true }
     )

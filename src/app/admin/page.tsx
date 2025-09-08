@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { 
-  Mail, 
   Building, 
   Calendar, 
   User, 
@@ -14,13 +14,10 @@ import {
   LogOut,
   Shield,
   Search,
-  Filter,
   FileText,
   Settings,
-  Image as ImageIcon,
   Plus,
   Edit,
-  Save,
   X
 } from 'lucide-react'
 
@@ -123,10 +120,6 @@ export default function AdminPanel() {
     }
   }, [isAuthenticated])
 
-  useEffect(() => {
-    filterMessages()
-  }, [messages, searchTerm, statusFilter])
-
   const checkAuth = () => {
     const token = localStorage.getItem('admin_token')
     if (token) {
@@ -155,7 +148,7 @@ export default function AdminPanel() {
       } else {
         setLoginError(data.error || 'Login failed')
       }
-    } catch (error) {
+    } catch {
       setLoginError('Network error occurred')
     } finally {
       setLoginLoading(false)
@@ -170,19 +163,21 @@ export default function AdminPanel() {
 
   const fetchMessages = async () => {
     try {
-      const token = localStorage.getItem('admin_token')
-      const response = await fetch('/api/contact', {
+      const token = localStorage.getItem('token')
+      const response = await fetch('/api/messages', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
-
       if (response.ok) {
         const data = await response.json()
-        setMessages(data.messages)
+        setMessages(data)
+        setFilteredMessages(data)
+      } else {
+        console.error('Mesajlar alınamadı')
       }
-    } catch (error) {
-      console.error('Failed to fetch messages:', error)
+    } catch (err) {
+      console.error('Mesajlar alınırken hata oluştu:', err)
     }
   }
 
@@ -216,24 +211,27 @@ export default function AdminPanel() {
     }
   }
 
-  const filterMessages = () => {
+  const filterMessages = useCallback(() => {
     let filtered = messages
-
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter(msg => msg.status === statusFilter)
-    }
-
+    
     if (searchTerm) {
-      filtered = filtered.filter(msg => 
-        msg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.message.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(message => 
+        message.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        message.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        message.message.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
-
+    
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(message => message.status === statusFilter)
+    }
+    
     setFilteredMessages(filtered)
-  }
+  }, [messages, searchTerm, statusFilter])
+
+  useEffect(() => {
+    filterMessages()
+  }, [filterMessages])
 
   const handleCreatePost = async () => {
     try {
@@ -683,10 +681,11 @@ export default function AdminPanel() {
                 <div key={post._id} className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden">
                   {post.featuredImage && (
                     <div className="relative h-48">
-                      <img
+                      <Image
                         src={post.featuredImage}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
@@ -1068,9 +1067,11 @@ export default function AdminPanel() {
                       />
                       {postForm.featuredImage && (
                         <div className="relative">
-                          <img 
+                          <Image 
                             src={postForm.featuredImage} 
                             alt="Preview" 
+                            width={100}
+                            height={100}
                             className="w-full h-32 object-cover rounded-lg"
                           />
                           <button

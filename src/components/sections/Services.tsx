@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowsPointingOutIcon, CodeBracketIcon, DevicePhoneMobileIcon, GlobeAltIcon, LinkIcon, PaperAirplaneIcon, SparklesIcon, StarIcon, ComputerDesktopIcon, CpuChipIcon } from '@heroicons/react/24/outline'
+import { ArrowsPointingOutIcon, CodeBracketIcon, DevicePhoneMobileIcon, LinkIcon, PaperAirplaneIcon, SparklesIcon, StarIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline'
 import { useRef } from 'react'
 
 const Services = () => {
@@ -188,7 +188,7 @@ const Services = () => {
 
         {/* Premium Services Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
+          {services.map((service) => {
             const IconComponent = service.icon
             return (
               <motion.div

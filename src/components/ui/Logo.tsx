@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 interface LogoProps {
@@ -8,7 +9,7 @@ interface LogoProps {
   className?: string
 }
 
-const Logo = ({ size = 'md', variant = 'white', className }: LogoProps) => {
+const Logo = ({ size = 'md', variant = 'default', className }: LogoProps) => {
   const sizeClasses = {
     sm: 'w-6 h-6',
     md: 'w-8 h-8 sm:w-10 sm:h-10',
@@ -19,22 +20,16 @@ const Logo = ({ size = 'md', variant = 'white', className }: LogoProps) => {
   const logoSrc = variant === 'white' ? '/logo-white.png' : '/logo.png'
 
   return (
-    <img 
+    <Image 
       src={logoSrc}
       alt="HMZ Solutions Logo" 
+      width={80}
+      height={80}
       className={cn(
         'object-contain transition-all duration-300',
         sizeClasses[size],
-        variant === 'white' && 'filter brightness-0 invert',
         className
       )}
-      onError={(e) => {
-        // Fallback to letter H if logo image fails to load
-        const target = e.currentTarget
-        target.style.display = 'none'
-        const fallback = target.nextElementSibling as HTMLElement
-        if (fallback) fallback.style.display = 'block'
-      }}
     />
   )
 }

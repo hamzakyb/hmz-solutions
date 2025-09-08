@@ -2,18 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { 
   ChatBubbleLeftRightIcon, 
   XMarkIcon, 
   PaperAirplaneIcon,
   SparklesIcon,
-  UserIcon,
-  ComputerDesktopIcon,
-  PhoneIcon,
-  EnvelopeIcon,
-  ArrowRightIcon,
-  CheckCircleIcon,
-  ExclamationTriangleIcon
+  UserIcon
 } from '@heroicons/react/24/outline'
 
 interface Message {
@@ -42,52 +37,9 @@ interface Agent {
   greeting: string
 }
 
-interface LeadData {
-  name: string
-  email: string
-  phone: string
-  service: string
-  message: string
-  budget?: string
-  timeline?: string
-  source?: string
-}
-
-interface BotPersonality {
-  greeting: string
-  farewell: string
-  helpMessage: string
-  errorMessage: string
-  workingHours: string
-  responseStyle: 'formal' | 'friendly' | 'professional'
-}
-
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentAgent, setCurrentAgent] = useState<Agent | null>(null)
-  const [isTransferring, setIsTransferring] = useState(false)
-  const [showLeadForm, setShowLeadForm] = useState(false)
-  const [leadData, setLeadData] = useState<LeadData>({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
-    budget: '',
-    timeline: '',
-    source: 'chatbot'
-  })
-  const [isSubmittingLead, setIsSubmittingLead] = useState(false)
-  const [leadSubmitted, setLeadSubmitted] = useState(false)
-  const [messageReactions, setMessageReactions] = useState<{[key: string]: string[]}>({})
-  const [quickReplyInput, setQuickReplyInput] = useState('')
-  const [conversationStartTime] = useState(new Date())
-  const [messageCount, setMessageCount] = useState(0)
-  const [userSatisfaction, setUserSatisfaction] = useState<number | null>(null)
-  const [showSatisfactionSurvey, setShowSatisfactionSurvey] = useState(false)
-  const [conversationHistory, setConversationHistory] = useState<string[]>([])
-  const [isUserTyping, setIsUserTyping] = useState(false)
-  const [lastTypingTime, setLastTypingTime] = useState<number>(0)
   
   // Kapsamlı Uzman Agent Profilleri
   const agents: { [key: string]: Agent } = {
@@ -148,7 +100,6 @@ const Chatbot = () => {
   }
   const [messages, setMessages] = useState<Message[]>([])
   const [inputText, setInputText] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // İlk agent ayarla
@@ -166,7 +117,7 @@ const Chatbot = () => {
         agentAvatar: defaultAgent.avatar
       }])
     }
-  }, [])
+  }, [agents.default, currentAgent])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -175,94 +126,6 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
-
-  // Kullanıcı yazma durumu takibi
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsUserTyping(false)
-    }, 1000)
-    
-    return () => clearTimeout(timer)
-  }, [lastTypingTime])
-
-  // Kullanıcı aktivite takibi
-  const handleUserTyping = () => {
-    if (!isUserTyping) {
-      setIsUserTyping(true)
-    }
-    setLastTypingTime(Date.now())
-  }
-
-  // Mesaj reaksiyonları
-  const addReaction = (messageId: string, reaction: string) => {
-    setMessageReactions(prev => ({
-      ...prev,
-      [messageId]: [...(prev[messageId] || []), reaction]
-    }))
-  }
-
-  // Memnuniyet anketi göster
-  const showSatisfactionAfterMessages = () => {
-    if (messageCount >= 5 && !showSatisfactionSurvey && !userSatisfaction) {
-      setShowSatisfactionSurvey(true)
-    }
-  }
-
-  // Konuşma geçmişini kaydet
-  const saveConversationHistory = (message: string) => {
-    setConversationHistory(prev => [...prev.slice(-10), message]) // Son 10 mesajı tut
-  }
-
-  // Gelişmiş Agent Seçimi ve Transfer Sistemi
-  const selectBestAgent = (input: string): Agent => {
-    const lowerInput = input.toLowerCase()
-    let bestMatch = agents.default
-    let maxScore = 0
-
-    // Tüm agentları puanla
-    for (const [key, agent] of Object.entries(agents)) {
-      if (key === 'default') continue
-      
-      let score = 0
-      // Specialization kontrolü
-      agent.specialization.forEach(spec => {
-        if (lowerInput.includes(spec)) {
-          score += 3 // Yüksek puan
-        }
-      })
-      
-      // Expertise kontrolü
-      agent.expertise.forEach(exp => {
-        if (lowerInput.includes(exp.toLowerCase())) {
-          score += 2 // Orta puan
-        }
-      })
-      
-      // İlgili kelimeler kontrolü
-      const relatedWords = {
-        web: ['site', 'internet', 'web', 'online', 'frontend', 'backend'],
-        mobile: ['telefon', 'mobil', 'app', 'aplikasyon'],
-        ecommerce: ['satış', 'ürün', 'mağaza', 'sepet', 'ödeme'],
-        seo: ['google', 'arama', 'sıralama', 'trafik', 'reklam'],
-        design: ['görsel', 'logo', 'renk', 'düzen', 'arayüz']
-      }
-      
-      if (relatedWords[key as keyof typeof relatedWords]) {
-        relatedWords[key as keyof typeof relatedWords].forEach(word => {
-          if (lowerInput.includes(word)) {
-            score += 1
-          }
-        })
-      }
-      
-      if (score > maxScore) {
-        maxScore = score
-        bestMatch = agent
-      }
-    }
-    
-    return bestMatch
-  }
 
   return (
     <>
@@ -351,9 +214,11 @@ const Chatbot = () => {
               <div className="flex items-center space-x-3">
                 <div className="relative">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30 shadow-lg">
-                    <img 
+                    <Image 
                       src={currentAgent?.avatar || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80'} 
                       alt={`${currentAgent?.name} - HMZ Solutions Uzmanı`}
+                      width={48}
+                      height={48}
                       className="w-full h-full object-cover"
                     />
                   </div>
