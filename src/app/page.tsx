@@ -6,18 +6,21 @@ import Contact from '@/components/sections/Contact'
 import Footer from '@/components/Footer'
 import Chatbot from '@/components/Chatbot'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import { ChatbotProvider } from '@/context/ChatbotContext'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black">
-      <Navigation />
-      <Hero />
-      <Services />
-      <About />
-      <Contact />
-      <Footer />
-      <Chatbot />
-      <WhatsAppButton />
-    </main>
+    <ChatbotProvider>
+      <main className="min-h-screen bg-black">
+        <Navigation />
+        <Hero />
+        <Services />
+        <About />
+        <Contact />
+        <Footer />
+        <Chatbot />
+        <WhatsAppButton />
+      </main>
+    </ChatbotProvider>
   )
 }

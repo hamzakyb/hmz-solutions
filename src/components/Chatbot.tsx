@@ -10,6 +10,7 @@ import {
   SparklesIcon,
   UserIcon
 } from '@heroicons/react/24/outline'
+import { useChatbot } from '@/context/ChatbotContext'
 
 interface Message {
   id: string
@@ -38,7 +39,7 @@ interface Agent {
 }
 
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const { isChatOpen, openChat, closeChat } = useChatbot()
   const [currentAgent, setCurrentAgent] = useState<Agent | null>(null)
   const [isTransferring, setIsTransferring] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
@@ -133,7 +134,7 @@ const Chatbot = () => {
 
   // İlk agent ayarla
   useEffect(() => {
-    if (!currentAgent) {
+    if (!currentAgent && isChatOpen) {
       const defaultAgent = agents.default
       setCurrentAgent(defaultAgent)
       setMessages([{
@@ -146,7 +147,7 @@ const Chatbot = () => {
         agentAvatar: defaultAgent.avatar
       }])
     }
-  }, [agents.default, currentAgent])
+  }, [agents.default, currentAgent, isChatOpen])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -173,8 +174,26 @@ const Chatbot = () => {
     setInputText('')
     setIsTyping(true)
 
-    // Check if agent transfer is needed
-    const bestAgent = agents.default // Simplified for this version
+    // Check if agent transfer is needed based on keywords
+    const userInput = inputText.toLowerCase();
+    let bestAgent = agents.default;
+    
+    // Find the most appropriate agent based on user input
+    for (const [agentKey, agent] of Object.entries(agents)) {
+      if (agentKey === 'default') continue;
+      
+      // Check if any specialization keywords match
+      const hasMatchingKeyword = agent.specialization.some(keyword => 
+        userInput.includes(keyword)
+      );
+      
+      if (hasMatchingKeyword) {
+        bestAgent = agent;
+        break;
+      }
+    }
+
+    // If a different agent is needed, initiate transfer
     if (bestAgent.id !== currentAgent?.id) {
       setIsTransferring(true)
       setTimeout(() => {
@@ -198,15 +217,116 @@ const Chatbot = () => {
     // Simulate bot response with context
     setTimeout(() => {
       setIsTyping(false)
-      const botResponse = bestAgent.greeting // Simplified for this version
+      
+      // If we just transferred, don't send another message immediately
+      if (bestAgent.id !== currentAgent?.id) return;
+      
+      // Generate response based on current agent with realistic information
+      let botResponse = "Üzgünüm, tam olarak ne demek istediğinizi anlamadım. Lütfen daha detaylı açıklayabilir misiniz?";
+      
+      // Response logic based on current agent with realistic information
+      if (currentAgent) {
+        if (currentAgent.id === 'hamza') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "Projelerin maliyeti, kapsam ve karmaşıklığa göre değişir. Genel olarak:\n\n• Kurumsal web sitesi: 15.000-50.000 TL\n• E-ticaret sitesi: 25.000-100.000 TL\n• Mobil uygulama: 30.000-150.000 TL\n\nDetaylı bilgi için projenizi anlatır mısınız?";
+          } else if (userInput.includes('süre') || userInput.includes('zaman') || userInput.includes('teslim')) {
+            botResponse = "Projelerin süresi ihtiyaçlara göre değişir:\n\n• Kurumsal web sitesi: 2-4 hafta\n• E-ticaret sitesi: 4-8 hafta\n• Mobil uygulama: 6-12 hafta\n\nDaha spesifik bir süre için projenizi detaylandırabilir misiniz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Bize aşağıdaki yollarla ulaşabilirsiniz:\n\n• WhatsApp: +90 505 095 99 50\n• E-posta: info@hmzsolutions.com\n• Telefon: +90 384 212 12 12\n\nAyrıca sizi daha iyi tanımam için projenizi kısaca anlatır mısınız?";
+          } else {
+            botResponse = "Bu konuda size nasıl yardımcı olabilirim? Daha fazla detay verebilir misiniz?";
+          }
+        } else if (currentAgent.id === 'mehmet') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "Web geliştirme projelerimizin fiyat aralığı:\n\n• Landing page: 8.000-15.000 TL\n• Kurumsal web sitesi: 15.000-50.000 TL\n• Özel web uygulaması: 30.000-150.000 TL\n• E-ticaret entegrasyonu: 10.000-40.000 TL\n\nProjeyi detaylandırırsanız daha net bir fiyat verebilirim.";
+          } else if (userInput.includes('teknoloji') || userInput.includes('framework') || userInput.includes('stack')) {
+            botResponse = "Kullandığımız teknolojiler:\n\n• Frontend: React, Next.js, TypeScript, Tailwind CSS\n• Backend: Node.js, Express, MongoDB, PostgreSQL\n• Deployment: Vercel, AWS, Docker\n• Diğer: REST API, GraphQL, CI/CD\n\nHangi teknoloji hakkında daha fazla bilgi istersiniz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Web geliştirme projeleriniz için bana doğrudan ulaşabilirsiniz:\n\n• E-posta: mehmet@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nVeya şirket genel hatları üzerinden de ulaşabilirsiniz. Projeyi anlatır mısınız?";
+          } else {
+            botResponse = "Web geliştirme konusunda uzmanlaşmış bir teknik danışman olarak size yardımcı olabilirim. Hangi teknolojiyi kullanmak istiyorsunuz?";
+          }
+        } else if (currentAgent.id === 'ayse') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "Mobil uygulama geliştirme fiyatlarımız:\n\n• Basit iOS/Android uygulaması: 25.000-50.000 TL\n• Karmaşık mobil uygulama: 50.000-150.000 TL\n• Cross-platform (React Native): 30.000-100.000 TL\n• Uygulama bakım: Aylık 5.000-15.000 TL\n\nDetaylı fiyat için projeyi anlatır mısınız?";
+          } else if (userInput.includes('platform') || userInput.includes('ios') || userInput.includes('android')) {
+            botResponse = "Mobil uygulama geliştirme seçeneklerimiz:\n\n• Native iOS (Swift)\n• Native Android (Kotlin)\n• Cross-platform (React Native, Flutter)\n\nHer platformun avantajları farklıdır. Hangi platformu tercih etmek istersiniz ve neden?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Mobil uygulama projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: ayse@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nProjeyi kısaca anlatırsanız size en uygun çözümü sunabilirim.";
+          } else {
+            botResponse = "Mobil uygulama geliştirme konusunda size nasıl yardımcı olabilirim? iOS mu Android mi düşünüyorsunuz?";
+          }
+        } else if (currentAgent.id === 'ali') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "E-ticaret çözümlerimizin fiyat aralığı:\n\n• Shopify temelli e-ticaret: 15.000-40.000 TL\n• WooCommerce e-ticaret: 20.000-50.000 TL\n• Özel e-ticaret çözümü: 50.000-200.000 TL\n• Ürün entegrasyonu (1000 ürün): 10.000-25.000 TL\n\nDetaylı fiyat için mağaza tipinizi söyler misiniz?";
+          } else if (userInput.includes('platform') || userInput.includes('sistem')) {
+            botResponse = "E-ticaret platform önerilerimiz:\n\n• Shopify: Kolay kullanım, hızlı kurulum\n• WooCommerce: Esneklik, WordPress entegrasyonu\n• Magento: Kurumsal çözümler için\n• Özel çözüm: Tam özelleştirme\n\nHangi sektörde e-ticaret düşünüyorsunuz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "E-ticaret projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: ali@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nSektörünüzü ve ihtiyaçlarınızı anlatırsanız size özel teklif hazırlayabilirim.";
+          } else {
+            botResponse = "E-ticaret çözümleri konusunda uzmanlaşmış bir danışman olarak size yardımcı olabilirim. Hangi platformu düşünüyorsunuz?";
+          }
+        } else if (currentAgent.id === 'zeynep') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "SEO ve dijital pazarlama hizmetlerimiz:\n\n• Aylık SEO paketi: 3.000-10.000 TL\n• Google Ads yönetimi: %10-15 bütçe + 2.000-5.000 TL yönetim\n• Sosyal medya yönetimi: 2.000-8.000 TL/ay\n• Content pazarlama: 1.500-5.000 TL/ay\n\nHedeflerinizi belirtirseniz daha özel fiyat verebilirim.";
+          } else if (userInput.includes('süre') || userInput.includes('zaman') || userInput.includes('sonuç')) {
+            botResponse = "Dijital pazarlama sonuç süreleri:\n\n• SEO: İlk sonuçlar 2-3 ay, önemli sonuçlar 6-12 ay\n• Google Ads: Anında sonuç, optimizasyon 1-2 ay\n• Sosyal medya: 1-2 ayda görünür sonuçlar\n• E-mail pazarlama: 1-2 ayda ilk dönüşümler\n\nHedef kitlenizi ve sektörünüzü söyler misiniz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Dijital pazarlama projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: zeynep@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nMevcut dijital varlıklarınızı ve hedeflerinizi anlatırsanız size özel strateji sunabilirim.";
+          } else {
+            botResponse = "SEO ve dijital pazarlama konularında size nasıl yardımcı olabilirim? Hangi hizmeti öğrenmek istiyorsunuz?";
+          }
+        } else if (currentAgent.id === 'emre') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "UI/UX tasarım hizmetlerimiz:\n\n• Web sitesi tasarımı: 8.000-25.000 TL\n• Mobil uygulama tasarımı: 12.000-35.000 TL\n• Prototipleme: 3.000-10.000 TL\n• Kullanıcı araştırması: 5.000-15.000 TL\n• Tasarım sistemi oluşturma: 15.000-40.000 TL\n\nProje kapsamını anlatırsanız daha net fiyat verebilirim.";
+          } else if (userInput.includes('süreç') || userInput.includes('aşama')) {
+            botResponse = "Tasarım sürecimiz şu aşamalardan oluşur:\n\n1. Araştırma ve analiz (1-2 hafta)\n2. Kullanıcı persona ve journey map (1 hafta)\n3. Wireframe ve prototipleme (2-3 hafta)\n4. Görsel tasarım (2-4 hafta)\n5. Test ve iterasyon (1-2 hafta)\n6. Teslim ve dokümantasyon (1 hafta)\n\nProjeniz hangi aşamada?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Tasarım projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: emre@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nReferans çalışmalarımızı ve portföyümüzü görmek ister misiniz?";
+          } else {
+            botResponse = "UI/UX tasarım konularında size nasıl yardımcı olabilirim? Hangi tür bir tasarım ihtiyacınız var?";
+          }
+        } else if (currentAgent.id === 'elif') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "Yapay zeka çözümlerimiz:\n\n• Chatbot geliştirme: 15.000-50.000 TL\n• Tahmine dayalı analiz: 25.000-100.000 TL\n• Görüntü işleme: 30.000-150.000 TL\n• NLP çözümleri: 20.000-80.000 TL\n• Makine öğrenmesi danışmanlığı: 10.000-30.000 TL\n\nİhtiyaçlarınızı detaylandırırsanız özel fiyat verebilirim.";
+          } else if (userInput.includes('alan') || userInput.includes('kullanım')) {
+            botResponse = "Yapay zeka uygulama alanlarımız:\n\n• Müşteri hizmetleri chatbotları\n• Satış tahminleri ve analiz\n• Görüntü ve ses işleme\n• Otomasyon çözümleri\n• Veri analizi ve görselleştirme\n\nHangi alanda bir çözüm düşünüyorsunuz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Yapay zeka projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: elif@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nMevcut veri altyapınızı ve hedeflerinizi anlatırsanız size özel çözüm önerisi sunabilirim.";
+          } else {
+            botResponse = "Yapay zeka çözümleri konusunda size nasıl yardımcı olabilirim? Hangi alanda bir uygulama düşünüyorsunuz?";
+          }
+        } else if (currentAgent.id === 'can') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "Artırılmış gerçeklik çözümlerimiz:\n\n• Eğitim uygulamaları: 30.000-100.000 TL\n• Perakende deneyimi: 50.000-150.000 TL\n• Sanal try-on: 40.000-120.000 TL\n• Endüstriyel uygulamalar: 80.000-250.000 TL\n• AR SDK entegrasyonu: 20.000-60.000 TL\n\nSektörünüzü belirtirseniz özel fiyat verebilirim.";
+          } else if (userInput.includes('kullanım') || userInput.includes('uygulama')) {
+            botResponse = "AR kullanım alanlarımız:\n\n• Eğitim ve simulasyon\n• Perakende ve e-ticaret\n• Mimari görselleştirme\n• Sanayi ve bakım\n• Oyun ve eğlence\n\nHangi sektörde AR düşünüyorsunuz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "AR projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: can@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nHedef kitlenizi ve kullanım senaryonuzu anlatırsanız size özel demo hazırlayabilirim.";
+          } else {
+            botResponse = "Artırılmış gerçeklik çözümleri konusunda size nasıl yardımcı olabilirim? Hangi sektör için düşünüyorsunuz?";
+          }
+        } else if (currentAgent.id === 'berk') {
+          if (userInput.includes('fiyat') || userInput.includes('ücret') || userInput.includes('maliyet')) {
+            botResponse = "Blockchain çözümlerimiz:\n\n• Akıllı sözleşme geliştirme: 20.000-80.000 TL\n• Token oluşturma: 15.000-50.000 TL\n• DApp geliştirme: 50.000-200.000 TL\n• Kripto ödeme entegrasyonu: 10.000-30.000 TL\n• Blockchain danışmanlığı: 15.000-40.000 TL\n\nProjeyi detaylandırırsanız özel fiyat verebilirim.";
+          } else if (userInput.includes('kullanım') || userInput.includes('uygulama')) {
+            botResponse = "Blockchain kullanım alanlarımız:\n\n• Tedarik zinciri şeffaflığı\n• Dijital kimlik doğrulama\n• Akıllı sözleşmeler\n• NFT ve dijital varlıklar\n• Kripto ödeme sistemleri\n\nHangi uygulama alanını düşünüyorsunuz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
+            botResponse = "Blockchain projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: berk@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nTeknik gereksinimlerinizi ve hedeflerinizi anlatırsanız size özel çözüm önerisi sunabilirim.";
+          } else {
+            botResponse = "Blockchain teknolojileri konusunda size nasıl yardımcı olabilirim? Hangi uygulama alanını düşünüyorsunuz?";
+          }
+        }
+      }
+      
       const botMessage: Message = {
         id: (Date.now() + 2).toString(),
         text: botResponse,
         isBot: true,
         timestamp: new Date(),
-        agentName: bestAgent.name,
-        agentTitle: bestAgent.title,
-        agentAvatar: bestAgent.avatar
+        agentName: currentAgent?.name,
+        agentTitle: currentAgent?.title,
+        agentAvatar: currentAgent?.avatar
       }
       setMessages(prev => [...prev, botMessage])
     }, 2000)
@@ -224,14 +344,14 @@ const Chatbot = () => {
     <>
       {/* Apple-Style Floating Chat Button */}
       <AnimatePresence>
-        {!isOpen && (
+        {!isChatOpen && (
           <motion.button
             initial={{ opacity: 0, scale: 0, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0, y: 20 }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(true)}
+            onClick={openChat}
             className="fixed bottom-6 right-6 z-50 group md:bottom-8 md:right-8"
             style={{
               filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15))'
@@ -341,7 +461,7 @@ const Chatbot = () => {
 
       {/* Apple-Style Chat Window */}
       <AnimatePresence>
-        {isOpen && (
+        {isChatOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -403,7 +523,7 @@ const Chatbot = () => {
                   
                   {/* Close button with Apple-style design */}
                   <motion.button
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeChat}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
@@ -506,7 +626,7 @@ const Chatbot = () => {
                                 : 'none'
                             }}
                           >
-                            <p className={`text-sm leading-relaxed ${
+                            <p className={`text-sm leading-relaxed whitespace-pre-line ${
                               message.isBot ? 'text-gray-800' : 'text-white'
                             }`} style={{
                               textShadow: message.isBot ? 'none' : '0 1px 2px rgba(0, 0, 0, 0.1)'
