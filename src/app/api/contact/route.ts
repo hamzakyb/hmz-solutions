@@ -78,26 +78,33 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const db = await getDatabase()
-    console.log('Database connection established')
-    
-    const collection = db.collection('contact_messages')
-    console.log('Collection accessed')
-    
-    const messages = await collection
-      .find({})
-      .sort({ createdAt: -1 })
-      .limit(100)
-      .toArray()
-    
-    console.log('Messages found:', messages.length)
-
-    return NextResponse.json({ messages })
+    try {
+      const db = await getDatabase()
+      console.log('Database connection established')
+      
+      const collection = db.collection('contact_messages')
+      console.log('Collection accessed')
+      
+      const messages = await collection
+        .find({})
+        .sort({ createdAt: -1 })
+        .limit(100)
+        .toArray()
+      
+      console.log('Messages found:', messages.length)
+      return NextResponse.json({ messages })
+    } catch (dbError) {
+      console.error('Database error:', dbError)
+      return NextResponse.json(
+        { error: 'Veritabanı bağlantı hatası: ' + (dbError as Error).message },
+        { status: 500 }
+      )
+    }
 
   } catch (error) {
     console.error('Get messages error:', error)
     return NextResponse.json(
-      { error: 'Mesajlar getirilirken hata oluştu' },
+      { error: 'Mesajlar getirilirken hata oluştu: ' + (error as Error).message },
       { status: 500 }
     )
   }

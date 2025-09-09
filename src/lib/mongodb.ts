@@ -6,8 +6,14 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI
-console.log('MongoDB URI configured:', uri ? 'YES' : 'NO')
-const options = {}
+// Add SSL options to the connection
+const options = {
+  tls: true,
+  retryWrites: true,
+  writeConcern: {
+    w: 'majority' as const
+  }
+}
 
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
@@ -21,21 +27,32 @@ if (process.env.NODE_ENV === 'development') {
   if (!globalWithMongo._mongoClientPromise) {
     console.log('Creating new MongoDB client for development')
     client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
+    globalWithMongo._mongoClientPromise = client.connect().catch(err => {
+      console.error('MongoDB connection error in development:', err)
+      throw err
+    })
   }
   clientPromise = globalWithMongo._mongoClientPromise
 } else {
   // Production'da her seferinde yeni client
-  console.log('Creating new MongoDB client for production')
+  console.log('Creating new MongoDB client for production with SSL options')
   client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+  clientPromise = client.connect().catch(err => {
+    console.error('MongoDB connection error in production:', err)
+    throw err
+  })
 }
 
 export default clientPromise
 
 export async function getDatabase(): Promise<Db> {
-  console.log('Getting database connection')
-  const client = await clientPromise
-  console.log('Database client ready')
-  return client.db('hmz-solutions')
+  try {
+    console.log('Getting database connection')
+    const client = await clientPromise
+    console.log('Database client ready')
+    return client.db('hmz-solutions')
+  } catch (error) {
+    console.error('Database connection failed:', error)
+    throw new Error('Veritabanı bağlantısı kurulamadı: ' + (error as Error).message)
+  }
 }

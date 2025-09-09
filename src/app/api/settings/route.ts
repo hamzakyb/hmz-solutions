@@ -41,46 +41,59 @@ interface SiteSettings {
 
 export async function GET() {
   try {
-    const db = await getDatabase()
-    const collection = db.collection<SiteSettings>('site_settings')
+    console.log('GET /api/settings called')
     
-    const settings = await collection.findOne({ _id: 'global' })
+    try {
+      const db = await getDatabase()
+      console.log('Database connection established for settings')
+      
+      const collection = db.collection<SiteSettings>('site_settings')
+      console.log('Settings collection accessed')
+      
+      const settings = await collection.findOne({ _id: 'global' })
 
-    // Default settings if none exist
-    const defaultSettings: SiteSettings = {
-      _id: 'global',
-      siteName: 'HMZ Solutions',
-      siteDescription: 'Premium Digital Solutions & Consultation Services',
-      logo: '/logo.png',
-      favicon: '/favicon.ico',
-      primaryColor: '#3B82F6',
-      secondaryColor: '#8B5CF6',
-      socialLinks: {
-        twitter: '',
-        linkedin: '',
-        instagram: '',
-        facebook: ''
-      },
-      contactInfo: {
-        email: 'info@hmzsolutions.com',
-        phone: '+90 (555) 123-4567',
-        address: 'İstanbul, Türkiye'
-      },
-      seo: {
-        metaTitle: 'HMZ Solutions - Premium Digital Solutions',
-        metaDescription: 'Professional web development, digital marketing, and technology consultation services.',
-        keywords: 'web development, digital marketing, technology consultation'
+      // Default settings if none exist
+      const defaultSettings: SiteSettings = {
+        _id: 'global',
+        siteName: 'HMZ Solutions',
+        siteDescription: 'Premium Digital Solutions & Consultation Services',
+        logo: '/logo.png',
+        favicon: '/favicon.ico',
+        primaryColor: '#3B82F6',
+        secondaryColor: '#8B5CF6',
+        socialLinks: {
+          twitter: '',
+          linkedin: '',
+          instagram: '',
+          facebook: ''
+        },
+        contactInfo: {
+          email: 'info@hmzsolutions.com',
+          phone: '+90 (555) 123-4567',
+          address: 'İstanbul, Türkiye'
+        },
+        seo: {
+          metaTitle: 'HMZ Solutions - Premium Digital Solutions',
+          metaDescription: 'Professional web development, digital marketing, and technology consultation services.',
+          keywords: 'web development, digital marketing, technology consultation'
+        }
       }
-    }
 
-    return NextResponse.json({ 
-      settings: settings || defaultSettings
-    })
+      return NextResponse.json({ 
+        settings: settings || defaultSettings
+      })
+    } catch (dbError) {
+      console.error('Database error in settings API:', dbError)
+      return NextResponse.json(
+        { error: 'Veritabanı bağlantı hatası: ' + (dbError as Error).message },
+        { status: 500 }
+      )
+    }
 
   } catch (error) {
     console.error('Settings fetch error:', error)
     return NextResponse.json(
-      { error: 'Ayarlar getirilirken hata oluştu' },
+      { error: 'Ayarlar getirilirken hata oluştu: ' + (error as Error).message },
       { status: 500 }
     )
   }
@@ -88,6 +101,8 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('POST /api/settings called')
+    
     // JWT token kontrolü
     const admin = requireAuth(request)
     
@@ -97,28 +112,39 @@ export async function POST(request: NextRequest) {
 
     const settings = await request.json()
 
-    const db = await getDatabase()
-    const collection = db.collection<SiteSettings>('site_settings')
-    
-    // Global settings'i upsert et
-    await collection.replaceOne(
-      { _id: 'global' },
-      {
-        _id: 'global',
-        ...settings
-      },
-      { upsert: true }
-    )
+    try {
+      const db = await getDatabase()
+      console.log('Database connection established for settings update')
+      
+      const collection = db.collection<SiteSettings>('site_settings')
+      console.log('Settings collection accessed for update')
+      
+      // Global settings'i upsert et
+      await collection.replaceOne(
+        { _id: 'global' },
+        {
+          _id: 'global',
+          ...settings
+        },
+        { upsert: true }
+      )
 
-    return NextResponse.json({
-      success: true,
-      message: 'Site ayarları başarıyla güncellendi!'
-    })
+      return NextResponse.json({
+        success: true,
+        message: 'Site ayarları başarıyla güncellendi!'
+      })
+    } catch (dbError) {
+      console.error('Database error in settings update:', dbError)
+      return NextResponse.json(
+        { error: 'Veritabanı bağlantı hatası: ' + (dbError as Error).message },
+        { status: 500 }
+      )
+    }
 
   } catch (error) {
     console.error('Settings update error:', error)
     return NextResponse.json(
-      { error: 'Ayarlar güncellenirken hata oluştu' },
+      { error: 'Ayarlar güncellenirken hata oluştu: ' + (error as Error).message },
       { status: 500 }
     )
   }
