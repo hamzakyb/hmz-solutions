@@ -328,8 +328,8 @@ const Chatbot = () => {
           } else if (userInput.includes('süre') || userInput.includes('zaman') || userInput.includes('teslim')) {
             botResponse = "Projelerin süresi ihtiyaçlara göre değişir:\n\n• Kurumsal web sitesi: 2-4 hafta\n• E-ticaret sitesi: 4-8 hafta\n• Mobil uygulama: 6-12 hafta\n• Yapay zeka çözümü: 4-16 hafta\n• Blockchain uygulaması: 8-20 hafta\n• AR/VR çözümü: 12-24 hafta\n\nDaha spesifik bir süre için projenizi detaylandırabilir misiniz?";
             quickReplies = ['2 hafta içinde bitmesini istiyorum', '2 ay sürem var', 'Ne kadar sürede biter?']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Bize aşağıdaki yollarla ulaşabilirsiniz:\n\n• WhatsApp: +90 505 095 99 50\n• E-posta: info@hmzsolutions.com\n• Telefon: +90 384 212 12 12\n• Adres: Nevşehir, Türkiye\n\nAyrıca sizi daha iyi tanımam için projenizi kısaca anlatır mısınız?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Bize aşağıdaki yollarla ulaşabilirsiniz:\n\n• WhatsApp: +90 505 095 99 50\n• E-posta: info@hmzsolutions.com\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nAyrıca sizi daha iyi tanımam için projenizi kısaca anlatır mısınız?";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Telefonla görüşmek istiyorum']
           } else if (userInput.includes('ödeme') || userInput.includes('taksit')) {
             botResponse = "Ödeme seçeneklerimiz esnektir:\n\n• Peşin ödeme: %5 indirim\n• 2 taksit: Ekstra ücret yok\n• 3-6 taksit: %5 ek ücret\n• Aşamalı ödeme: Projeye göre planlanır\n\nFatura kesimleri genellikle aşama sonlarında gerçekleşir.";
@@ -360,8 +360,8 @@ const Chatbot = () => {
           } else if (userInput.includes('performans') || userInput.includes('hız') || userInput.includes('optimizasyon')) {
             botResponse = "Performans optimizasyonu:\n\n• Code splitting ve lazy loading\n• Image optimization (WebP, lazy loading)\n• CDN entegrasyonu\n• Caching stratejileri\n• Minification ve compression\n• Server-side rendering\n• Database query optimization\n\nHedef: Lighthouse skoru 90+";
             quickReplies = ['Hız testi nasıl yapılır?', 'CDN nedir?', 'Lazy loading']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Web geliştirme projeleriniz için bana doğrudan ulaşabilirsiniz:\n\n• E-posta: mehmet@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nVeya şirket genel hatları üzerinden de ulaşabilirsiniz. Projeyi anlatır mısınız?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Web geliştirme projeleriniz için bana doğrudan ulaşabilirsiniz:\n\n• E-posta: mehmet@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nVeya şirket genel hatları üzerinden de ulaşabilirsiniz. Projeyi anlatır mısınız?";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Projemi anlatmak istiyorum']
           } else {
             botResponse = "Web geliştirme konusunda uzmanlaşmış bir teknik danışman olarak size yardımcı olabilirim. Hangi teknolojiyi kullanmak istiyorsunuz?";
@@ -383,8 +383,8 @@ const Chatbot = () => {
           } else if (userInput.includes('test') || userInput.includes('debug') || userInput.includes('kalite')) {
             botResponse = "Mobil uygulama test süreçlerimiz:\n\n• Unit testing\n• Integration testing\n• UI testing\n• Performance testing\n• Security testing\n• Device farm testing\n• User acceptance testing\n• A/B testing\n\nDesteklenen cihazlar: iOS 12+ ve Android 8+\n\nTest otomasyonu ile kalite garantisi sağlanır.";
             quickReplies = ['Unit testing', 'UI testing', 'Performance testing']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Mobil uygulama projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: ayse@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nProjeyi kısaca anlatırsanız size en uygun çözümü sunabilirim.";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Mobil uygulama projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: ayse@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nProjeyi kısaca anlatırsanız size en uygun çözümü sunabilirim.";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Projemi anlatmak istiyorum']
           } else {
             botResponse = "Mobil uygulama geliştirme konusunda size nasıl yardımcı olabilirim? iOS mu Android mi düşünüyorsunuz?";
@@ -406,8 +406,8 @@ const Chatbot = () => {
           } else if (userInput.includes('envanter') || userInput.includes('stok') || userInput.includes('inventory')) {
             botResponse = "Envanter yönetim sistemleri:\n\n• Gerçek zamanlı stok takibi\n• Otomatik stok yenileme\n• Tedarikçi entegrasyonu\n• Barkod sistemi\n• Multi-depo desteği\n• Stok uyarıları\n• Raporlama ve analiz\n• POS entegrasyonu\n\nERP sistemleri ile senkronizasyon sağlanabilir.";
             quickReplies = ['Stok takibi', 'Barkod sistemi', 'Multi-depo desteği']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "E-ticaret projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: ali@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nSektörünüzü ve ihtiyaçlarınızı anlatırsanız size özel teklif hazırlayabilirim.";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "E-ticaret projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: ali@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nSektörünüzü ve ihtiyaçlarınızı anlatırsanız size özel teklif hazırlayabilirim.";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Projemi anlatmak istiyorum']
           } else {
             botResponse = "E-ticaret çözümleri konusunda uzmanlaşmış bir danışman olarak size yardımcı olabilirim. Hangi platformu düşünüyorsunuz?";
@@ -429,8 +429,8 @@ const Chatbot = () => {
           } else if (userInput.includes('rapor') || userInput.includes('analytics') || userInput.includes('ölçüm')) {
             botResponse = "Performans raporlama ve analiz:\n\n• Google Analytics 4 entegrasyonu\n• Conversion tracking\n• Heatmap analizi\n• A/B testing\n• ROI hesaplama\n• Weekly/monthly raporlar\n• Dashboard oluşturma\n• Custom raporlama\n\nTüm veriler Google Data Studio ile görselleştirilir.";
             quickReplies = ['Google Analytics', 'Conversion tracking', 'Heatmap analizi']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Dijital pazarlama projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: zeynep@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nMevcut dijital varlıklarınızı ve hedeflerinizi anlatırsanız size özel strateji sunabilirim.";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Dijital pazarlama projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: zeynep@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nMevcut dijital varlıklarınızı ve hedeflerinizi anlatırsanız size özel strateji sunabilirim.";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Projemi anlatmak istiyorum']
           } else {
             botResponse = "SEO ve dijital pazarlama konularında size nasıl yardımcı olabilirim? Hangi hizmeti öğrenmek istiyorsunuz?";
@@ -449,8 +449,8 @@ const Chatbot = () => {
           } else if (userInput.includes('prensip') || userInput.includes('yaklaşım')) {
             botResponse = "Tasarım prensiplerimiz:\n\n• Kullanıcı merkezli tasarım (User-Centered Design)\n• Erişilebilirlik (Accessibility)\n• Responsive tasarım\n• Hız ve performans odaklı\n• Marka tutarlılığı\n• Test edilmiş kullanıcı deneyimi\n• Modern ve minimalist yaklaşım\n• Platform özel tasarım\n\nHer proje için özel tasarım rehberi oluşturulur.";
             quickReplies = ['Kullanıcı merkezli tasarım', 'Responsive tasarım', 'Erişilebilirlik']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Tasarım projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: emre@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nReferans çalışmalarımızı ve portföyümüzü görmek ister misiniz?";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Tasarım projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: emre@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nReferans çalışmalarımızı ve portföyümüzü görmek ister misiniz?";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Referans çalışmaları']
           } else {
             botResponse = "UI/UX tasarım konularında size nasıl yardımcı olabilirim? Hangi tür bir tasarım ihtiyacınız var?";
@@ -469,8 +469,8 @@ const Chatbot = () => {
           } else if (userInput.includes('veri') || userInput.includes('data')) {
             botResponse = "Veri işleme ve analiz:\n\n• Veri toplama ve temizleme\n• Özellik mühendisliği\n• Model eğitimi ve testi\n• Performans optimizasyonu\n• Gerçek zamanlı işleme\n• Batch processing\n• Veri gizliliği (GDPR uyumlu)\n• Etik AI uygulamaları\n\nMinimum 1000 veri satırı ile anlamlı modeller oluşturulabilir.";
             quickReplies = ['Veri toplama', 'Model eğitimi', 'Performans optimizasyonu']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Yapay zeka projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: elif@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nMevcut veri altyapınızı ve hedeflerinizi anlatırsanız size özel çözüm önerisi sunabilirim.";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Yapay zeka projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: elif@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nMevcut veri altyapınızı ve hedeflerinizi anlatırsanız size özel çözüm önerisi sunabilirim.";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Projemi anlatmak istiyorum']
           } else {
             botResponse = "Yapay zeka çözümleri konusunda size nasıl yardımcı olabilirim? Hangi alanda bir uygulama düşünüyorsunuz?";
@@ -489,8 +489,8 @@ const Chatbot = () => {
           } else if (userInput.includes('marker') || userInput.includes('tracking')) {
             botResponse = "AR tracking yöntemlerimiz:\n\n• Marker-based tracking (QR kod benzeri)\n• Markerless tracking (Görüntü bazlı)\n• SLAM (Simultaneous Localization and Mapping)\n• GPS tabanlı konumlandırma\n• Surface tracking (Yüzey tanıma)\n• Object recognition (Nesne tanıma)\n• Face tracking (Yüz takibi)\n• Hand tracking (El takibi)\n\nProje gereksinimlerinize göre en uygun yöntem seçilir.";
             quickReplies = ['Marker-based tracking', 'Markerless tracking', 'SLAM']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "AR projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: can@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nHedef kitlenizi ve kullanım senaryonuzu anlatırsanız size özel demo hazırlayabilirim.";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "AR projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: can@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nHedef kitlenizi ve kullanım senaryonuzu anlatırsanız size özel demo hazırlayabilirim.";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Demo istiyorum']
           } else {
             botResponse = "Artırılmış gerçeklik çözümleri konusunda size nasıl yardımcı olabilirim? Hangi sektör için düşünüyorsunuz?";
@@ -509,8 +509,8 @@ const Chatbot = () => {
           } else if (userInput.includes('güvenlik') || userInput.includes('security')) {
             botResponse = "Blockchain güvenlik önlemlerimiz:\n\n• Akıllı sözleşme denetimi\n• Penetrasyon testi\n• Zero-knowledge proofs\n• Multi-signature cüzdanlar\n• KYC/AML entegrasyonu\n• GDPR uyumlu veri işleme\n• Şifreleme standartları\n• Node güvenliği\n• API koruma\n\nTüm çözümler OWASP ve blockchain güvenlik standartlarına uygun geliştirilir.";
             quickReplies = ['Akıllı sözleşme denetimi', 'Penetrasyon testi', 'Zero-knowledge proofs']
-          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş')) {
-            botResponse = "Blockchain projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: berk@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n\nTeknik gereksinimlerinizi ve hedeflerinizi anlatırsanız size özel çözüm önerisi sunabilirim.";
+          } else if (userInput.includes('iletişim') || userInput.includes('ulaş') || userInput.includes('görüş') || userInput.includes('adres')) {
+            botResponse = "Blockchain projeleriniz için bana ulaşabilirsiniz:\n\n• E-posta: berk@hmzsolutions.com\n• WhatsApp: +90 505 095 99 50\n• Telefon: +90 384 212 12 12\n• Adres: Güllüoğlu Mah. Şehit Mustafa Vatan Cad. No:24/2 Ürgüp/Nevşehir, Türkiye\n\nTeknik gereksinimlerinizi ve hedeflerinizi anlatırsanız size özel çözüm önerisi sunabilirim.";
             quickReplies = ['WhatsApp ile ulaşmak istiyorum', 'E-posta göndermek istiyorum', 'Teknik danışmanlık']
           } else {
             botResponse = "Blockchain teknolojileri konusunda size nasıl yardımcı olabilirim? Hangi uygulama alanını düşünüyorsunuz?";
