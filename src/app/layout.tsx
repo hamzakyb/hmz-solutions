@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google'
 import "./globals.css";
+import { ChatbotProvider } from '@/context/ChatbotContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -112,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`scroll-smooth ${inter.variable}`}>
+    <html lang="tr" className={inter.variable}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />

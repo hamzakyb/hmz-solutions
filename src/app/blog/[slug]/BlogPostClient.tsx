@@ -221,24 +221,6 @@ export default function BlogPostPage() {
   return (
     <>
       <Navigation />
-      {post && (
-        <Head>
-          <title>{post.seoTitle || post.title} | HMZ Solutions Blog</title>
-          <meta name="description" content={post.seoDescription || post.excerpt} />
-          <meta name="keywords" content={post.tags.join(', ')} />
-          <meta property="og:title" content={post.title} />
-          <meta property="og:description" content={post.excerpt} />
-          <meta property="og:type" content="article" />
-          {post.featuredImage && (
-            <meta property="og:image" content={`${window.location.origin}${post.featuredImage}`} />
-          )}
-          <meta property="article:author" content={post.author} />
-          <meta property="article:published_time" content={post.createdAt} />
-          {post.tags.map((tag, index) => (
-            <meta key={index} property="article:tag" content={tag} />
-          ))}
-        </Head>
-      )}
 
       <div className="min-h-screen bg-white">
         {/* Enhanced Header Section */}
