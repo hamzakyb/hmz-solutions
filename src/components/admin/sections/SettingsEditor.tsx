@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Settings, Save, Globe, Shield, RefreshCw, Share2, Info, Sparkles, Upload, Loader2, Trash2, Image as ImageIcon } from 'lucide-react';
+import { upload } from '@vercel/blob/client';
 
 interface SiteSettings {
     siteTitle: string;
@@ -85,29 +86,32 @@ const SettingsEditor: React.FC = () => {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        // 10MB limit check
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Görsel boyutu çok büyük (Maksimum 10MB). Lütfen daha küçük bir dosya seçin veya görseli sıkıştırın.');
+            e.target.value = '';
+            return;
+        }
+
         try {
             setUploading(true);
             const token = localStorage.getItem('admin_token');
-            const response = await fetch(`/api/upload?filename=${file.name}`, {
-                method: 'POST',
+
+            const newBlob = await upload(file.name, file, {
+                access: 'public',
+                handleUploadUrl: '/api/upload',
                 headers: {
                     'Authorization': `Bearer ${token}`
-                },
-                body: file
+                }
             });
 
-            if (response.ok) {
-                const blob = await response.json();
-                setData({
-                    ...data,
-                    navigation: { ...data.navigation, logoImage: blob.url }
-                });
-            } else {
-                alert('Logo yüklenirken bir hata oluştu.');
-            }
+            setData({
+                ...data,
+                navigation: { ...data.navigation, logoImage: newBlob.url }
+            });
         } catch (error) {
             console.error('Upload error:', error);
-            alert('Logo yüklenirken bir hata oluştu.');
+            alert(`Logo yüklenirken bir hata oluştu: ${(error as Error).message}`);
         } finally {
             setUploading(false);
         }

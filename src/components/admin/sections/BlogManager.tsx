@@ -16,6 +16,7 @@ import {
     Upload,
     Loader2
 } from 'lucide-react'
+import { upload } from '@vercel/blob/client'
 
 interface BlogPost {
     _id: string
@@ -156,9 +157,9 @@ const BlogManager: React.FC = () => {
         const file = e.target.files?.[0]
         if (!file) return
 
-        // 4MB limit check
-        if (file.size > 4 * 1024 * 1024) {
-            alert('Görsel boyutu çok büyük (Maksimum 4MB). Lütfen daha küçük bir dosya seçin veya görseli sıkıştırın.');
+        // 10MB limit check
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Görsel boyutu çok büyük (Maksimum 10MB). Lütfen daha küçük bir dosya seçin veya görseli sıkıştırın.');
             e.target.value = '';
             return;
         }
@@ -166,35 +167,23 @@ const BlogManager: React.FC = () => {
         try {
             setUploading(true)
             const token = localStorage.getItem('admin_token')
-            const response = await fetch(`/api/upload?filename=${file.name}`, {
-                method: 'POST',
+
+            const newBlob = await upload(file.name, file, {
+                access: 'public',
+                handleUploadUrl: '/api/upload',
+                clientPayload: JSON.stringify({
+                    type: 'blog-post-image'
+                }),
+                // Authorization header is needed for /api/upload token generation
                 headers: {
                     'Authorization': `Bearer ${token}`
-                },
-                body: file
-            })
-
-            if (response.ok) {
-                const blob = await response.json()
-                setPostForm({ ...postForm, featuredImage: blob.url })
-            } else {
-                if (response.status === 413) {
-                    alert('Görsel boyutu sunucu sınırı (4.5MB) üzerinde. Lütfen görseli küçültüp tekrar deneyin.');
-                } else {
-                    const contentType = response.headers.get('content-type');
-                    if (contentType && contentType.includes('application/json')) {
-                        const errorData = await response.json();
-                        alert(`Görsel yüklenirken bir hata oluştu: ${errorData.error || 'Bağlantı sorunu'}`);
-                    } else {
-                        const errorText = await response.text();
-                        console.error('Server error response:', errorText);
-                        alert('Görsel yüklenirken sunucu hatası oluştu. Dosya çok büyük olabilir.');
-                    }
                 }
-            }
+            });
+
+            setPostForm({ ...postForm, featuredImage: newBlob.url })
         } catch (error) {
             console.error('Upload error:', error)
-            alert('Görsel yüklenirken teknik bir hata oluştu. Lütfen bağlantınızı kontrol edin.');
+            alert(`Görsel yüklenirken bir hata oluştu: ${(error as Error).message}`);
         } finally {
             setUploading(false)
         }
