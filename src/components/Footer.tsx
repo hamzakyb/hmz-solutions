@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { SparklesIcon, StarIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { CodeBracketIcon, BriefcaseIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 const Footer = () => {
   const containerRef = useRef<HTMLElement>(null)
@@ -12,10 +12,34 @@ const Footer = () => {
     target: containerRef,
     offset: ['start end', 'end start']
   })
-  
+
   const y = useTransform(scrollYProgress, [0, 1], ['30px', '-30px'])
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
   const currentYear = new Date().getFullYear()
+
+  const [data, setData] = useState({
+    footerDescription: 'Vizyonları dijital gerçekliklere dönüştürmek için en çağdaş teknolojiyi, olağanüstü tasarımı ve mükemmelliğe olan sarsılmaz bağlılığı kullanıyoruz.',
+    socialLinks: {
+      github: '#',
+      linkedin: '#',
+      instagram: '#'
+    }
+  })
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('/api/content?section=settings')
+        const result = await response.json()
+        if (result.content?.data) {
+          setData(result.content.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch footer settings:', error)
+      }
+    }
+    fetchSettings()
+  }, [])
 
   const quickLinks = [
     { label: 'Ana Sayfa', href: '#home', description: 'Başa dön' },
@@ -32,26 +56,26 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { 
-      icon: CodeBracketIcon, 
-      href: '#', 
-      label: 'GitHub', 
+    {
+      icon: CodeBracketIcon,
+      href: data.socialLinks.github,
+      label: 'GitHub',
       gradient: 'from-gray-800 to-gray-900',
       hoverGradient: 'hover:from-gray-700 hover:to-gray-800'
     },
-    { 
-      icon: BriefcaseIcon, 
-      href: '#', 
-      label: 'LinkedIn', 
+    {
+      icon: BriefcaseIcon,
+      href: data.socialLinks.linkedin,
+      label: 'LinkedIn',
       gradient: 'from-blue-600 to-blue-700',
       hoverGradient: 'hover:from-blue-500 hover:to-blue-600'
     },
-    { 
-      icon: ChatBubbleOvalLeftEllipsisIcon, 
-      href: '#', 
-      label: 'İletişim', 
-      gradient: 'from-green-600 to-green-700',
-      hoverGradient: 'hover:from-green-500 hover:to-green-600'
+    {
+      icon: ChatBubbleOvalLeftEllipsisIcon,
+      href: data.socialLinks.instagram,
+      label: 'Instagram',
+      gradient: 'from-pink-600 to-pink-700',
+      hoverGradient: 'hover:from-pink-500 hover:to-pink-600'
     },
   ]
 
@@ -60,15 +84,15 @@ const Footer = () => {
       {/* Premium Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-white to-gray-100" />
-        
+
         {/* Animated Grid */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-5"
           style={{ y }}
         >
           <div className="absolute inset-0 bg-dots" />
         </motion.div>
-        
+
         {/* Floating Orbs - Altın rengi */}
         {[...Array(4)].map((_, i) => (
           <motion.div
@@ -77,8 +101,8 @@ const Footer = () => {
             style={{
               left: `${20 + i * 20}%`,
               top: `${30 + (i % 2) * 30}%`,
-              background: i % 2 === 0 
-                ? 'rgba(175, 160, 98, 0.3)' 
+              background: i % 2 === 0
+                ? 'rgba(175, 160, 98, 0.3)'
                 : 'rgba(195, 180, 118, 0.2)'
             }}
             animate={{
@@ -157,7 +181,7 @@ const Footer = () => {
                   background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.1) 0%, rgba(195, 180, 118, 0.15) 50%, rgba(175, 160, 98, 0.1) 100%)'
                 }}
               />
-              
+
               <div className="relative bg-white/80 backdrop-blur-2xl border rounded-2xl p-6 sm:p-8 transition-all duration-500"
                 style={{
                   borderColor: 'rgba(175, 160, 98, 0.3)'
@@ -181,9 +205,9 @@ const Footer = () => {
                     />
                     <div className="relative w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-xl flex items-center justify-center shadow-xl overflow-hidden p-2.5 sm:p-3">
                       {/* Logo with better sizing and padding */}
-                      <Image 
-                        src="/logo.png" 
-                        alt="HMZ Solutions Logo" 
+                      <Image
+                        src="/logo.png"
+                        alt="HMZ Solutions Logo"
                         fill
                         className="object-contain"
                         onError={(e) => {
@@ -203,12 +227,11 @@ const Footer = () => {
                     <p className="text-gray-600 text-sm">Dijital İnovasyon Ortakları</p>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-700 leading-relaxed mb-6 text-sm sm:text-base">
-                  Vizyonları dijital gerçekliklere dönüştürmek için en çağdaş teknolojiyi, 
-                  olağanüstü tasarımı ve mükemmelliğe olan sarsılmaz bağlılığı kullanıyoruz.
+                  {data.footerDescription}
                 </p>
-                
+
                 {/* Premium Social Links */}
                 <div className="flex space-x-3 sm:space-x-4">
                   {socialLinks.map((social, index) => {
@@ -248,7 +271,7 @@ const Footer = () => {
                   background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.1) 0%, rgba(195, 180, 118, 0.15) 50%, rgba(175, 160, 98, 0.1) 100%)'
                 }}
               />
-              
+
               <div className="relative bg-white/80 backdrop-blur-2xl border rounded-2xl p-6 transition-all duration-500"
                 style={{
                   borderColor: 'rgba(175, 160, 98, 0.3)'
@@ -270,7 +293,7 @@ const Footer = () => {
                   />
                   Navigasyon
                 </h3>
-                
+
                 <ul className="space-y-3">
                   {quickLinks.map((link, index) => (
                     <motion.li
@@ -309,7 +332,7 @@ const Footer = () => {
                   background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.1) 0%, rgba(195, 180, 118, 0.15) 50%, rgba(175, 160, 98, 0.1) 100%)'
                 }}
               />
-              
+
               <div className="relative bg-white/80 backdrop-blur-2xl border rounded-2xl p-6 transition-all duration-500"
                 style={{
                   borderColor: 'rgba(175, 160, 98, 0.3)'
@@ -331,7 +354,7 @@ const Footer = () => {
                   />
                   Çözümler
                 </h3>
-                
+
                 <ul className="space-y-3">
                   {services.map((service, index) => (
                     <motion.li
@@ -371,7 +394,7 @@ const Footer = () => {
               background: 'linear-gradient(to right, transparent, rgba(175, 160, 98, 0.4), transparent)'
             }}
           />
-          
+
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             {/* Copyright */}
             <div className="flex items-center space-x-4">
@@ -379,7 +402,7 @@ const Footer = () => {
                 © {currentYear} HMZ Solutions. Tüm hakları saklıdır.
               </div>
             </div>
-            
+
             {/* Legal Links */}
             <div className="flex items-center space-x-6 text-sm">
               {[
@@ -404,7 +427,7 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Premium Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

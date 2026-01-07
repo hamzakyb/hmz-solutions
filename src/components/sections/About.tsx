@@ -1,8 +1,6 @@
-'use client'
-
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { TrophyIcon, UsersIcon, EyeIcon, LightBulbIcon, SparklesIcon, StarIcon } from '@heroicons/react/24/outline'
-import { useRef } from 'react'
+import { TrophyIcon, UsersIcon, EyeIcon, LightBulbIcon, SparklesIcon, StarIcon, AcademicCapIcon, RocketLaunchIcon } from '@heroicons/react/24/outline'
+import { useRef, useState, useEffect } from 'react'
 
 const About = () => {
   const containerRef = useRef<HTMLElement>(null)
@@ -10,49 +8,69 @@ const About = () => {
     target: containerRef,
     offset: ['start end', 'end start']
   })
-  
+
   const y = useTransform(scrollYProgress, [0, 1], ['50px', '-50px'])
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
-  const stats = [
-    { number: 'Yenilikçi', label: 'Yaklaşımlar', icon: TrophyIcon },
-    { number: 'Özgün', label: 'Çözümler', icon: UsersIcon },
-    { number: 'Müşteri', label: 'Odaklılık', icon: EyeIcon },
-    { number: 'Sürekli', label: 'Gelişim', icon: LightBulbIcon },
-  ]
+  const [data, setData] = useState({
+    badge: 'Hakkımızda',
+    title1: 'Yenilikçi',
+    title2: 'Dijital Çözümler',
+    description: 'Yaratıcı yaklaşımımız ve teknolojiye olan tutkumuzla, işletmenizin dijital dünyadaki yolculuğunu şekillendiriyoruz. Her fikri benzersiz bir dijital deneyime dönüştürüyoruz.',
+    philosophy: 'Mükemmel dijital deneyimler, sadece teknolojiyle değil, aynı zamanda insan odaklı yaklaşımla da mümkündür. Her projede bu dengeyi kurmak bizim önceliğimizdir.',
+    stats: [
+      { number: 'Yenilikçi', label: 'Yaklaşımlar' },
+      { number: 'Özgün', label: 'Çözümler' },
+      { number: 'Müşteri', label: 'Odaklılık' },
+      { number: 'Sürekli', label: 'Gelişim' }
+    ],
+    values: [
+      {
+        title: 'Stratejik Yaklaşım',
+        description: 'Her projeye özel stratejiler geliştirerek hedeflerinizi başarıyla dönüştürüyoruz.'
+      },
+      {
+        title: 'Yaratıcı Çözümler',
+        description: 'Standartların ötesine geçerek özgün ve etkileyici dijital deneyimler sunuyoruz.'
+      },
+      {
+        title: 'Sürekli Gelişim',
+        description: 'Teknolojiyi yakından takip ederek çözümlerimizi sürekli geliştiriyoruz.'
+      }
+    ]
+  })
 
-  const values = [
-    {
-      title: 'Stratejik Yaklaşım',
-      description: 'Her projeye özel stratejiler geliştirerek hedeflerinizi başarıyla dönüştürüyoruz.',
-      delay: 0.2
-    },
-    {
-      title: 'Yaratıcı Çözümler',
-      description: 'Standartların ötesine geçerek özgün ve etkileyici dijital deneyimler sunuyoruz.',
-      delay: 0.4
-    },
-    {
-      title: 'Sürekli Gelişim',
-      description: 'Teknolojiyi yakından takip ederek çözümlerimizi sürekli geliştiriyoruz.',
-      delay: 0.6
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch('/api/content?section=about')
+        const result = await response.json()
+        if (result.content?.data) {
+          setData(result.content.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch about content:', error)
+      }
     }
-  ]
+    fetchContent()
+  }, [])
+
+  const statIcons = [TrophyIcon, UsersIcon, EyeIcon, LightBulbIcon, AcademicCapIcon, RocketLaunchIcon]
 
   return (
     <section ref={containerRef} id="about" className="py-24 sm:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/80 to-gray-100/90" />
-        
+
         {/* Animated Grid */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-5"
           style={{ y }}
         >
           <div className="absolute inset-0 bg-dots" />
         </motion.div>
-        
+
         {/* Floating Orbs - Altın rengi */}
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -61,13 +79,13 @@ const About = () => {
             style={{
               left: `${10 + i * 12}%`,
               top: `${20 + (i % 3) * 25}%`,
-              background: i % 4 === 0 
-                ? 'rgba(175, 160, 98, 0.3)' 
-                : i % 4 === 1 
-                ? 'rgba(195, 180, 118, 0.2)' 
-                : i % 4 === 2 
-                ? 'rgba(175, 160, 98, 0.4)' 
-                : 'rgba(185, 170, 108, 0.25)'
+              background: i % 4 === 0
+                ? 'rgba(175, 160, 98, 0.3)'
+                : i % 4 === 1
+                  ? 'rgba(195, 180, 118, 0.2)'
+                  : i % 4 === 2
+                    ? 'rgba(175, 160, 98, 0.4)'
+                    : 'rgba(185, 170, 108, 0.25)'
             }}
             animate={{
               x: [0, 50, 0],
@@ -104,7 +122,7 @@ const About = () => {
             }}
           >
             <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
-            <span className="text-gray-800 font-medium text-sm sm:text-base">Hakkımızda</span>
+            <span className="text-gray-800 font-medium text-sm sm:text-base">{data.badge}</span>
             <StarIcon className="w-3 sm:w-4 h-3 sm:h-4" style={{ color: 'rgb(195, 180, 118)' }} />
           </motion.div>
 
@@ -115,7 +133,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-thin text-gray-900 mb-4 sm:mb-6 tracking-tight"
           >
-            <span className="font-extralight">Yenilikçi</span>
+            <span className="font-extralight">{data.title1}</span>
             <br />
             <span className="font-bold bg-clip-text text-transparent"
               style={{
@@ -124,10 +142,10 @@ const About = () => {
                 WebkitTextFillColor: 'transparent'
               }}
             >
-              Dijital Çözümler
+              {data.title2}
             </span>
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -135,8 +153,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-base sm:text-lg lg:text-2xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed px-4"
           >
-            Yaratıcı yaklaşımımız ve teknolojiye olan tutkumuzla, işletmenizin dijital dünyadaki yolculuğunu 
-            şekillendiriyoruz. Her fikri benzersiz bir dijital deneyime dönüştürüyoruz.
+            {data.description}
           </motion.p>
         </motion.div>
 
@@ -148,8 +165,8 @@ const About = () => {
           viewport={{ once: true }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-16 sm:mb-24"
         >
-          {stats.map((stat) => {
-            const IconComponent = stat.icon
+          {data.stats.map((stat, index) => {
+            const IconComponent = statIcons[index % statIcons.length] || TrophyIcon
             return (
               <motion.div
                 key={stat.label}
@@ -200,12 +217,12 @@ const About = () => {
                           <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" />
                         </div>
                       </div>
-                      
+
                       {/* Number */}
                       <div className="text-xl sm:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2 group-hover:text-glow transition-all duration-300">
                         {stat.number}
                       </div>
-                      
+
                       {/* Label */}
                       <div className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300 leading-tight">
                         {stat.label}
@@ -226,14 +243,14 @@ const About = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {values.map((value) => (
+          {data.values.map((value, index) => (
             <motion.div
               key={value.title}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.8, 
-                delay: value.delay,
+              transition={{
+                duration: 0.8,
+                delay: 0.2 + index * 0.2,
                 type: "spring",
                 stiffness: 100
               }}
@@ -243,7 +260,7 @@ const About = () => {
               {/* Premium Value Card */}
               <motion.div
                 className="relative h-full"
-                whileHover={{ 
+                whileHover={{
                   rotateX: 5,
                   rotateY: 5,
                   scale: 1.02
@@ -260,7 +277,7 @@ const About = () => {
                     background: `linear-gradient(135deg, rgba(175, 160, 98, 0.3) 0%, rgba(195, 180, 118, 0.4) 100%)`
                   }}
                 />
-                
+
                 {/* Main Card */}
                 <div className="relative bg-white/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 lg:p-10 border transition-all duration-500 h-full"
                   style={{
@@ -297,13 +314,13 @@ const About = () => {
                       </div>
                     </motion.div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="space-y-3 sm:space-y-4">
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-700 group-hover:bg-clip-text transition-all duration-300">
                       {value.title}
                     </h3>
-                    
+
                     <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300 text-sm sm:text-base">
                       {value.description}
                     </p>
@@ -341,8 +358,7 @@ const About = () => {
                 transition={{ duration: 1, delay: 1.4 }}
                 viewport={{ once: true }}
               >
-                &ldquo;Mükemmel dijital deneyimler, sadece teknolojiyle değil, aynı zamanda insan odaklı 
-                yaklaşımla da mümkündür. Her projede bu dengeyi kurmak bizim önceliğimizdir.&rdquo;
+                &ldquo;{data.philosophy}&rdquo;
               </motion.p>
               <motion.div
                 className="mt-4 sm:mt-6 font-medium"

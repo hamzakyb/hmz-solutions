@@ -2,7 +2,15 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowsPointingOutIcon, CodeBracketIcon, DevicePhoneMobileIcon, LinkIcon, PaperAirplaneIcon, SparklesIcon, StarIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
+
+interface DynamicService {
+  title: string;
+  subtitle: string;
+  description: string;
+  features: string[];
+  delay: number;
+}
 
 const Services = () => {
   const containerRef = useRef<HTMLElement>(null)
@@ -10,87 +18,70 @@ const Services = () => {
     target: containerRef,
     offset: ['start end', 'end start']
   })
-  
+
   const y = useTransform(scrollYProgress, [0, 1], ['100px', '-100px'])
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
-  const services = [
-    {
-      icon: ComputerDesktopIcon,
-      title: 'Web Sitesi',
-      subtitle: 'Profesyonel Web Çözümleri',
-      description: 'Şirketiniz için modern, hızlı ve kolay kullanımlı web siteleri yapıyoruz.',
-      features: ['Hızlı Yükleme', 'Mobil Uyumlu', 'Arama Motorlarında Görünür', 'Kolay Yönetim'],
-      gradient: 'from-yellow-100 via-yellow-200 to-yellow-300',
-      glowColor: 'golden',
-      delay: 0.1
-    },
-    {
-      icon: DevicePhoneMobileIcon,
-      title: 'Mobil Uygulama',
-      subtitle: 'iOS & Android Uygulamalar',
-      description: 'iPhone ve Android telefonlar için kullanıcı dostu mobil uygulamalar geliştiriyoruz.',
-      features: ['iOS Uygulamaları', 'Android Uygulamaları', 'Kullanıcı Dostu Arayüz', 'Mağaza Yayınlama'],
-      gradient: 'from-yellow-200 via-yellow-300 to-yellow-400',
-      glowColor: 'golden',
-      delay: 0.2
-    },
-    {
-      icon: CodeBracketIcon,
-      title: 'Özel Yazılım',
-      subtitle: 'İşe Özel Teknoloji',
-      description: 'İş süreçlerinize özel yazılım çözümleri ile verimliliği artırıyoruz.',
-      features: ['İş Süreçleri Otomasyonu', 'Veri Analizi', 'Güvenli Sistemler', 'Teknik Destek'],
-      gradient: 'from-yellow-300 via-yellow-400 to-yellow-500',
-      glowColor: 'golden',
-      delay: 0.3
-    },
-    {
-      icon: SparklesIcon,
-      title: 'Yapay Zeka Cozumleri',
-      subtitle: 'Akilli Is Surecleri',
-      description: 'Is sureclerini otomatiklestiren ve verimliligi artiran yapay zeka tabanli cozumler gelistiriyoruz.',
-      features: ['Makine Ogrenmesi', 'Veri Analizi', 'Tahmine Dayali Modeller', 'Otomasyon'],
-      gradient: 'from-green-200 via-green-300 to-green-400',
-      glowColor: 'green',
-      delay: 0.4
-    },
-    {
-      icon: ArrowsPointingOutIcon,
-      title: 'Artirilmis Gercelik',
-      subtitle: 'Yenilikci AR Cozumleri',
-      description: 'Musterilerinize etkileyici ve interaktif deneyimler sunan artirilmis gercelik uygulamalari gelistiriyoruz.',
-      features: ['3D Modelleme', 'Interaktif Deneyimler', 'Gercek Zamanli Isleme', 'Platformlar Arasi Uyumluluk'],
-      gradient: 'from-purple-200 via-purple-300 to-purple-400',
-      glowColor: 'purple',
-      delay: 0.5
-    },
-    {
-      icon: LinkIcon,
-      title: 'Blockchain Teknolojisi',
-      subtitle: 'Sefaf ve Guvenli Sistemler',
-      description: 'Sefaf, guvenli ve degistirilemez veri paylasimi saglayan blockchain cozumleri sunuyoruz.',
-      features: ['Akilli Sozlesmeler', 'Sefaf Kayit Sistemi', 'Kripto Para Entegrasyonu', 'Guvenli Veri Saklama'],
-      gradient: 'from-blue-200 via-blue-300 to-blue-400',
-      glowColor: 'blue',
-      delay: 0.6
+  const [content, setContent] = useState({
+    title: 'Dijital Hizmetlerimiz',
+    subtitle: 'İşletmenizin dijital ihtiyaçları için profesyonel çözümler sunuyoruz. Her projede müşteri memnuniyetini ön planda tutuyoruz.',
+    services: [
+      {
+        title: 'Web Sitesi',
+        subtitle: 'Profesyonel Web Çözümleri',
+        description: 'Şirketiniz için modern, hızlı ve kolay kullanımlı web siteleri yapıyoruz.',
+        features: ['Hızlı Yükleme', 'Mobil Uyumlu', 'Arama Motorlarında Görünür', 'Kolay Yönetim'],
+        delay: 0.1
+      },
+      {
+        title: 'Mobil Uygulama',
+        subtitle: 'iOS & Android Uygulamalar',
+        description: 'iPhone ve Android telefonlar için kullanıcı dostu mobil uygulamalar geliştiriyoruz.',
+        features: ['iOS Uygulamaları', 'Android Uygulamaları', 'Kullanıcı Dostu Arayüz', 'Mağaza Yayınlama'],
+        delay: 0.2
+      },
+      {
+        title: 'Özel Yazılım',
+        subtitle: 'İşe Özel Teknoloji',
+        description: 'İş süreçlerinize özel yazılım çözümleri ile verimliliği artırıyoruz.',
+        features: ['İş Süreçleri Otomasyonu', 'Veri Analizi', 'Güvenli Sistemler', 'Teknik Destek'],
+        delay: 0.3
+      }
+    ]
+  })
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch('/api/content?section=services')
+        const result = await response.json()
+        if (result.content?.data) {
+          setContent(result.content.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch services content:', error)
+      }
     }
-  ]
+    fetchContent()
+  }, [])
+
+  // Icon mapping for dynamic services
+  const iconMap = [ComputerDesktopIcon, DevicePhoneMobileIcon, CodeBracketIcon, SparklesIcon, ArrowsPointingOutIcon, LinkIcon]
 
   return (
     <section ref={containerRef} id="services" className="py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
       {/* Premium Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white/80 to-gray-100/90" />
-        
+
         {/* Animated Grid */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-10"
           style={{ y }}
         >
           <div className="absolute inset-0 bg-grid" />
         </motion.div>
-        
+
         {/* Floating Particles */}
         {[...Array(20)].map((_, i) => {
           // Sabit pozisyonlar hydration hatası için
@@ -106,7 +97,7 @@ const Services = () => {
           const position = positions[i] || positions[0]
           const delays = [0, 0.5, 1.0, 1.5, 2.0, 0.3, 0.8, 1.3, 1.8, 0.2, 0.7, 1.2, 1.7, 0.4, 0.9, 1.4, 1.9, 0.6, 1.1, 1.6]
           const durations = [3, 4, 5, 6, 7, 3.5, 4.5, 5.5, 6.5, 3.2, 4.2, 5.2, 6.2, 3.8, 4.8, 5.8, 6.8, 3.3, 4.3, 5.3]
-          
+
           return (
             <motion.div
               key={i}
@@ -163,7 +154,7 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-5xl md:text-7xl font-thin text-gray-900 mb-6 tracking-tight"
           >
-            <span className="font-extralight">Dijital</span>
+            <span className="font-extralight">{content.title.split(' ')[0]}</span>
             <br />
             <span className="font-bold text-transparent bg-clip-text"
               style={{
@@ -171,10 +162,10 @@ const Services = () => {
                 textShadow: '0 2px 8px rgba(175, 160, 98, 0.3)' // Granüllü text efekti
               }}
             >
-              Hizmetlerimiz
+              {content.title.split(' ').slice(1).join(' ')}
             </span>
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -182,21 +173,21 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed"
           >
-            İşletmenizin dijital ihtiyaçları için profesyonel çözümler sunuyoruz. Her projede müşteri memnuniyetini ön planda tutuyoruz.
+            {content.subtitle}
           </motion.p>
         </motion.div>
 
         {/* Premium Services Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {services.map((service) => {
-            const IconComponent = service.icon
+          {content.services.map((service: DynamicService, index: number) => {
+            const IconComponent = iconMap[index % iconMap.length] || ComputerDesktopIcon
             return (
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.8, 
+                transition={{
+                  duration: 0.8,
                   delay: service.delay,
                   type: "spring",
                   stiffness: 100
@@ -207,7 +198,7 @@ const Services = () => {
                 {/* Card Container with 3D Effect */}
                 <motion.div
                   className="relative h-full"
-                  whileHover={{ 
+                  whileHover={{
                     rotateX: 5,
                     rotateY: 5,
                     scale: 1.02
@@ -219,15 +210,15 @@ const Services = () => {
                   }}
                 >
                   {/* Premium Glow Effect - Altın rengi ile */}
-                  <div 
+                  <div
                     className="absolute inset-0 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-700"
                     style={{
                       background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.3) 0%, rgba(195, 180, 118, 0.4) 50%, rgba(175, 160, 98, 0.3) 100%)'
                     }}
                   />
-                  
+
                   {/* Main Card - Altın rengi ile hover efekti */}
-                  <div 
+                  <div
                     className="relative bg-white/90 backdrop-blur-2xl rounded-3xl p-8 border transition-all duration-500 h-full"
                     style={{
                       borderColor: 'rgba(175, 160, 98, 0.2)',
@@ -250,13 +241,13 @@ const Services = () => {
                         transition={{ duration: 0.3 }}
                       >
                         {/* Altın rengi background ile gradient efekt */}
-                        <div 
+                        <div
                           className="absolute inset-0 rounded-2xl blur-xl opacity-30 group-hover:opacity-70 transition-opacity duration-300"
                           style={{
                             background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.4) 0%, rgba(195, 180, 118, 0.6) 50%, rgba(175, 160, 98, 0.4) 100%)'
                           }}
                         />
-                        <div 
+                        <div
                           className="relative w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl"
                           style={{
                             background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 50%, rgb(175, 160, 98) 100%)',
@@ -267,7 +258,7 @@ const Services = () => {
                         </div>
                       </motion.div>
                     </div>
-                    
+
                     {/* Content */}
                     <div className="space-y-6">
                       <div>
@@ -278,23 +269,23 @@ const Services = () => {
                           {service.subtitle}
                         </p>
                       </div>
-                      
+
                       <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
                         {service.description}
                       </p>
-                      
+
                       {/* Premium Features */}
                       <ul className="space-y-3">
-                        {service.features.map((feature, i) => (
-                          <motion.li 
-                            key={i} 
+                        {service.features.map((feature: string, i: number) => (
+                          <motion.li
+                            key={i}
                             className="flex items-center text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300"
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.8 + i * 0.1, duration: 0.3 }}
                             viewport={{ once: true }}
                           >
-                            <div 
+                            <div
                               className="w-2 h-2 rounded-full mr-3 transition-shadow duration-300"
                               style={{
                                 background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)',
@@ -305,14 +296,14 @@ const Services = () => {
                           </motion.li>
                         ))}
                       </ul>
-                      
+
                       {/* Premium CTA */}
                       <motion.div
                         className="pt-6"
                         whileHover={{ x: 5 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <div 
+                        <div
                           className="flex items-center font-medium transition-colors duration-300 cursor-pointer"
                           style={{ color: 'rgb(175, 160, 98)' }}
                           onMouseEnter={(e) => {
@@ -351,19 +342,19 @@ const Services = () => {
           <p className="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
             Projeyi birlikte hayata geçirmeye hazır mısınız?
           </p>
-          
+
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="relative inline-block group"
           >
-            <div 
+            <div
               className="absolute inset-0 rounded-full blur-2xl opacity-30 group-hover:opacity-70 transition-opacity duration-300"
               style={{
                 background: 'linear-gradient(135deg, rgba(175, 160, 98, 0.5) 0%, rgba(195, 180, 118, 0.6) 50%, rgba(175, 160, 98, 0.5) 100%)'
               }}
             />
-            <button 
+            <button
               className="relative backdrop-blur-xl border text-white font-medium px-12 py-4 rounded-full text-lg shadow-2xl transition-all duration-300 group cursor-pointer"
               style={{
                 background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(155, 140, 78) 50%, rgb(175, 160, 98) 100%)',
