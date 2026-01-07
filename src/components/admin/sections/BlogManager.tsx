@@ -157,11 +157,12 @@ const BlogManager: React.FC = () => {
                 const blob = await response.json()
                 setPostForm({ ...postForm, featuredImage: blob.url })
             } else {
-                alert('Görsel yüklenirken bir hata oluştu.')
+                const errorData = await response.json();
+                alert(`Görsel yüklenirken bir hata oluştu: ${errorData.error || 'Bağlantı sorunu'}`);
             }
         } catch (error) {
             console.error('Upload error:', error)
-            alert('Görsel yüklenirken bir hata oluştu.')
+            alert('Görsel yüklenirken teknik bir hata oluştu. Lütfen bağlantınızı kontrol edin.');
         } finally {
             setUploading(false)
         }
