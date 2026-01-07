@@ -221,7 +221,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 1.2 }}
             className="text-xl md:text-3xl font-light text-gray-700 mb-12 max-w-5xl mx-auto leading-relaxed"
           >
-            <span className="font-medium" style={{ color: 'rgb(175, 160, 98)' }}>Nevşehir ve Kapadokya</span> bölgesinden tüm Türkiye'ye,
+            <span className="font-medium" style={{ color: 'rgb(175, 160, 98)' }}>Nevşehir ve Kapadokya</span> bölgesinden tüm Türkiye&apos;ye,
             <br className="hidden md:block" />
             teknolojinin sınırlarını aşan dijital deneyimler geliştiriyoruz.
             <br className="hidden md:block" />
