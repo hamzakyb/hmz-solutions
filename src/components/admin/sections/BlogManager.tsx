@@ -96,8 +96,15 @@ const BlogManager: React.FC = () => {
                 setIsCreatingPost(false)
                 resetForm()
             } else {
-                const errorData = await response.json();
-                alert(`Blog oluşturulurken hata: ${errorData.error || 'Bilinmeyen bir hata oluştu.'}`);
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const errorData = await response.json();
+                    alert(`Blog oluşturulurken hata: ${errorData.error || 'Bilinmeyen bir hata oluştu.'}`);
+                } else {
+                    const errorText = await response.text();
+                    console.error('Server error response:', errorText);
+                    alert('Blog oluşturulurken sunucu hatası oluştu. Lütfen verilerinizin boyutunu kontrol edin.');
+                }
             }
         } catch (error) {
             console.error('Failed to create post:', error)
@@ -129,8 +136,15 @@ const BlogManager: React.FC = () => {
                 setSelectedPost(null)
                 resetForm()
             } else {
-                const errorData = await response.json();
-                alert(`Güncelleme hatası: ${errorData.error || 'Bilinmeyen bir hata oluştu.'}`);
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const errorData = await response.json();
+                    alert(`Güncelleme hatası: ${errorData.error || 'Bilinmeyen bir hata oluştu.'}`);
+                } else {
+                    const errorText = await response.text();
+                    console.error('Server error response:', errorText);
+                    alert('Güncelleme sırasında sunucu hatası oluştu. Lütfen verilerinizin boyutunu kontrol edin.');
+                }
             }
         } catch (error) {
             console.error('Failed to update post:', error)
@@ -141,6 +155,13 @@ const BlogManager: React.FC = () => {
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (!file) return
+
+        // 4MB limit check
+        if (file.size > 4 * 1024 * 1024) {
+            alert('Görsel boyutu çok büyük (Maksimum 4MB). Lütfen daha küçük bir dosya seçin veya görseli sıkıştırın.');
+            e.target.value = '';
+            return;
+        }
 
         try {
             setUploading(true)
@@ -157,8 +178,19 @@ const BlogManager: React.FC = () => {
                 const blob = await response.json()
                 setPostForm({ ...postForm, featuredImage: blob.url })
             } else {
-                const errorData = await response.json();
-                alert(`Görsel yüklenirken bir hata oluştu: ${errorData.error || 'Bağlantı sorunu'}`);
+                if (response.status === 413) {
+                    alert('Görsel boyutu sunucu sınırı (4.5MB) üzerinde. Lütfen görseli küçültüp tekrar deneyin.');
+                } else {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const errorData = await response.json();
+                        alert(`Görsel yüklenirken bir hata oluştu: ${errorData.error || 'Bağlantı sorunu'}`);
+                    } else {
+                        const errorText = await response.text();
+                        console.error('Server error response:', errorText);
+                        alert('Görsel yüklenirken sunucu hatası oluştu. Dosya çok büyük olabilir.');
+                    }
+                }
             }
         } catch (error) {
             console.error('Upload error:', error)
