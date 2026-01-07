@@ -21,7 +21,8 @@ const Navigation = () => {
 
   const [settings, setSettings] = useState({
     navigation: {
-      logoText: 'HMZ Solutions'
+      logoText: 'HMZ Solutions',
+      logoImage: '/logo.png'
     }
   })
 
@@ -132,7 +133,7 @@ const Navigation = () => {
                   <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden p-1.5 sm:p-2">
                     {/* Logo with better sizing and padding */}
                     <Image
-                      src="/logo.png"
+                      src={settings.navigation.logoImage}
                       alt="HMZ Solutions Logo"
                       fill
                       className="object-contain"

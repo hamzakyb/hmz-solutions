@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { TrophyIcon, UsersIcon, EyeIcon, LightBulbIcon, SparklesIcon, StarIcon, AcademicCapIcon, RocketLaunchIcon } from '@heroicons/react/24/outline'
+import { TrophyIcon, UsersIcon, EyeIcon, LightBulbIcon, SparklesIcon, StarIcon, AcademicCapIcon, RocketLaunchIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 
 const About = () => {
@@ -18,6 +19,7 @@ const About = () => {
     title2: 'Dijital Çözümler',
     description: 'Yaratıcı yaklaşımımız ve teknolojiye olan tutkumuzla, işletmenizin dijital dünyadaki yolculuğunu şekillendiriyoruz. Her fikri benzersiz bir dijital deneyime dönüştürüyoruz.',
     philosophy: 'Mükemmel dijital deneyimler, sadece teknolojiyle değil, aynı zamanda insan odaklı yaklaşımla da mümkündür. Her projede bu dengeyi kurmak bizim önceliğimizdir.',
+    mainImage: '',
     stats: [
       { number: 'Yenilikçi', label: 'Yaklaşımlar' },
       { number: 'Özgün', label: 'Çözümler' },
@@ -156,6 +158,28 @@ const About = () => {
             {data.description}
           </motion.p>
         </motion.div>
+
+        {/* Dynamic Image Section */}
+        {data.mainImage && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="mb-24 relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-100/50 to-white/50 rounded-[2rem] -rotate-1" />
+            <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-[2rem] overflow-hidden border border-gray-200 shadow-2xl">
+              <Image
+                src={data.mainImage}
+                alt="HMZ Solutions"
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            </div>
+          </motion.div>
+        )}
 
         {/* Premium Stats Section */}
         <motion.div

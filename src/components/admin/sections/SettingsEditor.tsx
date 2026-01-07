@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Settings, Save, Globe, Shield, RefreshCw, Share2, Info, Sparkles } from 'lucide-react';
+import { Settings, Save, Globe, Shield, RefreshCw, Share2, Info, Sparkles, Upload, Loader2, Trash2, Image as ImageIcon } from 'lucide-react';
 
 interface SiteSettings {
     siteTitle: string;
@@ -20,6 +20,7 @@ interface SiteSettings {
     };
     navigation: {
         logoText: string;
+        logoImage: string;
     };
     whatsapp: {
         phoneNumber: string;
@@ -47,7 +48,8 @@ const SettingsEditor: React.FC = () => {
             hours: 'Pzt-Cum 09:00-18:00'
         },
         navigation: {
-            logoText: 'HMZ Solutions'
+            logoText: 'HMZ Solutions',
+            logoImage: '/logo.png'
         },
         whatsapp: {
             phoneNumber: '+905050959950',
@@ -59,6 +61,7 @@ const SettingsEditor: React.FC = () => {
     });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         fetchSettings();
@@ -75,6 +78,38 @@ const SettingsEditor: React.FC = () => {
             console.error('Failed to fetch settings:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        try {
+            setUploading(true);
+            const token = localStorage.getItem('admin_token');
+            const response = await fetch(`/api/upload?filename=${file.name}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: file
+            });
+
+            if (response.ok) {
+                const blob = await response.json();
+                setData({
+                    ...data,
+                    navigation: { ...data.navigation, logoImage: blob.url }
+                });
+            } else {
+                alert('Logo yüklenirken bir hata oluştu.');
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            alert('Logo yüklenirken bir hata oluştu.');
+        } finally {
+            setUploading(false);
         }
     };
 
@@ -226,17 +261,70 @@ const SettingsEditor: React.FC = () => {
 
                     <div className="space-y-4">
                         <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest flex items-center space-x-2">
+                                <ImageIcon className="w-3 h-3" />
+                                <span>Logo Görseli</span>
+                            </label>
+
+                            <div className="space-y-4">
+                                {data.navigation.logoImage && (
+                                    <div className="relative h-20 w-40 rounded-xl overflow-hidden border border-white/10 group bg-white/5 p-2">
+                                        <img
+                                            src={data.navigation.logoImage}
+                                            alt="Logo Preview"
+                                            className="h-full w-full object-contain"
+                                        />
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <button
+                                                type="button"
+                                                onClick={() => setData({ ...data, navigation: { ...data.navigation, logoImage: '' } })}
+                                                className="bg-red-500 p-1.5 rounded-lg text-white"
+                                            >
+                                                <Trash2 className="w-3 h-3" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="flex items-center space-x-3">
+                                    <input
+                                        type="text"
+                                        value={data.navigation.logoImage}
+                                        onChange={(e) => setData({ ...data, navigation: { ...data.navigation, logoImage: e.target.value } })}
+                                        placeholder="Logo URL..."
+                                        className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-1 focus:ring-blue-500/40 text-sm"
+                                    />
+                                    <label className={`cursor-pointer flex items-center justify-center p-2 rounded-xl border transition-all ${uploading ? 'bg-white/5 border-white/10 opacity-50' : 'bg-blue-500/20 border-blue-500/30 hover:bg-blue-500/30 text-blue-400'}`}>
+                                        {uploading ? (
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                        ) : (
+                                            <Upload className="w-4 h-4" />
+                                        )}
+                                        <input
+                                            type="file"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={handleImageUpload}
+                                            disabled={uploading}
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
                             <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Logo Metni</label>
                             <input
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium"
                                 value={data.navigation.logoText}
                                 onChange={(e) => setData({ ...data, navigation: { ...data.navigation, logoText: e.target.value } })}
                             />
                         </div>
+
                         <div className="space-y-2">
                             <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">WhatsApp Karşılama Mesajı</label>
                             <input
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm"
                                 value={data.whatsapp.welcomeMessage}
                                 onChange={(e) => setData({ ...data, whatsapp: { ...data.whatsapp, welcomeMessage: e.target.value } })}
                             />
@@ -255,8 +343,8 @@ const SettingsEditor: React.FC = () => {
                         <div className="space-y-2">
                             <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Yapay Zeka Karşılama Mesajı</label>
                             <textarea
-                                rows={3}
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none transition-all"
+                                rows={4}
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none transition-all text-sm leading-relaxed"
                                 value={data.chatbot.greeting}
                                 onChange={(e) => setData({ ...data, chatbot: { ...data.chatbot, greeting: e.target.value } })}
                             />
@@ -275,7 +363,7 @@ const SettingsEditor: React.FC = () => {
                         <div className="space-y-2">
                             <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">LinkedIn URL</label>
                             <input
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm"
                                 value={data.socialLinks.linkedin}
                                 onChange={(e) => setData({ ...data, socialLinks: { ...data.socialLinks, linkedin: e.target.value } })}
                             />
@@ -283,7 +371,7 @@ const SettingsEditor: React.FC = () => {
                         <div className="space-y-2">
                             <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">GitHub URL</label>
                             <input
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm"
                                 value={data.socialLinks.github}
                                 onChange={(e) => setData({ ...data, socialLinks: { ...data.socialLinks, github: e.target.value } })}
                             />
@@ -291,7 +379,7 @@ const SettingsEditor: React.FC = () => {
                         <div className="space-y-2">
                             <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Instagram URL</label>
                             <input
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm"
                                 value={data.socialLinks.instagram}
                                 onChange={(e) => setData({ ...data, socialLinks: { ...data.socialLinks, instagram: e.target.value } })}
                             />
@@ -306,9 +394,9 @@ const SettingsEditor: React.FC = () => {
                         <h3 className="text-lg font-semibold text-white">Yönetici Bilgileri</h3>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center h-48 border border-dashed border-white/10 rounded-xl p-6 text-center">
+                    <div className="flex flex-col items-center justify-center h-52 border border-dashed border-white/10 rounded-xl p-6 text-center">
                         <Shield className="w-10 h-10 text-white/10 mb-4" />
-                        <p className="text-xs text-white/20 italic">
+                        <p className="text-xs text-white/20 italic leading-relaxed">
                             Güvenlik nedeniyle admin bilgilerini değiştirmek için lütfen teknik ekiple iletişime geçin veya .env dosyasını güncelleyin.
                         </p>
                     </div>

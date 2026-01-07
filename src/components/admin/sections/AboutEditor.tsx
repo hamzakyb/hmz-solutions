@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Save, RefreshCw, FileText, Plus, Trash2, Award, Zap } from 'lucide-react';
+import { Save, RefreshCw, FileText, Plus, Trash2, Award, Zap, Upload, Loader2, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 
 interface StatItem {
     number: string;
@@ -19,6 +20,7 @@ interface AboutData {
     title2: string;
     description: string;
     philosophy: string;
+    mainImage: string;
     stats: StatItem[];
     values: ValueItem[];
 }
@@ -30,6 +32,7 @@ const AboutEditor: React.FC = () => {
         title2: 'Dijital Çözümler',
         description: 'Yaratıcı yaklaşımımız ve teknolojiye olan tutkumuzla...',
         philosophy: 'Mükemmel dijital deneyimler, sadece teknolojiyle değil...',
+        mainImage: '',
         stats: [
             { number: 'Yenilikçi', label: 'Yaklaşımlar' },
             { number: 'Özgün', label: 'Çözümler' }
@@ -40,6 +43,7 @@ const AboutEditor: React.FC = () => {
     });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         fetchContent();
@@ -56,6 +60,35 @@ const AboutEditor: React.FC = () => {
             console.error('Failed to fetch about content:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        try {
+            setUploading(true);
+            const token = localStorage.getItem('admin_token');
+            const response = await fetch(`/api/upload?filename=${file.name}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: file
+            });
+
+            if (response.ok) {
+                const blob = await response.json();
+                setData({ ...data, mainImage: blob.url });
+            } else {
+                alert('Görsel yüklenirken bir hata oluştu.');
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            alert('Görsel yüklenirken bir hata oluştu.');
+        } finally {
+            setUploading(false);
         }
     };
 
@@ -114,6 +147,58 @@ const AboutEditor: React.FC = () => {
                         </div>
 
                         <div className="space-y-4">
+                            <div className="space-y-2">
+                                <label className="text-xs font-semibold text-white/60 flex items-center space-x-2">
+                                    <ImageIcon className="w-4 h-4" />
+                                    <span>Bölüm Görseli</span>
+                                </label>
+
+                                <div className="space-y-4">
+                                    {data.mainImage && (
+                                        <div className="relative h-40 w-full rounded-xl overflow-hidden border border-white/10 group">
+                                            <Image
+                                                src={data.mainImage}
+                                                alt="About Preview"
+                                                fill
+                                                className="object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setData({ ...data, mainImage: '' })}
+                                                    className="bg-red-500 p-2 rounded-lg text-white"
+                                                >
+                                                    <Trash2 className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    <div className="flex items-center space-x-3">
+                                        <input
+                                            type="text"
+                                            value={data.mainImage}
+                                            onChange={(e) => setData({ ...data, mainImage: e.target.value })}
+                                            placeholder="Görsel URL veya yükleyin..."
+                                            className="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-1 focus:ring-blue-500/40 text-sm"
+                                        />
+                                        <label className={`cursor-pointer flex items-center justify-center p-2 rounded-xl border transition-all ${uploading ? 'bg-white/5 border-white/10 opacity-50' : 'bg-blue-500/20 border-blue-500/30 hover:bg-blue-500/30 text-blue-400'}`}>
+                                            {uploading ? (
+                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                            ) : (
+                                                <Upload className="w-5 h-5" />
+                                            )}
+                                            <input
+                                                type="file"
+                                                className="hidden"
+                                                accept="image/*"
+                                                onChange={handleImageUpload}
+                                                disabled={uploading}
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-semibold text-white/60">Üst Rozet</label>
                                 <input
