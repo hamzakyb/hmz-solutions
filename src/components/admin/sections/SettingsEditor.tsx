@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Settings, Save, Globe, Shield, RefreshCw, Share2, Info } from 'lucide-react';
+import { Settings, Save, Globe, Shield, RefreshCw, Share2, Info, Sparkles } from 'lucide-react';
 
 interface SiteSettings {
     siteTitle: string;
@@ -247,7 +247,7 @@ const SettingsEditor: React.FC = () => {
                 {/* Chatbot Settings */}
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
                     <div className="flex items-center space-x-3 mb-2">
-                        <SparklesIcon className="w-5 h-5 text-yellow-400" />
+                        <Sparkles className="w-5 h-5 text-yellow-400" />
                         <h3 className="text-lg font-semibold text-white">Chatbot Ayarları</h3>
                     </div>
 
