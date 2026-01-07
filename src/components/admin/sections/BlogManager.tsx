@@ -95,9 +95,13 @@ const BlogManager: React.FC = () => {
                 await fetchBlogPosts()
                 setIsCreatingPost(false)
                 resetForm()
+            } else {
+                const errorData = await response.json();
+                alert(`Blog oluşturulurken hata: ${errorData.error || 'Bilinmeyen bir hata oluştu.'}`);
             }
         } catch (error) {
             console.error('Failed to create post:', error)
+            alert('Blog oluşturulurken teknik bir hata oluştu.');
         }
     }
 
@@ -124,9 +128,13 @@ const BlogManager: React.FC = () => {
                 setIsEditingPost(false)
                 setSelectedPost(null)
                 resetForm()
+            } else {
+                const errorData = await response.json();
+                alert(`Güncelleme hatası: ${errorData.error || 'Bilinmeyen bir hata oluştu.'}`);
             }
         } catch (error) {
             console.error('Failed to update post:', error)
+            alert('Güncelleme sırasında teknik bir hata oluştu.');
         }
     }
 

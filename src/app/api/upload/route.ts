@@ -12,6 +12,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = new URL(request.url);
     const filename = searchParams.get('filename') || 'image.png';
 
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      console.error('BLOB_READ_WRITE_TOKEN is missing');
+      return NextResponse.json(
+        { error: 'Vercel Blob Token bulunamadı. Lütfen Vercel panelinden yapılandırın.' },
+        { status: 500 }
+      );
+    }
+
     if (!request.body) {
       return NextResponse.json({ error: 'Body is required' }, { status: 400 });
     }
