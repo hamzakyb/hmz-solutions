@@ -3,9 +3,9 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { 
-  ChatBubbleLeftRightIcon, 
-  XMarkIcon, 
+import {
+  ChatBubbleLeftRightIcon,
+  XMarkIcon,
   PaperAirplaneIcon,
   SparklesIcon,
   UserIcon
@@ -40,7 +40,7 @@ interface Agent {
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentAgent, setCurrentAgent] = useState<Agent | null>(null)
-  
+
   // Kapsamlı Uzman Agent Profilleri
   const agents: { [key: string]: Agent } = {
     default: {
@@ -55,7 +55,7 @@ const Chatbot = () => {
     web: {
       id: 'mehmet',
       name: 'Mehmet',
-      title: 'Senior Web Geliştirme Uzmanı', 
+      title: 'Senior Web Geliştirme Uzmanı',
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
       specialization: ['web', 'website', 'react', 'nextjs', 'frontend', 'backend', 'full stack'],
       expertise: ['React & Next.js', 'TypeScript', 'Node.js', 'Database Design', 'API Development'],
@@ -65,7 +65,7 @@ const Chatbot = () => {
       id: 'ayse',
       name: 'Ayşe',
       title: 'Mobil Uygulama Geliştirme Uzmanı',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face&auto=format&q=80', 
+      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
       specialization: ['mobil', 'uygulama', 'ios', 'android', 'react native', 'flutter', 'app'],
       expertise: ['React Native', 'Flutter', 'iOS Development', 'Android Development', 'App Store Optimization'],
       greeting: 'Merhaba! 📱 Ben Ayşe, mobil uygulama uzmanınızım. iOS ve Android platformları için kullanıcılarınızın sevecekleri uygulamalar geliştirelim!'
@@ -104,19 +104,43 @@ const Chatbot = () => {
 
   // İlk agent ayarla
   useEffect(() => {
-    if (!currentAgent) {
-      const defaultAgent = agents.default
-      setCurrentAgent(defaultAgent)
-      setMessages([{
-        id: '1',
-        text: defaultAgent.greeting,
-        isBot: true,
-        timestamp: new Date(),
-        agentName: defaultAgent.name,
-        agentTitle: defaultAgent.title,
-        agentAvatar: defaultAgent.avatar
-      }])
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('/api/content?section=settings')
+        const result = await response.json()
+        const dynamicGreeting = result.content?.data?.chatbot?.greeting || agents.default.greeting
+
+        if (!currentAgent) {
+          const defaultAgent = { ...agents.default, greeting: dynamicGreeting }
+          setCurrentAgent(defaultAgent)
+          setMessages([{
+            id: '1',
+            text: dynamicGreeting,
+            isBot: true,
+            timestamp: new Date(),
+            agentName: defaultAgent.name,
+            agentTitle: defaultAgent.title,
+            agentAvatar: defaultAgent.avatar
+          }])
+        }
+      } catch (error) {
+        console.error('Failed to fetch chatbot settings:', error)
+        if (!currentAgent) {
+          const defaultAgent = agents.default
+          setCurrentAgent(defaultAgent)
+          setMessages([{
+            id: '1',
+            text: defaultAgent.greeting,
+            isBot: true,
+            timestamp: new Date(),
+            agentName: defaultAgent.name,
+            agentTitle: defaultAgent.title,
+            agentAvatar: defaultAgent.avatar
+          }])
+        }
+      }
     }
+    fetchSettings()
   }, [agents.default, currentAgent])
 
   const scrollToBottom = () => {
@@ -143,40 +167,40 @@ const Chatbot = () => {
           >
             {/* Glow effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
-            
+
             {/* Button */}
             <div className="relative w-16 h-16 bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-full shadow-2xl flex items-center justify-center border-2 border-white/20">
               <ChatBubbleLeftRightIcon className="w-8 h-8 text-white" />
-              
+
               {/* Notification badge */}
               <motion.div
-                animate={{ 
+                animate={{
                   scale: [1, 1.3, 1],
                   rotate: [0, 10, -10, 0]
                 }}
-                transition={{ 
-                  duration: 3, 
+                transition={{
+                  duration: 3,
                   repeat: Infinity,
                   repeatDelay: 2
                 }}
                 className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center border-2 border-white shadow-lg"
               >
-                <motion.div 
+                <motion.div
                   animate={{ opacity: [1, 0.5, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
-                  className="w-2 h-2 bg-white rounded-full" 
+                  className="w-2 h-2 bg-white rounded-full"
                 />
               </motion.div>
-              
+
               {/* Floating message preview */}
               <motion.div
                 initial={{ opacity: 0, x: -100, scale: 0.8 }}
-                animate={{ 
+                animate={{
                   opacity: [0, 1, 1, 0],
                   x: [-100, -10, -10, -100],
                   scale: [0.8, 1, 1, 0.8]
                 }}
-                transition={{ 
+                transition={{
                   duration: 4,
                   times: [0, 0.3, 0.7, 1],
                   repeat: Infinity,
@@ -189,7 +213,7 @@ const Chatbot = () => {
                   <span className="text-xs font-medium text-gray-800">HMZ Solutions</span>
                 </div>
                 <p className="text-xs text-gray-600">Merhaba! Size nasıl yardımcı olabilirim? 🚀</p>
-                
+
                 {/* Chat bubble tail */}
                 <div className="absolute right-0 top-4 transform translate-x-1">
                   <div className="w-2 h-2 bg-white border-r border-b border-gray-200 transform rotate-45" />
@@ -214,8 +238,8 @@ const Chatbot = () => {
               <div className="flex items-center space-x-3">
                 <div className="relative">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30 shadow-lg">
-                    <Image 
-                      src={currentAgent?.avatar || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80'} 
+                    <Image
+                      src={currentAgent?.avatar || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80'}
                       alt={`${currentAgent?.name} - HMZ Solutions Uzmanı`}
                       width={48}
                       height={48}
@@ -226,7 +250,7 @@ const Chatbot = () => {
                     <div className="w-full h-full bg-green-400 rounded-full animate-pulse" />
                   </div>
                 </div>
-                
+
                 <div>
                   <h3 className="text-white font-semibold">{currentAgent?.name || 'Uzman'}</h3>
                   <p className="text-yellow-100 text-xs flex items-center">
@@ -252,22 +276,19 @@ const Chatbot = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
                 >
-                  <div className={`flex items-start space-x-2 max-w-[80%] ${
-                    message.isBot ? 'flex-row' : 'flex-row-reverse space-x-reverse'
-                  }`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden ${
-                      message.isBot ? 'bg-gradient-to-r from-yellow-600 to-yellow-700 border-2 border-white' : 'bg-gray-600'
+                  <div className={`flex items-start space-x-2 max-w-[80%] ${message.isBot ? 'flex-row' : 'flex-row-reverse space-x-reverse'
                     }`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden ${message.isBot ? 'bg-gradient-to-r from-yellow-600 to-yellow-700 border-2 border-white' : 'bg-gray-600'
+                      }`}>
                       {message.isBot ? (
                         <SparklesIcon className="w-4 h-4 text-white" />
                       ) : (
                         <UserIcon className="w-4 h-4 text-white" />
                       )}
                     </div>
-                    
-                    <div className={`rounded-2xl px-4 py-3 ${
-                      message.isBot ? 'bg-white border border-gray-200 text-gray-800' : 'bg-gradient-to-r from-yellow-600 to-yellow-700 text-white'
-                    }`}>
+
+                    <div className={`rounded-2xl px-4 py-3 ${message.isBot ? 'bg-white border border-gray-200 text-gray-800' : 'bg-gradient-to-r from-yellow-600 to-yellow-700 text-white'
+                      }`}>
                       <p className="text-sm leading-relaxed">{message.text}</p>
                       <p className={`text-xs mt-1 ${message.isBot ? 'text-gray-500' : 'text-yellow-100'}`}>
                         {message.timestamp.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}

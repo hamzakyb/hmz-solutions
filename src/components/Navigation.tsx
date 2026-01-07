@@ -19,15 +19,34 @@ const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
+  const [settings, setSettings] = useState({
+    navigation: {
+      logoText: 'HMZ Solutions'
+    }
+  })
+
   useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('/api/content?section=settings')
+        const result = await response.json()
+        if (result.content?.data?.navigation) {
+          setSettings(result.content.data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch navigation settings:', error)
+      }
+    }
+    fetchSettings()
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       setIsScrolled(scrollPosition > 20)
-      
+
       // Update active section based on scroll position
       const sections = ['home', 'services', 'about', 'contact']
       const sectionElements = sections.map(id => document.getElementById(id))
-      
+
       for (let i = sectionElements.length - 1; i >= 0; i--) {
         const element = sectionElements[i]
         if (element && element.offsetTop <= scrollPosition + 100) {
@@ -52,7 +71,7 @@ const Navigation = () => {
   const handleNavClick = (href: string, id: string, external?: boolean) => {
     setActiveSection(id)
     setIsMobileMenuOpen(false)
-    
+
     if (external || href.startsWith('/')) {
       // Handle external links and route changes
       if (typeof window !== 'undefined') {
@@ -60,7 +79,7 @@ const Navigation = () => {
       }
       return
     }
-    
+
     // Handle anchor links on the same page
     if (href.startsWith('/#')) {
       const sectionId = href.replace('/#', '')
@@ -90,15 +109,15 @@ const Navigation = () => {
         className={cn(
           'fixed top-4 left-4 right-4 z-50 transition-all duration-700 ease-out',
           'max-w-7xl mx-auto rounded-2xl',
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-2xl border border-gray-300 shadow-2xl shadow-gray-400/10' 
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-2xl border border-gray-300 shadow-2xl shadow-gray-400/10'
             : 'bg-white/80 backdrop-blur-xl border border-gray-200'
         )}
       >
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Premium Logo */}
-            <motion.div 
+            <motion.div
               className="flex-shrink-0 min-w-0"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
@@ -112,9 +131,9 @@ const Navigation = () => {
                   />
                   <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden p-1.5 sm:p-2">
                     {/* Logo with better sizing and padding */}
-                    <Image 
-                      src="/logo.png" 
-                      alt="HMZ Solutions Logo" 
+                    <Image
+                      src="/logo.png"
+                      alt="HMZ Solutions Logo"
                       fill
                       className="object-contain"
                       onError={(e) => {
@@ -133,8 +152,8 @@ const Navigation = () => {
                   "text-lg sm:text-xl font-semibold tracking-tight transition-colors duration-300 truncate",
                   isScrolled ? "text-gray-900" : "text-gray-800"
                 )}>
-                  <span className="hidden sm:inline">HMZ Solutions</span>
-                  <span className="sm:hidden">HMZ</span>
+                  <span className="hidden sm:inline">{settings.navigation.logoText}</span>
+                  <span className="sm:hidden">{settings.navigation.logoText.split(' ')[0]}</span>
                 </span>
               </div>
             </motion.div>
@@ -154,10 +173,10 @@ const Navigation = () => {
                       }}
                       className={cn(
                         "relative px-3 xl:px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer",
-                        isActive 
-                          ? "text-gray-900" 
-                          : isScrolled 
-                            ? "text-gray-700 hover:text-gray-900" 
+                        isActive
+                          ? "text-gray-900"
+                          : isScrolled
+                            ? "text-gray-700 hover:text-gray-900"
                             : "text-gray-600 hover:text-gray-800"
                       )}
                       whileHover={{ scale: 1.05 }}
@@ -197,7 +216,7 @@ const Navigation = () => {
                     background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)'
                   }}
                 />
-                <Button 
+                <Button
                   size="sm"
                   onClick={() => handleNavClick('/#contact', 'contact')}
                   className="relative backdrop-blur-xl border text-white font-medium px-4 xl:px-6 py-2 rounded-full shadow-lg transition-all duration-300 text-sm cursor-pointer"
@@ -329,7 +348,7 @@ const Navigation = () => {
                   transition={{ delay: 0.4, duration: 0.3 }}
                   className="pt-4 border-t border-gray-200"
                 >
-                  <Button 
+                  <Button
                     className="w-full text-white font-medium py-3 rounded-xl shadow-lg transition-all duration-300 cursor-pointer"
                     style={{
                       background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)'

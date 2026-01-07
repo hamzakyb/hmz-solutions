@@ -18,6 +18,16 @@ interface SiteSettings {
         address: string;
         hours: string;
     };
+    navigation: {
+        logoText: string;
+    };
+    whatsapp: {
+        phoneNumber: string;
+        welcomeMessage: string;
+    };
+    chatbot: {
+        greeting: string;
+    };
 }
 
 const SettingsEditor: React.FC = () => {
@@ -35,6 +45,16 @@ const SettingsEditor: React.FC = () => {
             phone: '+90 (505) 095 99 50',
             address: 'Nevşehir Merkez, Türkiye',
             hours: 'Pzt-Cum 09:00-18:00'
+        },
+        navigation: {
+            logoText: 'HMZ Solutions'
+        },
+        whatsapp: {
+            phoneNumber: '+905050959950',
+            welcomeMessage: 'Merhaba! HMZ Solutions hizmetleri hakkında bilgi almak istiyorum.'
+        },
+        chatbot: {
+            greeting: 'Merhaba! 👋 Ben Hamza, HMZ Solutions kurucusu ve dijital çözüm uzmanınızım. Projelerinizi hayata geçirmek için buradayım. Size nasıl yardımcı olabilirim?'
         }
     });
     const [loading, setLoading] = useState(true);
@@ -192,6 +212,53 @@ const SettingsEditor: React.FC = () => {
                                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                                 value={data.contactInfo.hours}
                                 onChange={(e) => setData({ ...data, contactInfo: { ...data.contactInfo, hours: e.target.value } })}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Navigation & WhatsApp */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+                    <div className="flex items-center space-x-3 mb-2">
+                        <Settings className="w-5 h-5 text-indigo-400" />
+                        <h3 className="text-lg font-semibold text-white">Navigasyon & WhatsApp</h3>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Logo Metni</label>
+                            <input
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                value={data.navigation.logoText}
+                                onChange={(e) => setData({ ...data, navigation: { ...data.navigation, logoText: e.target.value } })}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">WhatsApp Karşılama Mesajı</label>
+                            <input
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                                value={data.whatsapp.welcomeMessage}
+                                onChange={(e) => setData({ ...data, whatsapp: { ...data.whatsapp, welcomeMessage: e.target.value } })}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Chatbot Settings */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+                    <div className="flex items-center space-x-3 mb-2">
+                        <SparklesIcon className="w-5 h-5 text-yellow-400" />
+                        <h3 className="text-lg font-semibold text-white">Chatbot Ayarları</h3>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Yapay Zeka Karşılama Mesajı</label>
+                            <textarea
+                                rows={3}
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none transition-all"
+                                value={data.chatbot.greeting}
+                                onChange={(e) => setData({ ...data, chatbot: { ...data.chatbot, greeting: e.target.value } })}
                             />
                         </div>
                     </div>
