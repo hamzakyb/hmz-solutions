@@ -1,79 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { requireAuth } from '@/lib/auth'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
-import { existsSync } from 'fs'
+import { put } from '@vercel/blob';
+import { NextRequest, NextResponse } from 'next/server';
+import { requireAuth } from '@/lib/auth';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    // JWT token kontrolü
-    const admin = requireAuth(request)
-    
+    const admin = requireAuth(request);
     if (!admin) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const data = await request.formData()
-    const file: File | null = data.get('file') as unknown as File
+    const { searchParams } = new URL(request.url);
+    const filename = searchParams.get('filename') || 'image.png';
 
-    if (!file) {
-      return NextResponse.json(
-        { error: 'Dosya seçilmedi' },
-        { status: 400 }
-      )
+    if (!request.body) {
+      return NextResponse.json({ error: 'Body is required' }, { status: 400 });
     }
 
-    // File type validation
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
-    if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json(
-        { error: 'Sadece resim dosyaları yüklenebilir (JPEG, PNG, GIF, WebP)' },
-        { status: 400 }
-      )
-    }
+    const blob = await put(filename, request.body, {
+      access: 'public',
+    });
 
-    // File size validation (5MB max)
-    const maxSize = 5 * 1024 * 1024 // 5MB
-    if (file.size > maxSize) {
-      return NextResponse.json(
-        { error: 'Dosya boyutu 5MB\'dan büyük olamaz' },
-        { status: 400 }
-      )
-    }
-
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-
-    // Create unique filename
-    const timestamp = Date.now()
-    const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
-    const filename = `${timestamp}_${originalName}`
-
-    // Ensure uploads directory exists
-    const uploadsDir = join(process.cwd(), 'public', 'uploads')
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true })
-    }
-
-    const filePath = join(uploadsDir, filename)
-    await writeFile(filePath, buffer)
-
-    const fileUrl = `/uploads/${filename}`
-
-    return NextResponse.json({
-      success: true,
-      fileUrl,
-      filename,
-      originalName: file.name,
-      size: file.size,
-      type: file.type
-    })
-
+    return NextResponse.json(blob);
   } catch (error) {
-    console.error('File upload error:', error)
-    return NextResponse.json(
-      { error: 'Dosya yüklenirken hata oluştu' },
-      { status: 500 }
-    )
+    console.error('Upload error:', error);
+    return NextResponse.json({ error: 'Yükleme başarısız oldu: ' + (error as Error).message }, { status: 500 });
   }
 }

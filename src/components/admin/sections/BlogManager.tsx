@@ -11,8 +11,10 @@ import {
     FileText,
     X,
     Save,
-    Image as ImageIcon,
-    Tag
+    ImageIcon,
+    Tag,
+    Upload,
+    Loader2
 } from 'lucide-react'
 
 interface BlogPost {
@@ -36,6 +38,7 @@ const BlogManager: React.FC = () => {
     const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
     const [isCreatingPost, setIsCreatingPost] = useState(false)
     const [isEditingPost, setIsEditingPost] = useState(false)
+    const [uploading, setUploading] = useState(false)
 
     const [postForm, setPostForm] = useState({
         title: '',
@@ -127,6 +130,35 @@ const BlogManager: React.FC = () => {
         }
     }
 
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        try {
+            setUploading(true)
+            const token = localStorage.getItem('admin_token')
+            const response = await fetch(`/api/upload?filename=${file.name}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: file
+            })
+
+            if (response.ok) {
+                const blob = await response.json()
+                setPostForm({ ...postForm, featuredImage: blob.url })
+            } else {
+                alert('Görsel yüklenirken bir hata oluştu.')
+            }
+        } catch (error) {
+            console.error('Upload error:', error)
+            alert('Görsel yüklenirken bir hata oluştu.')
+        } finally {
+            setUploading(false)
+        }
+    }
+
     const handleDeletePost = async (postId: string) => {
         if (!confirm('Bu blog yazısını silmek istediğinizden emin misiniz?')) return
 
@@ -212,8 +244,8 @@ const BlogManager: React.FC = () => {
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-4">
                                 <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-lg ${post.published
-                                        ? 'bg-green-500/20 text-green-300'
-                                        : 'bg-yellow-500/20 text-yellow-300'
+                                    ? 'bg-green-500/20 text-green-300'
+                                    : 'bg-yellow-500/20 text-yellow-300'
                                     }`}>
                                     {post.published ? 'Yayında' : 'Taslak'}
                                 </span>
@@ -366,17 +398,55 @@ const BlogManager: React.FC = () => {
                                             <div className="space-y-2">
                                                 <label className="text-sm font-semibold text-white/80 flex items-center space-x-2">
                                                     <ImageIcon className="w-4 h-4 text-white/40" />
-                                                    <span>Öne Çıkan Görsel URL</span>
+                                                    <span>Öne Çıkan Görsel</span>
                                                 </label>
-                                                <input
-                                                    type="text"
-                                                    value={postForm.featuredImage}
-                                                    onChange={(e) => setPostForm({ ...postForm, featuredImage: e.target.value })}
-                                                    placeholder="https://..."
-                                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                                                />
-                                            </div>
 
+                                                <div className="space-y-4">
+                                                    {postForm.featuredImage && (
+                                                        <div className="relative h-40 w-full rounded-xl overflow-hidden border border-white/10 group">
+                                                            <Image
+                                                                src={postForm.featuredImage}
+                                                                alt="Preview"
+                                                                fill
+                                                                className="object-cover"
+                                                            />
+                                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => setPostForm({ ...postForm, featuredImage: '' })}
+                                                                    className="bg-red-500 p-2 rounded-lg text-white"
+                                                                >
+                                                                    <Trash2 className="w-4 h-4" />
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    <div className="flex items-center space-x-4">
+                                                        <input
+                                                            type="text"
+                                                            value={postForm.featuredImage}
+                                                            onChange={(e) => setPostForm({ ...postForm, featuredImage: e.target.value })}
+                                                            placeholder="Görsel URL veya yükleyin..."
+                                                            className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                                                        />
+                                                        <label className={`cursor-pointer flex items-center justify-center p-3 rounded-xl border transition-all ${uploading ? 'bg-white/5 border-white/10 opacity-50' : 'bg-blue-500/20 border-blue-500/30 hover:bg-blue-500/30 text-blue-400'}`}>
+                                                            {uploading ? (
+                                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                                            ) : (
+                                                                <Upload className="w-5 h-5" />
+                                                            )}
+                                                            <input
+                                                                type="file"
+                                                                className="hidden"
+                                                                accept="image/*"
+                                                                onChange={handleImageUpload}
+                                                                disabled={uploading}
+                                                            />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div className="space-y-2">
                                                 <label className="text-sm font-semibold text-white/80 flex items-center space-x-2">
                                                     <Tag className="w-4 h-4 text-white/40" />
