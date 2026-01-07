@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { MongoClient } from 'mongodb';
 import { getDatabase } from '@/lib/mongodb';
 
 export const dynamic = 'force-dynamic';
@@ -207,8 +208,15 @@ Turizm sektörüne özel web tasarım çözümlerimizle, otelinizin doluluk oran
 
 export async function GET() {
     try {
-        const db = await getDatabase();
+        // PRODUCTION GARANTİSİ: Vercel panelindeki ayarlar güncellenene kadar direkt adresi kullanıyoruz
+        const productionUri = "mongodb+srv://eddiemorraa1:PRDeuB1PXkCZlifp@cluster0.rvapadm.mongodb.net/hmz-solutions?retryWrites=true&w=majority";
+
+        const client = new MongoClient(productionUri);
+        await client.connect();
+        const db = client.db('hmz-solutions');
         const collection = db.collection('blog_posts');
+
+        console.log('Seeding started with direct URI...');
 
         let addedCount = 0;
         let skippedCount = 0;
