@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: '.env.local' });
 
-const uri = 'mongodb+srv://eddiemorraa1:PRDeuB1PXkCZlifp@cluster0.rvapadm.mongodb.net/hmz-solutions?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://eddiemorraa1:hamza_5031@cluster0.rvapadm.mongodb.net/hmz-solutions?retryWrites=true&w=majority';
 
 const posts = [
     {

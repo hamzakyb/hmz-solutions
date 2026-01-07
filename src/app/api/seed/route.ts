@@ -209,7 +209,7 @@ Turizm sektörüne özel web tasarım çözümlerimizle, otelinizin doluluk oran
 export async function GET() {
     try {
         // PRODUCTION GARANTİSİ: Vercel panelindeki ayarlar güncellenene kadar direkt adresi kullanıyoruz
-        const productionUri = "mongodb+srv://eddiemorraa1:PRDeuB1PXkCZlifp@cluster0.rvapadm.mongodb.net/hmz-solutions?retryWrites=true&w=majority";
+        const productionUri = "mongodb+srv://eddiemorraa1:hamza_5031@cluster0.rvapadm.mongodb.net/hmz-solutions?retryWrites=true&w=majority";
 
         const client = new MongoClient(productionUri);
         await client.connect();
