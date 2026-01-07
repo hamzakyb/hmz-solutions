@@ -343,7 +343,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {children}
+        <ChatbotProvider>
+          {children}
+        </ChatbotProvider>
       </body>
     </html>
   );
