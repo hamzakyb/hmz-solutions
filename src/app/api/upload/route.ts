@@ -30,6 +30,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
         return {
           allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+          addRandomSuffix: true,
           tokenPayload: JSON.stringify({
             userId: admin.email,
           }),
