@@ -33,13 +33,13 @@ export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTag, setSelectedTag] = useState<string>('')
   const [allTags, setAllTags] = useState<string[]>([])
-  const limit = 6
+  const limit = 20
 
   const filterPosts = useCallback(() => {
     let filtered = posts
 
     if (searchTerm) {
-      filtered = filtered.filter(post => 
+      filtered = filtered.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.content.toLowerCase().includes(searchTerm.toLowerCase())
@@ -121,7 +121,7 @@ export default function BlogPage() {
                   background: 'linear-gradient(to right, rgba(175, 160, 98, 0.2), rgba(195, 180, 118, 0.2))'
                 }}></div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="rounded-2xl p-6 animate-pulse"
@@ -144,7 +144,7 @@ export default function BlogPage() {
                     style={{
                       background: 'linear-gradient(to right, rgba(175, 160, 98, 0.1), rgba(195, 180, 118, 0.1))'
                     }}></div>
-                  
+
                   {/* Gold accent loading indicator */}
                   <div className="mt-4 h-6 rounded-full animate-pulse"
                     style={{
@@ -157,7 +157,7 @@ export default function BlogPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Add loading animation styles */}
         <style jsx>{`
           @keyframes loading {
@@ -182,7 +182,7 @@ export default function BlogPage() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(175,160,98,0.08),transparent_50%)]" />
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-300 to-transparent" />
           </div>
-          
+
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -191,7 +191,7 @@ export default function BlogPage() {
               className="text-center"
             >
               {/* Floating Badge */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -207,24 +207,24 @@ export default function BlogPage() {
                 Teknoloji ile Geleceği Şekillendirmek
                 <ChartBarIcon className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform" style={{ color: 'rgb(175, 160, 98)' }} />
               </motion.div>
-              
+
               {/* Main Title */}
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight flex justify-center items-center flex-wrap gap-2"
               >
                 <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
-                  Teknoloji 
+                  Teknoloji
                 </span>
                 <span className="gold-gradient-text inline-block transform hover:scale-105 transition-transform duration-300 relative">
                   Yolculuğu
                 </span>
               </motion.h1>
-              
+
               {/* Subtitle */}
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -233,9 +233,9 @@ export default function BlogPage() {
                 Nevşehir ve Kapadokya bölgesindeki dijital dönüşüm hikayelerini, teknoloji trendlerini ve yazılım dünyasındaki yenilikleri sizlerle paylaşıyoruz.
                 <span style={{ color: 'rgb(175, 160, 98)' }}> Yerel çözümlerle</span> Türkiye&apos;nin dijital geleceğini birlikte inşa ediyoruz.
               </motion.p>
-              
+
               {/* Enhanced Search and Filter */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
@@ -250,7 +250,7 @@ export default function BlogPage() {
                           background: 'linear-gradient(to right, rgba(175, 160, 98, 0.2), rgba(195, 180, 118, 0.2))'
                         }} />
                       <div className="relative">
-                        <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5 transition-colors" 
+                        <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5 transition-colors"
                           style={{
                             color: 'rgb(175, 160, 98)'
                           }}
@@ -279,7 +279,7 @@ export default function BlogPage() {
                         />
                       </div>
                     </div>
-                    
+
                     {/* Category Filter */}
                     <div className="lg:w-64 relative group">
                       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur"
@@ -322,18 +322,18 @@ export default function BlogPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Active Filters with Animation */}
                   <AnimatePresence>
                     {(searchTerm || selectedTag) && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         className="flex flex-wrap gap-3 mt-6 pt-4 border-t border-yellow-200"
                       >
                         {searchTerm && (
-                          <motion.span 
+                          <motion.span
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
@@ -373,7 +373,7 @@ export default function BlogPage() {
                           </motion.span>
                         )}
                         {selectedTag && (
-                          <motion.span 
+                          <motion.span
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
@@ -443,7 +443,7 @@ export default function BlogPage() {
         {/* Enhanced Blog Posts Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           {filteredPosts.length === 0 ? (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-center py-20"
@@ -452,12 +452,12 @@ export default function BlogPage() {
                 style={{
                   background: 'linear-gradient(to right, rgba(175, 160, 98, 0.1), rgba(195, 180, 118, 0.1))'
                 }}>
-                <motion.div 
-                  animate={{ 
+                <motion.div
+                  animate={{
                     y: [0, -10, 0],
                     rotate: [0, 5, -5, 0]
                   }}
-                  transition={{ 
+                  transition={{
                     duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut"
@@ -475,7 +475,7 @@ export default function BlogPage() {
                   {searchTerm || selectedTag ? 'Sonuç bulunamadı' : 'Henüz blog yazısı bulunmuyor'}
                 </h3>
                 <p className="text-gray-600 mb-8 leading-relaxed">
-                  {searchTerm || selectedTag 
+                  {searchTerm || selectedTag
                     ? 'Arama kriterlerinizi değiştirmeyi veya farklı anahtar kelimeler kullanmayı deneyin'
                     : 'Yakında ilginç içeriklerle burada olacağız!'}
                 </p>
@@ -509,7 +509,7 @@ export default function BlogPage() {
             <>
               {/* Featured Posts */}
               {!searchTerm && !selectedTag && posts.length > 0 && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -525,7 +525,7 @@ export default function BlogPage() {
                     <h2 className="section-title-gold">Öne Çıkanlar</h2>
                     <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
                   </div>
-                  
+
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {getFeaturedPosts().map((post, index) => (
                       <motion.article
@@ -540,14 +540,14 @@ export default function BlogPage() {
                             {/* Featured Badge */}
                             <div className="absolute top-4 left-4 z-10">
                               <div className="bg-gradient-to-r text-white text-xs font-bold px-2 py-1 rounded-full"
-                              style={{
-                                background: 'linear-gradient(to right, rgb(175, 160, 98), rgb(195, 180, 118))'
-                              }}>
+                                style={{
+                                  background: 'linear-gradient(to right, rgb(175, 160, 98), rgb(195, 180, 118))'
+                                }}>
                                 <SparklesIcon className="w-3 h-3 inline mr-1" />
                                 Öne Çıkan
                               </div>
                             </div>
-                            
+
                             {/* Image */}
                             {post.featuredImage && (
                               <div className="relative h-56 overflow-hidden">
@@ -558,7 +558,7 @@ export default function BlogPage() {
                                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                                
+
                                 {/* Reading Time */}
                                 <div className="absolute bottom-4 right-4">
                                   <span className="inline-flex items-center px-3 py-1 bg-black/60 backdrop-blur-sm text-white/90 rounded-full text-xs font-medium">
@@ -621,9 +621,9 @@ export default function BlogPage() {
                                     e.currentTarget.style.color = 'rgb(175, 160, 98)'
                                     e.currentTarget.style.opacity = '0'
                                   }}>
-                                <span className="font-medium">Oku</span>
-                                <PaperAirplaneIcon className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                              </div>
+                                  <span className="font-medium">Oku</span>
+                                  <PaperAirplaneIcon className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -633,15 +633,15 @@ export default function BlogPage() {
                   </div>
                 </motion.div>
               )}
-              
+
               {/* All Posts Grid */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 {/* Stats Bar - Moved to better position */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
@@ -698,18 +698,18 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </motion.div>
-                
+
                 <div className="flex items-center space-x-3 mb-8">
-                    <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-                      style={{
-                        background: 'linear-gradient(135deg, rgb(175, 160, 98), rgb(195, 180, 118))'
-                      }}>
-                      <BookOpenIcon className="w-5 h-5 text-white" />
-                    </div>
-                    <h2 className="section-title-gold">Tüm Yazılar</h2>
-                    <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
+                  <div className="w-8 h-8 rounded-xl flex items-center justify-center"
+                    style={{
+                      background: 'linear-gradient(135deg, rgb(175, 160, 98), rgb(195, 180, 118))'
+                    }}>
+                    <BookOpenIcon className="w-5 h-5 text-white" />
                   </div>
-                
+                  <h2 className="section-title-gold">Tüm Yazılar</h2>
+                  <div className="flex-1 h-px bg-gradient-to-r from-white/20 to-transparent" />
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {(searchTerm || selectedTag ? filteredPosts : posts.slice(3)).map((post, index) => (
                     <motion.article
@@ -742,7 +742,7 @@ export default function BlogPage() {
                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                              
+
                               {/* Reading Time Estimate */}
                               <div className="absolute top-4 left-4">
                                 <span className="inline-flex items-center px-2 py-1 bg-black/50 backdrop-blur-sm text-white/80 rounded-full text-xs">
@@ -750,7 +750,7 @@ export default function BlogPage() {
                                   {calculateReadingTime(post.content)} dakika
                                 </span>
                               </div>
-                              
+
                               {/* View Count */}
                               <div className="absolute top-4 right-4">
                                 <span className="inline-flex items-center px-2 py-1 bg-black/50 backdrop-blur-sm text-white/80 rounded-full text-xs">
@@ -828,7 +828,7 @@ export default function BlogPage() {
 
               {/* Enhanced Load More Button */}
               {hasMore && !searchTerm && !selectedTag && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center mt-16"
