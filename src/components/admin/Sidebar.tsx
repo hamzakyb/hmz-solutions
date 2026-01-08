@@ -32,6 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onLogout, st
         { id: 'content-hero', label: 'Hero Bölümü', icon: Home },
         { id: 'content-services', label: 'Hizmetler', icon: Briefcase },
         { id: 'content-about', label: 'Hakkımızda', icon: Info },
+        { id: 'content-contact', label: 'İletişim', icon: MessageSquare },
         { type: 'divider', label: 'Ayarlar' },
         { id: 'settings', label: 'Genel Ayarlar', icon: Settings },
     ];
@@ -68,8 +69,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onLogout, st
                             key={item.id}
                             onClick={() => setActiveTab(item.id)}
                             className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-300 group ${isActive
-                                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/20'
-                                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                                ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/20'
+                                : 'text-white/60 hover:text-white hover:bg-white/5'
                                 }`}
                         >
                             <div className="flex items-center space-x-3">
