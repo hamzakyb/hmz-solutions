@@ -263,7 +263,7 @@ const SettingsEditor: React.FC = () => {
                                 onChange={(e) => setData({ ...data, contactInfo: { ...data.contactInfo, googleMapsUrl: e.target.value } })}
                                 placeholder="<iframe src='...'> veya sadece https://..."
                             />
-                            <p className="text-[10px] text-white/20">Google Maps > Paylaş > Harita Yerleştir > src içindeki linki yapıştırın.</p>
+                            <p className="text-[10px] text-white/20">Google Maps - Paylaş - Harita Yerleştir - src içindeki linki yapıştırın.</p>
                         </div>
                     </div>
                 </div>
