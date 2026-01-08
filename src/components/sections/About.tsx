@@ -172,7 +172,7 @@ const About = () => {
             <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-[2rem] overflow-hidden border border-gray-200 shadow-2xl">
               <Image
                 src={data.mainImage}
-                alt="HMZ Solutions"
+                alt="HMZ Solutions - Nevşehir Yazılım ve Web Tasarım Şirketi"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
               />

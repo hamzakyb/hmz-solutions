@@ -14,10 +14,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://hmzsolutions.com'),
   title: {
-    default: "Nevşehir Yazılım Şirketi | Web Sitesi & Mobil Uygulama - HMZ Solutions",
+    default: "Nevşehir Web Tasarım & Yazılım Şirketi | HMZ Solutions",
     template: "%s | HMZ Solutions Nevşehir Yazılım"
   },
-  description: "Nevşehir'in lider yazılım şirketi HMZ Solutions. Web sitesi tasarımı, mobil uygulama geliştirme, e-ticaret, kurumsal yazılım ve dijital pazarlama hizmetleri. Nevşehir, Kapadokya ve tüm Türkiye'ye profesyonel yazılım çözümleri. ☎️ Hemen arayın!",
+  description: "Nevşehir'un lider yazılım şirketi HMZ Solutions. Profesyonel web tasarım, mobil uygulama, SEO ve e-ticaret çözümleriyle işletmenizi dijitalde zirveye taşıyoruz. Hemen teklif alın!",
   keywords: [
     "nevşehir yazılım şirketi",
     "kapadokya web tasarım",
@@ -76,8 +76,8 @@ export const metadata: Metadata = {
     locale: 'tr_TR',
     url: 'https://hmzsolutions.com',
     siteName: 'HMZ Solutions - Nevşehir Yazılım Şirketi',
-    title: 'Nevşehir Yazılım Şirketi | Web Sitesi & Mobil Uygulama - HMZ Solutions',
-    description: 'Nevşehir\'in lider yazılım şirketi. Web sitesi, mobil uygulama, e-ticaret ve kurumsal yazılım çözümleri. Kapadokya bölgesinin en profesyonel dijital ajansı. Hemen iletişime geçin!',
+    title: 'Nevşehir Web Tasarım & Yazılım Şirketi | HMZ Solutions',
+    description: 'Nevşehir\'in en profesyonel yazılım şirketi HMZ Solutions. Web tasarım, mobil uygulama, SEO ve e-ticaret çözümlerimizle işletmenizi dijitalde 1. sıraya taşıyoruz.',
     images: [
       {
         url: '/og-image.jpg',
@@ -90,8 +90,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nevşehir Yazılım Şirketi | Web Sitesi & Mobil Uygulama - HMZ Solutions',
-    description: 'Nevşehir\'in lider yazılım şirketi. Web sitesi, mobil uygulama, e-ticaret ve kurumsal yazılım çözümleri. Profesyonel dijital hizmetler.',
+    title: 'Nevşehir Web Tasarım & Yazılım Şirketi | HMZ Solutions',
+    description: 'Nevşehir\'in lider yazılım şirketi HMZ Solutions. Web tasarım, mobil uygulama ve SEO çözümleriyle işletmenizi büyütün.',
     images: ['/og-image.jpg'],
     creator: '@hmzsolutions',
   },
@@ -133,9 +133,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "@id": "https://hmzsolutions.com/#organization",
-              "name": "HMZ Solutions",
-              "alternateName": "HMZ Yazılım",
-              "description": "Nevşehir'in lider yazılım şirketi. Web sitesi tasarımı, mobil uygulama geliştirme, e-ticaret ve kurumsal yazılım çözümleri.",
+              "name": "HMZ Solutions - Nevşehir Web Tasarım & Yazılım",
+              "alternateName": "HMZ Yazılım Nevşehir",
+              "description": "Nevşehir'in lider yazılım şirketi. Web tasarım, mobil uygulama geliştirme, e-ticaret ve SEO çözümleri sunan profesyonel dijital ajans.",
               "url": "https://hmzsolutions.com",
               "logo": "https://hmzsolutions.com/logo.png",
               "image": "https://hmzsolutions.com/og-image.jpg",
