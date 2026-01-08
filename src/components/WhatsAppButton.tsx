@@ -64,7 +64,7 @@ const WhatsAppButton = () => {
             </div>
 
             {/* Vertical Text */}
-            <span className="text-[12px] text-white/80 font-medium tracking-[0.3em] uppercase writing-vertical-lr group-hover:text-white transition-colors whitespace-nowrap">
+            <span className="text-[12px] text-white/80 font-medium tracking-[0.3em] uppercase [writing-mode:vertical-rl] rotate-180 group-hover:text-white transition-colors whitespace-nowrap">
               WhatsApp
             </span>
           </div>
