@@ -32,28 +32,42 @@ const Hero = () => {
 
         if (data?.slides && Array.isArray(data.slides) && data.slides.length > 0) {
           setSlides(data.slides)
-        } else if (data) {
-          // Fallback for legacy data
-          setSlides([{
-            id: 'legacy',
-            badge: data.badge || 'HMZ Solutions • Nevşehir',
-            title1: data.title1 || 'Global',
-            title2: data.title2 || 'Dijital Çözümler',
-            subtitle: data.subtitle || 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz.',
-            ctaText: data.cta1Text || 'Teklif Alın',
-            ctaLink: '#contact'
-          }])
         } else {
-          // Default initial state
-          setSlides([{
-            id: 'default',
-            badge: 'HMZ Solutions',
-            title1: 'Dijital',
-            title2: 'Gelecek',
-            subtitle: 'Henüz içerik eklenmedi.',
-            ctaText: 'İletişime Geç',
-            ctaLink: '#contact'
-          }])
+          // Default initial state with Premium Content (Overrides legacy flat data)
+          // If no 'slides' array exists, we default to our new premium content 
+          // to ensure the user sees the new design immediately.
+          setSlides([
+            {
+              id: 'slide-1',
+              badge: 'HMZ SOLUTIONS • GLOBAL',
+              title1: 'Sınırları Aşan',
+              title2: 'Teknoloji',
+              subtitle: 'İşletmenizi global standartlara taşıyan, ölçeklenebilir ve güvenli dijital altyapılar kuruyoruz.',
+              image: '/hero-slides/hero-globe.png',
+              ctaText: 'Keşfedin',
+              ctaLink: '#services'
+            },
+            {
+              id: 'slide-2',
+              badge: 'YAPAY ZEKA • İNOVASYON',
+              title1: 'Geleceği',
+              title2: 'Tasarlıyoruz',
+              subtitle: 'İş süreçlerinizi yapay zeka ve veri odaklı çözümlerle optimize ederek verimliliğinizi maksimize edin.',
+              image: '/hero-slides/hero-ai.png',
+              ctaText: 'AI Çözümleri',
+              ctaLink: '#services'
+            },
+            {
+              id: 'slide-3',
+              badge: 'DİJİTAL DÖNÜŞÜM',
+              title1: 'Kodun',
+              title2: 'Sanatı',
+              subtitle: 'Modern, hızlı ve kullanıcı odaklı yazılım çözümleriyle markanızın dijital varlığını güçlendiriyoruz.',
+              image: '/hero-slides/hero-growth.png',
+              ctaText: 'Proje Başlatın',
+              ctaLink: '#contact'
+            }
+          ])
         }
         setIsLoaded(true)
       } catch (error) {

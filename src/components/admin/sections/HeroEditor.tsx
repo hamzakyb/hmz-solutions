@@ -36,67 +36,46 @@ const HeroEditor: React.FC = () => {
             const response = await fetch('/api/content?section=hero');
             const result = await response.json();
 
-            if (result.content?.data) {
-                // Migration logic: if old flat structure exists, convert to slide
-                if (!result.content.data.slides && result.content.data.title1) {
-                    const initialSlide: HeroSlide = {
-                        id: crypto.randomUUID(),
-                        badge: result.content.data.badge || 'HMZ Solutions',
-                        title1: result.content.data.title1 || 'Global',
-                        title2: result.content.data.title2 || 'Dijital Çözümler',
-                        subtitle: result.content.data.subtitle || '',
-                        image: '',
-                        ctaText: result.content.data.cta1Text || 'Teklif Alın',
-                        ctaLink: '#contact'
-                    };
-                    setData({ slides: [initialSlide] });
-                    setSelectedSlideId(initialSlide.id);
-                } else {
-                    setData(result.content.data);
-                    if (result.content.data.slides?.length > 0) {
-                        setSelectedSlideId(result.content.data.slides[0].id);
-                    }
-                }
+            if (result.content?.data && result.content.data.slides && result.content.data.slides.length > 0) {
+                setData(result.content.data);
+                setSelectedSlideId(result.content.data.slides[0].id);
             } else {
-                // Initialize with Premium Default Slides
-                setData({
-                    slides: [
-                        {
-                            id: crypto.randomUUID(),
-                            badge: 'HMZ SOLUTIONS • GLOBAL',
-                            title1: 'Sınırları Aşan',
-                            title2: 'Teknoloji',
-                            subtitle: 'İşletmenizi global standartlara taşıyan, ölçeklenebilir ve güvenli dijital altyapılar kuruyoruz.',
-                            image: '/hero-slides/hero-globe.png',
-                            ctaText: 'Keşfedin',
-                            ctaLink: '#services'
-                        },
-                        {
-                            id: crypto.randomUUID(),
-                            badge: 'YAPAY ZEKA • İNOVASYON',
-                            title1: 'Geleceği',
-                            title2: 'Tasarlıyoruz',
-                            subtitle: 'İş süreçlerinizi yapay zeka ve veri odaklı çözümlerle optimize ederek verimliliğinizi maksimize edin.',
-                            image: '/hero-slides/hero-ai.png',
-                            ctaText: 'AI Çözümleri',
-                            ctaLink: '#services'
-                        },
-                        {
-                            id: crypto.randomUUID(),
-                            badge: 'DİJİTAL DÖNÜŞÜM',
-                            title1: 'Kodun',
-                            title2: 'Sanatı',
-                            subtitle: 'Modern, hızlı ve kullanıcı odaklı yazılım çözümleriyle markanızın dijital varlığını güçlendiriyoruz.',
-                            image: '/hero-slides/hero-growth.png',
-                            ctaText: 'Proje Başlatın',
-                            ctaLink: '#contact'
-                        }
-                    ]
-                });
-                // Set first slide as active (will be handled by useEffect or user interaction, but checking logic below)
-                // Actually need to set selectedSlideId after setting data if no data was found
-                // Since setData is async/batched, we might not have the ID immediately if we generated randomUUIDs here.
-                // But simplified logic: user will see list and click.
+                // Initialize with Premium Default Slides if no slides data exists
+                const defaultSlides = [
+                    {
+                        id: crypto.randomUUID(),
+                        badge: 'HMZ SOLUTIONS • GLOBAL',
+                        title1: 'Sınırları Aşan',
+                        title2: 'Teknoloji',
+                        subtitle: 'İşletmenizi global standartlara taşıyan, ölçeklenebilir ve güvenli dijital altyapılar kuruyoruz.',
+                        image: '/hero-slides/hero-globe.png',
+                        ctaText: 'Keşfedin',
+                        ctaLink: '#services'
+                    },
+                    {
+                        id: crypto.randomUUID(),
+                        badge: 'YAPAY ZEKA • İNOVASYON',
+                        title1: 'Geleceği',
+                        title2: 'Tasarlıyoruz',
+                        subtitle: 'İş süreçlerinizi yapay zeka ve veri odaklı çözümlerle optimize ederek verimliliğinizi maksimize edin.',
+                        image: '/hero-slides/hero-ai.png',
+                        ctaText: 'AI Çözümleri',
+                        ctaLink: '#services'
+                    },
+                    {
+                        id: crypto.randomUUID(),
+                        badge: 'DİJİTAL DÖNÜŞÜM',
+                        title1: 'Kodun',
+                        title2: 'Sanatı',
+                        subtitle: 'Modern, hızlı ve kullanıcı odaklı yazılım çözümleriyle markanızın dijital varlığını güçlendiriyoruz.',
+                        image: '/hero-slides/hero-growth.png',
+                        ctaText: 'Proje Başlatın',
+                        ctaLink: '#contact'
+                    }
+                ];
+                setData({ slides: defaultSlides });
+                // Automatically select the first slide so the editor is not empty
+                setSelectedSlideId(defaultSlides[0].id);
             }
         } catch (error) {
             console.error('Failed to fetch hero content:', error);
