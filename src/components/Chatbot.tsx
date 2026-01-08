@@ -33,41 +33,78 @@ interface Agent {
   KNOWLEDGE BASE SECTION
   Defines the intelligence of the chatbot based on site content.
 */
+/* 
+  KNOWLEDGE BASE SECTION
+  Defines the intelligence of the chatbot based on site content.
+  Expanded to cover comprehensive agency questions.
+*/
 const knowledgeBase = {
   greetings: {
-    keywords: ['merhaba', 'selam', 'hey', 'günaydın', 'iyi günler', 'sa', 'slm'],
+    keywords: ['merhaba', 'selam', 'hey', 'günaydın', 'iyi günler', 'sa', 'slm', 'alo'],
     responses: [
       "Merhaba! HMZ Solutions'a hoş geldiniz. Size nasıl yardımcı olabilirim?",
       "Selamlar! Dijital dönüşüm yolculuğunuzda size nasıl destek olabilirim?",
-      "Merhaba, ben dijital asistanınız. Projeniz hakkında konuşmaya hazır mısınız?"
+      "Merhaba, ben kurumsal asistanınız. Projeniz hakkında konuşmaya hazır mısınız?"
     ]
   },
-  services: {
-    keywords: ['hizmet', 'neler yapıyorsunuz', 'servis', 'yazılım', 'web', 'mobil', 'seo', 'tasarım', 'neler var'],
-    response: "HMZ Solutions olarak uçtan uca dijital hizmetler sunuyoruz:\n\n1. **Web Geliştirme:** Modern, hızlı ve SEO uyumlu kurumsal web siteleri.\n2. **Mobil Uygulama:** iOS ve Android için native performanslı uygulamalar.\n3. **Özel Yazılım:** İş süreçlerinizi optimize eden size özel yazılım çözümleri.\n4. **E-Ticaret:** Global ölçekte satış yapmanızı sağlayan güvenli altyapılar.\n5. **SEO & Dijital Pazarlama:** Markanızın görünürlüğünü artıran stratejik çalışmalar.\n\nHangi alanda desteğe ihtiyacınız var?"
+  process: {
+    keywords: ['süreç', 'nasıl çalışıyorsunuz', 'aşamalar', 'nasıl başlarız', 'yöntem', 'adım adım', 'işleyiş'],
+    response: "Çalışma sürecimiz 4 temel adımdan oluşur:\n\n1. **Analiz & Keşif:** İhtiyaçlarınızı ve hedeflerinizi dinler, stratejiyi belirleriz.\n2. **Tasarım & Prototip:** Kullanıcı deneyimini (UX) ve arayüzü (UI) tasarlar, onayınıza sunarız.\n3. **Geliştirme:** Onaylanan tasarımı en güncel teknolojilerle kodlarız.\n4. **Test & Yayın:** Tüm fonksiyonları test eder ve projeyi canlıya alırız."
   },
-  contact: {
-    keywords: ['iletişim', 'telefon', 'mail', 'adres', 'nerede', 'ulaşım', 'konum', 'ofis'],
-    response: "Bize dilediğiniz kanaldan ulaşabilirsiniz:\n\n📍 **Adres:** Güzelyurt Mah. Zübeyde Hanım Cad., Nevşehir/Merkez\n📧 **E-posta:** info@hmzsolutions.com\n📞 **Telefon:** +90 (505) 095 99 50\n\nAyrıca hemen sayfanın altındaki iletişim formunu doldurarak hızlıca teklif alabilirsiniz."
-  },
-  about: {
-    keywords: ['hakkınızda', 'kimsiniz', 'biz kimiz', 'firma', 'şirket', 'ekip', 'hmz'],
-    response: "HMZ Solutions, Nevşehir merkezli olup global vizyona sahip bir teknoloji şirketidir. İşletmelerin dijital dönüşüm süreçlerine liderlik ediyor, karmaşık iş problemlerini 'Sanat ve Teknoloji'yi birleştirerek çözüyoruz. Amacımız sadece bir web sitesi yapmak değil, markanız için sürdürülebilir bir dijital miras inşa etmektir."
+  timeline: {
+    keywords: ['ne kadar sürer', 'kaç gün', 'zaman', 'teslim süresi', 'ne zaman biter', 'vakit'],
+    response: "Proje süresi, kapsam ve özelliklere göre değişmektedir. Standart bir kurumsal web sitesi ortalama **2-4 hafta**, kapsamlı e-ticaret veya özel yazılım projeleri ise **6-12 hafta** sürebilir. Net bir takvim için proje detaylarını görüşmemiz gerekir."
   },
   pricing: {
-    keywords: ['fiyat', 'ücret', 'kaç para', 'maliyet', 'teklif', 'ne kadar'],
-    response: "Her projenin gereksinimleri ve ölçeği farklı olduğu için standart bir fiyatlandırmamız bulunmamaktadır. Size en uygun ve stratejik teklifi sunabilmemiz için projenizin detaylarını öğrenmek isteriz. Dilerseniz iletişim formunu doldurun, dilerseniz kısaca projenizden bahsedin, sizi hemen arayalım."
+    keywords: ['fiyat', 'ücret', 'kaç para', 'maliyet', 'teklif', 'ne kadar', 'bütçe', 'pahalı', 'ucuz'],
+    response: "Fiyatlandırmamız 'paket' usulü değil, **proje bazlıdır**. İhtiyacınız olmayan özelliklere ödeme yapmanızı istemeyiz. Bütçenize ve hedeflerinize en uygun teklifi sunabilmemiz için projenizi kısaca anlatırsanız, size özel bir çalışma yapabiliriz."
   },
-  location: {
-    keywords: ['nevşehir', 'kapadokya', 'yerel', 'bölge'],
-    response: "Merkezimiz Nevşehir'de bulunmakla birlikte, Kapadokya'nın yaratıcı atmosferinden ilham alarak tüm Türkiye'ye ve global müşterilere hizmet veriyoruz. Dijital dünyada sınır tanımıyoruz."
+  maintenance: {
+    keywords: ['destek', 'bakım', 'güncelleme', 'bozulursa', 'hata', 'garanti', 'sonrası', 'teknik destek'],
+    response: "Proje tesliminden sonra sizi yalnız bırakmıyoruz. Tüm projelerimiz **1 yıl ücretsiz teknik destek ve bakım garantisi** altındadır. Ayrıca, uzun vadeli bakım anlaşmalarıyla sisteminizin her zaman güncel ve güvenli kalmasını sağlıyoruz."
   },
-  tech: {
-    keywords: ['teknoloji', 'react', 'next', 'node', 'yazılım dili', 'altyapı'],
-    response: "Projelerimizde endüstri standardı olan en güncel teknolojileri kullanıyoruz: React, Next.js, Node.js, TypeScript, MongoDB ve Cloud altyapıları. Bu sayede projeleriniz her zaman hızlı, güvenli ve ölçeklenebilir olur."
+  ecommerce: {
+    keywords: ['e-ticaret', 'satış', 'mağaza', 'ödeme', 'sanal pos', 'online satış', 'sepet'],
+    response: "Global standartlarda e-ticaret çözümleri sunuyoruz:\n- Güvenli Ödeme Altyapıları (Iyzico, Stripe vb.)\n- Gelişmiş Stok ve Sipariş Yönetimi\n- Hızlı ve Mobil Uyumlu Arayüzler\n- Pazaryeri Entegrasyonları (Trendyol, Hepsiburada vb.)"
+  },
+  seo: {
+    keywords: ['seo', 'google', 'arama motoru', 'birinci sayfa', 'görünürlük', 'reklam', 'hit'],
+    response: "Sadece 'güzel' değil, 'bulunabilir' siteler yapıyoruz. Tüm projelerimiz teknik SEO (Hız, Mobil Uyum, Schema Yapısı) standartlarına uygun geliştirilir. Ayrıca içerik stratejisi ve backlink çalışmalarıyla Google sıralamanızı yükseltecek özel SEO danışmanlığı da veriyoruz."
+  },
+  mobile: {
+    keywords: ['mobil', 'app', 'uygulama', 'ios', 'android', 'telefon'],
+    response: "Mobil dünyada var olmanız için Native (Swift/Kotlin) veya Cross-Platform (React Native/Flutter) teknolojileriyle yüksek performanslı iOS ve Android uygulamalar geliştiriyoruz."
+  },
+  technologies: {
+    keywords: ['teknoloji', 'hangi dil', 'altyapı', 'react', 'next', 'node', 'php', 'wordpress', 'yazılım dili'],
+    response: "Projenin doğasına göre en doğru teknolojiyi seçiyoruz. Genellikle yüksek performans ve güvenlik için **React, Next.js, Node.js ve cloud altyapılarını** tercih ediyoruz. Ancak içerik odaklı basit projeler için modern Headless CMS çözümleri de kullanıyoruz."
+  },
+  wordpress_vs_custom: {
+    keywords: ['wordpress', 'hazır', 'özel yazılım', 'fark', 'neden özel'],
+    response: "WordPress hızlı bir başlangıç için iyidir ancak **Özel Yazılım (Custom Development)** size sınırsız özgürlük, yüksek güvenlik ve maksimum performans sağlar. İşletmeniz büyüdükçe WordPress hantallaşabilir, özel yazılım ise sizinle birlikte ölçeklenir."
+  },
+  contact: {
+    keywords: ['iletişim', 'telefon', 'mail', 'adres', 'nerede', 'ulaşım', 'konum', 'ofis', 'yeriniz'],
+    response: "Nevşehir merkez ofisimize kahveye bekleriz! ☕\n\n📍 **Adres:** Güzelyurt Mah. Zübeyde Hanım Cad.\n📞 **Tel:** +90 (505) 095 99 50\n📧 **Mail:** info@hmzsolutions.com"
+  },
+  meeting: {
+    keywords: ['toplantı', 'görüşme', 'randevu', 'yüz yüze', 'ziyaret', 'zoom', 'online'],
+    response: "Memnuniyetle! İster Nevşehir'deki ofisimizde yüz yüze, ister Zoom/Google Meet üzerinden online bir toplantı planlayabiliriz. Size uygun zamanı belirtmeniz yeterli."
+  },
+  references: {
+    keywords: ['referans', 'örnek', 'kimlerle', 'portföy', 'yaptığınız işler', 'müşteri'],
+    response: "Bugüne kadar birçok farklı sektörden (Turizm, E-ticaret, Sağlık, Kurumsal) markayla çalıştık. Gizlilik sözleşmeleri gereği bazılarını burada paylaşamasak da, 'Projeler' sayfamızdan seçkileri inceleyebilir veya size özel sunum talep edebilirsiniz."
+  },
+  career: {
+    keywords: ['iş', 'staj', 'kariyer', 'başvuru', 'çalışma', 'ilan', 'personel'],
+    response: "HMZ Solutions ailesini büyütmekten heyecan duyarız. Güncel açık pozisyonlar ve staj imkanları için CV'nizi ve portfolyonuzu **kariyer@hmzsolutions.com** adresine gönderebilirsiniz."
+  },
+  about: {
+    keywords: ['hakkınızda', 'kimsiniz', 'biz kimiz', 'firma', 'şirket', 'vizyon', 'misyon', 'hmz'],
+    response: "HMZ Solutions, teknolojiyi sanatla birleştiren yeni nesil bir dijital ajanstaır. Nevşehir'den dünyaya açılan vizyonumuzla, markalar için sadece yazılım değil, 'dijital miras' üretiyoruz."
   },
   default: {
-    response: "Anladım. Bu konu hakkında daha detaylı bilgi verebilmem veya size özel bir çözüm sunabilmemiz için iletişim bilgilerinizi bırakabilir veya doğrudan **info@hmzsolutions.com** adresine yazabilirsiniz. Uzman ekibimiz konuyu inceleyip size dönüş yapacaktır."
+    response: "Bu konuyu detaylandırmak için bir insan uzmanımızın devreye girmesi daha sağlıklı olur. 👇\n\nLütfen iletişim bilgilerinizi bırakın veya **info@hmzsolutions.com** adresine yazın. Sizinle hemen iletişime geçelim."
   }
 }
 
@@ -118,42 +155,25 @@ const Chatbot = () => {
   const generateResponse = (input: string): string => {
     const lowerInput = input.toLowerCase()
 
-    // 1. Check Greetings
+    // 1. Check Greetings first (Specific logic for arrays)
     if (knowledgeBase.greetings.keywords.some(k => lowerInput.includes(k))) {
       return knowledgeBase.greetings.responses[Math.floor(Math.random() * knowledgeBase.greetings.responses.length)]
     }
 
-    // 2. Check Services
-    if (knowledgeBase.services.keywords.some(k => lowerInput.includes(k))) {
-      return knowledgeBase.services.response
+    // 2. Dynamic Check for all other categories
+    // We iterate through keys to find the first matching category
+    for (const [key, category] of Object.entries(knowledgeBase)) {
+      if (key === 'greetings' || key === 'default') continue;
+
+      // Type guard to access properties safely
+      const cat = category as { keywords: string[], response: string };
+
+      if (cat.keywords.some(k => lowerInput.includes(k))) {
+        return cat.response;
+      }
     }
 
-    // 3. Check Contact
-    if (knowledgeBase.contact.keywords.some(k => lowerInput.includes(k))) {
-      return knowledgeBase.contact.response
-    }
-
-    // 4. Check About
-    if (knowledgeBase.about.keywords.some(k => lowerInput.includes(k))) {
-      return knowledgeBase.about.response
-    }
-
-    // 5. Check Pricing
-    if (knowledgeBase.pricing.keywords.some(k => lowerInput.includes(k))) {
-      return knowledgeBase.pricing.response
-    }
-
-    // 6. Check Location
-    if (knowledgeBase.location.keywords.some(k => lowerInput.includes(k))) {
-      return knowledgeBase.location.response
-    }
-
-    // 7. Check Tech
-    if (knowledgeBase.tech.keywords.some(k => lowerInput.includes(k))) {
-      return knowledgeBase.tech.response
-    }
-
-    // Default Fallback
+    // 3. Default Fallback
     return knowledgeBase.default.response
   }
 
