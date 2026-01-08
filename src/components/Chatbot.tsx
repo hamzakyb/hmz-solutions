@@ -359,7 +359,7 @@ const Chatbot = () => {
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
-                    placeholder="Kurumsal bir mesaj yazın..."
+                    placeholder="Size nasıl yardımcı olabilirim?"
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-12 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#AF9C64]/50 focus:bg-white/10 transition-all"
                   />
                   <button
