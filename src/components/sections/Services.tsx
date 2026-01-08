@@ -121,8 +121,8 @@ const Services = () => {
     <section id="services" className="py-24 sm:py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-amber-50 rounded-full blur-3xl opacity-30" />
-        <div className="absolute top-[20%] -right-[10%] w-[30%] h-[30%] bg-orange-50 rounded-full blur-3xl opacity-30" />
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-gold-50 rounded-full blur-3xl opacity-30" />
+        <div className="absolute top-[20%] -right-[10%] w-[30%] h-[30%] bg-gold-100 rounded-full blur-3xl opacity-30" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -132,7 +132,7 @@ const Services = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-bold tracking-widest uppercase mb-4 border border-amber-100"
+              className="inline-block px-3 py-1 rounded-full bg-gold-50 text-gold-600 text-xs font-bold tracking-widest uppercase mb-4 border border-gold-100"
             >
               Hizmetlerimiz
             </motion.span>
@@ -169,17 +169,17 @@ const Services = () => {
                 viewport={{ once: true }}
                 className="group relative bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-orange-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-gold-50/50 to-gold-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
                 <div className="relative z-10">
-                  <div className="mb-6 inline-flex p-3 rounded-xl bg-gray-50 text-gray-600 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
+                  <div className="mb-6 inline-flex p-3 rounded-xl bg-gray-50 text-gray-600 group-hover:bg-gold-500 group-hover:text-white transition-colors duration-300">
                     <IconComponent className="w-6 h-6" />
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-gold-600 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-4">
+                  <p className="text-xs font-semibold text-gold-500 uppercase tracking-wider mb-4">
                     {service.subtitle}
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
@@ -189,7 +189,7 @@ const Services = () => {
                   <div className="space-y-2 border-t border-gray-100 pt-6">
                     {service.features.map((feature: string, i: number) => (
                       <div key={i} className="flex items-center text-xs text-gray-500">
-                        <ArrowRightIcon className="w-3 h-3 text-amber-400 mr-2 flex-shrink-0" />
+                        <ArrowRightIcon className="w-3 h-3 text-gold-400 mr-2 flex-shrink-0" />
                         <span className="truncate">{feature}</span>
                       </div>
                     ))}
