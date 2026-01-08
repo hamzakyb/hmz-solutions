@@ -18,7 +18,6 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-
   const [settings, setSettings] = useState({
     navigation: {
       logoText: 'HMZ Solutions',
@@ -41,22 +40,17 @@ const Navigation = () => {
     fetchSettings()
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      setIsScrolled(scrollPosition > 20)
-
-      // Update active section based on scroll position
+      setIsScrolled(window.scrollY > 20)
       const sections = ['home', 'services', 'about', 'contact']
       const sectionElements = sections.map(id => document.getElementById(id))
-
       for (let i = sectionElements.length - 1; i >= 0; i--) {
         const element = sectionElements[i]
-        if (element && element.offsetTop <= scrollPosition + 100) {
+        if (element && element.offsetTop <= window.scrollY + 100) {
           setActiveSection(sections[i])
           break
         }
       }
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -72,33 +66,12 @@ const Navigation = () => {
   const handleNavClick = (href: string, id: string, external?: boolean) => {
     setActiveSection(id)
     setIsMobileMenuOpen(false)
-
-    if (external || href.startsWith('/')) {
-      // Handle external links and route changes
-      if (typeof window !== 'undefined') {
-        window.location.href = href
-      }
+    if (external || href.startsWith('/') && !href.startsWith('/#')) {
+      if (typeof window !== 'undefined') window.location.href = href
       return
     }
-
-    // Handle anchor links on the same page
-    if (href.startsWith('/#')) {
-      const sectionId = href.replace('/#', '')
-      const element = document.getElementById(sectionId)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    } else {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      } else {
-        // If element not found, navigate to homepage with hash
-        if (typeof window !== 'undefined') {
-          window.location.href = `/${href}`
-        }
-      }
-    }
+    const element = document.getElementById(href.replace('/#', ''))
+    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
@@ -108,265 +81,77 @@ const Navigation = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className={cn(
-          'fixed top-4 left-4 right-4 z-50 transition-all duration-700 ease-out',
-          'max-w-7xl mx-auto rounded-2xl',
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-2xl border border-gray-300 shadow-2xl shadow-gray-400/10'
-            : 'bg-white/80 backdrop-blur-xl border border-gray-200'
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out',
+          isScrolled ? 'py-4 bg-black/50 backdrop-blur-md border-b border-white/5' : 'py-6 bg-transparent'
         )}
       >
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Premium Logo */}
-            <motion.div
-              className="flex-shrink-0 min-w-0"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div
+              className="flex items-center space-x-3 cursor-pointer group"
+              onClick={() => handleNavClick('/', 'home', true)}
             >
-              <div className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer" onClick={() => handleNavClick('/', 'home', true)}>
-                <div className="relative">
-                  <div className="absolute inset-0 rounded-2xl blur-lg opacity-30 group-hover:opacity-70 transition-opacity duration-300"
-                    style={{
-                      background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)'
-                    }}
-                  />
-                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden p-1.5 sm:p-2">
-                    {/* Logo with better sizing and padding */}
-                    <Image
-                      src={settings.navigation.logoImage}
-                      alt="HMZ Solutions Logo"
-                      fill
-                      className="object-contain"
-                      onError={(e) => {
-                        // Fallback to letter H if logo image fails to load
-                        e.currentTarget.style.display = 'none';
-                        const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                        if (fallback) fallback.style.display = 'block';
-                      }}
-                    />
-                    <span className="text-gray-800 font-semibold text-sm sm:text-lg tracking-tight hidden">
-                      H
-                    </span>
-                  </div>
-                </div>
-                <span className={cn(
-                  "text-lg sm:text-xl font-semibold tracking-tight transition-colors duration-300 truncate",
-                  isScrolled ? "text-gray-900" : "text-gray-800"
-                )}>
-                  <span className="hidden sm:inline">{settings.navigation.logoText}</span>
-                  <span className="sm:hidden">{settings.navigation.logoText.split(' ')[0]}</span>
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Premium Navigation Menu */}
-            <div className="hidden lg:block flex-1">
-              <div className="flex items-center justify-center space-x-1">
-                {navItems.map((item) => {
-                  const isActive = activeSection === item.id
-                  return (
-                    <motion.a
-                      key={item.label}
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleNavClick(item.href, item.id, item.external)
-                      }}
-                      className={cn(
-                        "relative px-3 xl:px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer",
-                        isActive
-                          ? "text-gray-900"
-                          : isScrolled
-                            ? "text-gray-700 hover:text-gray-900"
-                            : "text-gray-600 hover:text-gray-800"
-                      )}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeSection"
-                          className="absolute inset-0 backdrop-blur-xl rounded-full border"
-                          style={{
-                            background: 'rgba(175, 160, 98, 0.1)',
-                            borderColor: 'rgba(175, 160, 98, 0.2)'
-                          }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 30
-                          }}
-                        />
-                      )}
-                      <span className="relative z-10">{item.label}</span>
-                    </motion.a>
-                  )
-                })}
-              </div>
-            </div>
-
-            {/* Premium CTA Button */}
-            <div className="hidden lg:block flex-shrink-0">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 rounded-full blur-xl opacity-30 group-hover:opacity-70 transition-opacity duration-300"
-                  style={{
-                    background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)'
-                  }}
+              <div className="relative w-8 h-8 md:w-10 md:h-10 opacity-90 transition-opacity group-hover:opacity-100">
+                <Image
+                  src={settings.navigation.logoImage}
+                  alt="HMZ"
+                  fill
+                  className="object-contain invert"
+                  priority
                 />
-                <Button
-                  size="sm"
-                  onClick={() => handleNavClick('/#contact', 'contact')}
-                  className="relative backdrop-blur-xl border text-white font-medium px-4 xl:px-6 py-2 rounded-full shadow-lg transition-all duration-300 text-sm cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)',
-                    borderColor: 'rgba(175, 160, 98, 0.25)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgb(195, 180, 118) 0%, rgb(175, 160, 98) 100%)'
-                    e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.4)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)'
-                    e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.25)'
-                  }}
-                >
-                  <span className="hidden xl:inline">Teklif Al</span>
-                  <span className="xl:hidden">Teklif</span>
-                </Button>
-              </motion.div>
+              </div>
+              <span className="text-white font-bold tracking-tight text-lg md:text-xl transform origin-left transition-transform duration-300">
+                {settings.navigation.logoText}
+              </span>
             </div>
 
-            {/* Premium Mobile Menu Button */}
-            <div className="lg:hidden flex-shrink-0">
-              <motion.button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={cn(
-                  "inline-flex items-center justify-center p-2 rounded-full transition-all duration-300",
-                  "bg-white/90 backdrop-blur-xl border hover:bg-white/95"
-                )}
-                style={{
-                  borderColor: 'rgba(175, 160, 98, 0.2)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.4)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(175, 160, 98, 0.2)'
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <AnimatePresence mode="wait">
-                  {isMobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <XMarkIcon className="block h-5 w-5 sm:h-6 sm:w-6 text-gray-800" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Bars3Icon className="block h-5 w-5 sm:h-6 sm:w-6 text-gray-800" />
-                    </motion.div>
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(item.href, item.id, item.external) }}
+                  className={cn(
+                    "text-sm font-medium transition-colors duration-300 relative group",
+                    activeSection === item.id ? "text-white" : "text-gray-400 hover:text-white"
                   )}
-                </AnimatePresence>
-              </motion.button>
+                >
+                  {item.label}
+                  <span className={cn(
+                    "absolute -bottom-1 left-0 w-full h-px bg-white transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100",
+                    activeSection === item.id && "scale-x-100"
+                  )} />
+                </a>
+              ))}
+              <Button
+                size="sm"
+                onClick={() => handleNavClick('/#contact', 'contact')}
+                className="bg-white text-black hover:bg-gray-200 border-none rounded-full px-6 py-2 text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                Teklif Al
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              >
+                {isMobileMenuOpen ? (
+                  <XMarkIcon className="w-6 h-6" />
+                ) : (
+                  <Bars3Icon className="w-6 h-6" />
+                )}
+              </button>
             </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Premium Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed top-24 left-4 right-4 z-40 max-w-md mx-auto lg:hidden"
-          >
-            <div className="bg-white/95 backdrop-blur-2xl rounded-2xl border shadow-2xl overflow-hidden"
-              style={{
-                borderColor: 'rgba(175, 160, 98, 0.2)'
-              }}
-            >
-              <div className="px-4 sm:px-6 py-6 sm:py-8 space-y-3 sm:space-y-4">
-                {navItems.map((item, index) => {
-                  const isActive = activeSection === item.id
-                  return (
-                    <motion.a
-                      key={item.label}
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleNavClick(item.href, item.id, item.external)
-                      }}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                      className={cn(
-                        "block px-4 py-3 text-base font-medium rounded-xl transition-all duration-300 cursor-pointer",
-                        isActive
-                          ? "text-gray-800 border"
-                          : "text-gray-700 hover:text-gray-900"
-                      )}
-                      style={{
-                        background: isActive ? 'rgba(175, 160, 98, 0.15)' : undefined,
-                        borderColor: isActive ? 'rgba(175, 160, 98, 0.25)' : undefined
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.background = 'rgba(175, 160, 98, 0.05)'
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.background = 'transparent'
-                        }
-                      }}
-                    >
-                      {item.label}
-                    </motion.a>
-                  )
-                })}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.3 }}
-                  className="pt-4 border-t border-gray-200"
-                >
-                  <Button
-                    className="w-full text-white font-medium py-3 rounded-xl shadow-lg transition-all duration-300 cursor-pointer"
-                    style={{
-                      background: 'linear-gradient(135deg, rgb(175, 160, 98) 0%, rgb(195, 180, 118) 100%)'
-                    }}
-                    size="sm"
-                    onClick={() => handleNavClick('/#contact', 'contact')}
-                  >
-                    Teklif Al
-                  </Button>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Backdrop blur overlay for mobile menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -374,9 +159,34 @@ const Navigation = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center"
+          >
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col space-y-8 text-center"
+            >
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(item.href, item.id, item.external) }}
+                  className="text-2xl font-light text-gray-300 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <div className="pt-8">
+                <Button
+                  onClick={() => handleNavClick('/#contact', 'contact')}
+                  className="bg-white text-black px-8 py-3 rounded-full text-sm font-bold uppercase tracking-wider"
+                >
+                  Teklif Al
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
