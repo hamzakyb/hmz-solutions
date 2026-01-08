@@ -33,7 +33,6 @@ const WhatsAppButton = () => {
   }
 
   return (
-  return (
     <AnimatePresence>
       {!isChatOpen && (
         <motion.button
