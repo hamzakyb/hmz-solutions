@@ -89,13 +89,33 @@ const About = () => {
           {data.stats.map((stat, index) => {
             const IconComponent = statIcons[index % statIcons.length]
             return (
-              <div key={index}>
-                <div className="mb-4 text-gray-400">
-                  <IconComponent className="w-8 h-8" />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="group relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-2xl border border-gray-100 overflow-hidden transition-all duration-500 hover:-translate-y-1"
+              >
+                {/* Decorational Circle */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#AF9C64]/5 rounded-bl-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-150 group-hover:bg-[#AF9C64]/10" />
+
+                <div className="relative z-10">
+                  <div className="mb-6 inline-flex p-3 rounded-xl bg-[#AF9C64]/10 text-[#AF9C64] group-hover:bg-[#AF9C64] group-hover:text-white transition-colors duration-500">
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="text-2xl lg:text-3xl font-serif italic text-gray-900 group-hover:text-[#AF9C64] transition-colors duration-300">
+                      {stat.number}
+                    </div>
+                    <div className="h-px w-12 bg-gray-200 group-hover:w-full group-hover:bg-[#AF9C64]/30 transition-all duration-500" />
+                    <div className="text-xs font-bold tracking-[0.25em] text-gray-400 uppercase group-hover:text-gray-900 transition-colors duration-300 pt-1">
+                      {stat.label}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.number}</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wider">{stat.label}</div>
-              </div>
+              </motion.div>
             )
           })}
         </div>
