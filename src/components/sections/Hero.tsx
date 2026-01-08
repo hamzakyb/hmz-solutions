@@ -134,8 +134,14 @@ const Hero = () => {
           {slide.image ? (
             <>
               <div className="absolute inset-0 bg-black/60 z-10" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={slide.image} alt={slide.title1} className="w-full h-full object-cover" />
+              <div className="relative w-full h-full">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={slide.image}
+                  alt={slide.title1}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </>
           ) : (
             <>
