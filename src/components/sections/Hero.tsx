@@ -93,9 +93,7 @@ const Hero = () => {
                   borderColor: 'rgba(175, 160, 98, 0.3)'
                 }}
               >
-                <SparklesIcon className="w-5 h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
                 <span className="text-gray-800 font-medium">{data.badge}</span>
-                <StarIcon className="w-4 h-4" style={{ color: 'rgb(175, 160, 98)' }} />
               </div>
             </div>
           </motion.div>
@@ -190,7 +188,6 @@ const Hero = () => {
                 }}
               >
                 Projeye Başla
-                <PaperAirplaneIcon className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
               </Button>
             </motion.div>
 

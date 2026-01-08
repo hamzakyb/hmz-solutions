@@ -142,9 +142,7 @@ const Services = () => {
               boxShadow: '0 4px 16px rgba(175, 160, 98, 0.1), inset 0 1px 0 rgba(175, 160, 98, 0.2)' // Granüllü efekt
             }}
           >
-            <SparklesIcon className="w-5 h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
             <span className="font-medium" style={{ color: 'rgb(120, 100, 60)' }}>Premium Hizmetler</span>
-            <StarIcon className="w-4 h-4" style={{ color: 'rgb(175, 160, 98)' }} />
           </motion.div>
 
           <motion.h2
@@ -320,7 +318,6 @@ const Services = () => {
                           }}
                         >
                           <span className="mr-3">Daha Fazla Keşfet</span>
-                          <PaperAirplaneIcon className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                         </div>
                       </motion.div>
                     </div>
@@ -379,7 +376,6 @@ const Services = () => {
               }}
             >
               Projeyi Başlat
-              <PaperAirplaneIcon className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300 inline-block" />
             </button>
           </motion.div>
         </motion.div>

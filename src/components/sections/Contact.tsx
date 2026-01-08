@@ -180,9 +180,7 @@ const Contact = () => {
               boxShadow: '0 4px 16px rgba(175, 160, 98, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
             }}
           >
-            <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
             <span className="text-gray-800 font-medium text-sm sm:text-base">İletişim</span>
-            <StarIcon className="w-3 sm:w-4 h-3 sm:h-4" style={{ color: 'rgb(195, 180, 118)' }} />
           </motion.div>
 
           <motion.h2
@@ -439,9 +437,6 @@ const Contact = () => {
                               submitStatus === 'error' ? 'Tekrar Deneyin' :
                                 'Teklif Talebi Gönder'}
                         </span>
-                        {!isSubmitting && (
-                          <PaperAirplaneIcon className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-                        )}
                         {isSubmitting && (
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         )}
@@ -654,7 +649,6 @@ const Contact = () => {
                     >
                       <span className="relative z-10 flex items-center justify-center space-x-2">
                         <span>Hemen Ara</span>
-                        <PaperAirplaneIcon className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                       </span>
                       <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
                         style={{

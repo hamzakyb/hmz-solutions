@@ -123,9 +123,7 @@ const About = () => {
               boxShadow: '0 4px 16px rgba(175, 160, 98, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
             }}
           >
-            <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
             <span className="text-gray-800 font-medium text-sm sm:text-base">{data.badge}</span>
-            <StarIcon className="w-3 sm:w-4 h-3 sm:h-4" style={{ color: 'rgb(195, 180, 118)' }} />
           </motion.div>
 
           <motion.h2
