@@ -29,23 +29,66 @@ interface Agent {
   greeting: string
 }
 
+/* 
+  KNOWLEDGE BASE SECTION
+  Defines the intelligence of the chatbot based on site content.
+*/
+const knowledgeBase = {
+  greetings: {
+    keywords: ['merhaba', 'selam', 'hey', 'günaydın', 'iyi günler', 'sa', 'slm'],
+    responses: [
+      "Merhaba! HMZ Solutions'a hoş geldiniz. Size nasıl yardımcı olabilirim?",
+      "Selamlar! Dijital dönüşüm yolculuğunuzda size nasıl destek olabilirim?",
+      "Merhaba, ben dijital asistanınız. Projeniz hakkında konuşmaya hazır mısınız?"
+    ]
+  },
+  services: {
+    keywords: ['hizmet', 'neler yapıyorsunuz', 'servis', 'yazılım', 'web', 'mobil', 'seo', 'tasarım', 'neler var'],
+    response: "HMZ Solutions olarak uçtan uca dijital hizmetler sunuyoruz:\n\n1. **Web Geliştirme:** Modern, hızlı ve SEO uyumlu kurumsal web siteleri.\n2. **Mobil Uygulama:** iOS ve Android için native performanslı uygulamalar.\n3. **Özel Yazılım:** İş süreçlerinizi optimize eden size özel yazılım çözümleri.\n4. **E-Ticaret:** Global ölçekte satış yapmanızı sağlayan güvenli altyapılar.\n5. **SEO & Dijital Pazarlama:** Markanızın görünürlüğünü artıran stratejik çalışmalar.\n\nHangi alanda desteğe ihtiyacınız var?"
+  },
+  contact: {
+    keywords: ['iletişim', 'telefon', 'mail', 'adres', 'nerede', 'ulaşım', 'konum', 'ofis'],
+    response: "Bize dilediğiniz kanaldan ulaşabilirsiniz:\n\n📍 **Adres:** Güzelyurt Mah. Zübeyde Hanım Cad., Nevşehir/Merkez\n📧 **E-posta:** info@hmzsolutions.com\n📞 **Telefon:** +90 (505) 095 99 50\n\nAyrıca hemen sayfanın altındaki iletişim formunu doldurarak hızlıca teklif alabilirsiniz."
+  },
+  about: {
+    keywords: ['hakkınızda', 'kimsiniz', 'biz kimiz', 'firma', 'şirket', 'ekip', 'hmz'],
+    response: "HMZ Solutions, Nevşehir merkezli olup global vizyona sahip bir teknoloji şirketidir. İşletmelerin dijital dönüşüm süreçlerine liderlik ediyor, karmaşık iş problemlerini 'Sanat ve Teknoloji'yi birleştirerek çözüyoruz. Amacımız sadece bir web sitesi yapmak değil, markanız için sürdürülebilir bir dijital miras inşa etmektir."
+  },
+  pricing: {
+    keywords: ['fiyat', 'ücret', 'kaç para', 'maliyet', 'teklif', 'ne kadar'],
+    response: "Her projenin gereksinimleri ve ölçeği farklı olduğu için standart bir fiyatlandırmamız bulunmamaktadır. Size en uygun ve stratejik teklifi sunabilmemiz için projenizin detaylarını öğrenmek isteriz. Dilerseniz iletişim formunu doldurun, dilerseniz kısaca projenizden bahsedin, sizi hemen arayalım."
+  },
+  location: {
+    keywords: ['nevşehir', 'kapadokya', 'yerel', 'bölge'],
+    response: "Merkezimiz Nevşehir'de bulunmakla birlikte, Kapadokya'nın yaratıcı atmosferinden ilham alarak tüm Türkiye'ye ve global müşterilere hizmet veriyoruz. Dijital dünyada sınır tanımıyoruz."
+  },
+  tech: {
+    keywords: ['teknoloji', 'react', 'next', 'node', 'yazılım dili', 'altyapı'],
+    response: "Projelerimizde endüstri standardı olan en güncel teknolojileri kullanıyoruz: React, Next.js, Node.js, TypeScript, MongoDB ve Cloud altyapıları. Bu sayede projeleriniz her zaman hızlı, güvenli ve ölçeklenebilir olur."
+  },
+  default: {
+    response: "Anladım. Bu konu hakkında daha detaylı bilgi verebilmem veya size özel bir çözüm sunabilmemiz için iletişim bilgilerinizi bırakabilir veya doğrudan **info@hmzsolutions.com** adresine yazabilirsiniz. Uzman ekibimiz konuyu inceleyip size dönüş yapacaktır."
+  }
+}
+
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentAgent, setCurrentAgent] = useState<Agent | null>(null)
 
-  // World-Class Corporate Agents
+  // World-Class Corporate Identity
   const agents: { [key: string]: Agent } = {
     default: {
-      id: 'hamza',
-      name: 'Hamza',
-      title: 'Senior Solutions Architect',
-      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format&q=80',
+      id: 'hmz',
+      name: 'HMZ Solutions',
+      title: 'Digital Concierge',
+      avatar: '', // No personal avatar
       greeting: 'HMZ Solutions Digital Concierge servisine hoş geldiniz. İşletmenizin dijital altyapısını global ölçekte nasıl güçlendirebileceğimizi konuşmak için buradayım.'
     }
   }
 
   const [messages, setMessages] = useState<Message[]>([])
   const [inputText, setInputText] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -70,27 +113,76 @@ const Chatbot = () => {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages])
+  }, [messages, isTyping])
+
+  const generateResponse = (input: string): string => {
+    const lowerInput = input.toLowerCase()
+
+    // 1. Check Greetings
+    if (knowledgeBase.greetings.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.greetings.responses[Math.floor(Math.random() * knowledgeBase.greetings.responses.length)]
+    }
+
+    // 2. Check Services
+    if (knowledgeBase.services.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.services.response
+    }
+
+    // 3. Check Contact
+    if (knowledgeBase.contact.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.contact.response
+    }
+
+    // 4. Check About
+    if (knowledgeBase.about.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.about.response
+    }
+
+    // 5. Check Pricing
+    if (knowledgeBase.pricing.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.pricing.response
+    }
+
+    // 6. Check Location
+    if (knowledgeBase.location.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.location.response
+    }
+
+    // 7. Check Tech
+    if (knowledgeBase.tech.keywords.some(k => lowerInput.includes(k))) {
+      return knowledgeBase.tech.response
+    }
+
+    // Default Fallback
+    return knowledgeBase.default.response
+  }
 
   const handleSendMessage = async (e?: React.FormEvent) => {
     e?.preventDefault()
     if (!inputText.trim()) return
 
+    const userText = inputText
     const userMsg: Message = {
       id: Date.now().toString(),
-      text: inputText,
+      text: userText,
       isBot: false,
       timestamp: new Date()
     }
 
     setMessages(prev => [...prev, userMsg])
     setInputText('')
+    setIsTyping(true)
 
-    // Simulate Corporate AI Response
+    // Analyze intent and generate response
+    const responseText = generateResponse(userText)
+
+    // Calculate realistic typing delay based on response length (min 1s, max 3s)
+    const typingDelay = Math.min(Math.max(responseText.length * 20, 1000), 3000)
+
     setTimeout(() => {
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
-        text: "Mesajınız iletildi. Projenizin detaylarını analiz ederek size en stratejik yol haritasını sunmak üzere, uzman ekibimiz en kısa sürede dönüş sağlayacaktır.",
+        text: responseText,
         isBot: true,
         timestamp: new Date(),
         agentName: currentAgent?.name,
@@ -98,7 +190,8 @@ const Chatbot = () => {
         agentAvatar: currentAgent?.avatar
       }
       setMessages(prev => [...prev, botMsg])
-    }, 1500)
+      setIsTyping(false)
+    }, typingDelay)
   }
 
   return (
@@ -164,38 +257,30 @@ const Chatbot = () => {
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed right-0 top-0 bottom-0 sm:top-auto sm:bottom-6 sm:right-6 z-50 w-full sm:w-[400px] sm:max-h-[700px] sm:rounded-3xl bg-[#0a0a0a] border-l sm:border border-white/10 shadow-2xl flex flex-col overflow-hidden"
             >
-              {/* Header: Executive Profile */}
-              <div className="relative p-6 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
-                <div className="absolute top-4 right-4">
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
-                  >
-                    <XMarkIcon className="w-6 h-6" />
-                  </button>
-                </div>
-
+              {/* Header: Corporate Brand */}
+              <div className="relative p-6 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="relative w-16 h-16">
-                    <div className="absolute inset-0 bg-[#AF9C64] rounded-full blur-md opacity-20" />
-                    <Image
-                      src={currentAgent?.avatar || ''}
-                      alt="Agent"
-                      width={64}
-                      height={64}
-                      className="rounded-full object-cover border border-white/20 relative z-10"
-                    />
-                    <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full z-20" />
+                  {/* Modern Brand Icon */}
+                  <div className="relative w-12 h-12 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl overflow-hidden group">
+                    <div className="absolute inset-0 bg-[#AF9C64] opacity-0 group-hover:opacity-20 transition-opacity" />
+                    <SparklesIcon className="w-6 h-6 text-[#AF9C64]" />
                   </div>
+
                   <div>
-                    <h3 className="text-lg font-light text-white tracking-wide">{currentAgent?.name}</h3>
-                    <p className="text-[#AF9C64] text-xs uppercase tracking-widest font-medium">{currentAgent?.title}</p>
-                    <div className="flex items-center gap-1 mt-1">
+                    <h3 className="text-lg font-medium text-white tracking-wide">HMZ Solutions</h3>
+                    <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                      <span className="text-gray-500 text-xs">Çevrimiçi</span>
+                      <p className="text-[#AF9C64] text-[10px] uppercase tracking-widest font-bold">Kurumsal Asistan</p>
                     </div>
                   </div>
                 </div>
+
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+                >
+                  <XMarkIcon className="w-6 h-6" />
+                </button>
               </div>
 
               {/* Chat Area */}
@@ -225,6 +310,22 @@ const Chatbot = () => {
                     </div>
                   </motion.div>
                 ))}
+                {/* Typing Indicator */}
+                {isTyping && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex justify-start"
+                  >
+                    <div className="mr-auto">
+                      <div className="bg-white/5 border border-white/10 p-4 rounded-2xl rounded-tl-none flex space-x-1">
+                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
                 <div ref={messagesEndRef} />
               </div>
 
