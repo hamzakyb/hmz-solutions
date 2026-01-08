@@ -75,7 +75,31 @@ const SettingsEditor: React.FC = () => {
             const response = await fetch('/api/content?section=settings');
             const result = await response.json();
             if (result.content?.data) {
-                setData(result.content.data);
+                // Deep merge to ensure new fields (like googleMapsUrl) are present even if DB data is old
+                setData(prev => ({
+                    ...prev,
+                    ...result.content.data,
+                    contactInfo: {
+                        ...prev.contactInfo,
+                        ...(result.content.data.contactInfo || {})
+                    },
+                    socialLinks: {
+                        ...prev.socialLinks,
+                        ...(result.content.data.socialLinks || {})
+                    },
+                    navigation: {
+                        ...prev.navigation,
+                        ...(result.content.data.navigation || {})
+                    },
+                    whatsapp: {
+                        ...prev.whatsapp,
+                        ...(result.content.data.whatsapp || {})
+                    },
+                    chatbot: {
+                        ...prev.chatbot,
+                        ...(result.content.data.chatbot || {})
+                    }
+                }));
             }
         } catch (error) {
             console.error('Failed to fetch settings:', error);

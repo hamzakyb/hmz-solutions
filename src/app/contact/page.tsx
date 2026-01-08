@@ -236,25 +236,24 @@ export default function ContactPage() {
                     </div>
 
                     {/* Google Map Section */}
-                    {settings?.contactInfo?.googleMapsUrl && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="w-full h-[400px] rounded-3xl overflow-hidden border border-white/5 shadow-2xl relative"
-                        >
-                            <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Loading state placeholder */}
-                            <iframe
-                                src={settings.contactInfo.googleMapsUrl.match(/src="([^"]+)"/)?.[1] || settings.contactInfo.googleMapsUrl}
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                                className="relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
-                            ></iframe>
-                        </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="w-full h-[400px] rounded-3xl overflow-hidden border border-white/5 shadow-2xl relative"
+                    >
+                        <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Loading state placeholder */}
+                        <iframe
+                            src={(settings?.contactInfo?.googleMapsUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12485.667576596144!2d34.7126!3d38.6244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x152a65a6390141f1%3A0x6c63b7e6d0590a0!2sNev%C5%9Fehir!5e0!3m2!1str!2str!4v1684321234567!5m2!1str!2str').match(/src="([^"]+)"/)?.[1] || (settings?.contactInfo?.googleMapsUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12485.667576596144!2d34.7126!3d38.6244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x152a65a6390141f1%3A0x6c63b7e6d0590a0!2sNev%C5%9Fehir!5e0!3m2!1str!2str!4v1684321234567!5m2!1str!2str')}
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0 }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
+                        ></iframe>
+                    </motion.div>
                     )}
                 </div>
             </section>
