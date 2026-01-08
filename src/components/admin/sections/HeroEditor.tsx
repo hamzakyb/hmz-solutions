@@ -48,7 +48,7 @@ const HeroEditor: React.FC = () => {
                         title1: 'Sınırları Aşan',
                         title2: 'Teknoloji',
                         subtitle: 'İşletmenizi global standartlara taşıyan, ölçeklenebilir ve güvenli dijital altyapılar kuruyoruz.',
-                        image: '/hero-slides/hero-globe.png',
+                        image: '/hero-slides/hero-globe.png?v=2',
                         ctaText: 'Keşfedin',
                         ctaLink: '#services'
                     },
@@ -58,7 +58,7 @@ const HeroEditor: React.FC = () => {
                         title1: 'Geleceği',
                         title2: 'Tasarlıyoruz',
                         subtitle: 'İş süreçlerinizi yapay zeka ve veri odaklı çözümlerle optimize ederek verimliliğinizi maksimize edin.',
-                        image: '/hero-slides/hero-ai.png',
+                        image: '/hero-slides/hero-ai.png?v=2',
                         ctaText: 'AI Çözümleri',
                         ctaLink: '#services'
                     },
@@ -68,7 +68,7 @@ const HeroEditor: React.FC = () => {
                         title1: 'Kodun',
                         title2: 'Sanatı',
                         subtitle: 'Modern, hızlı ve kullanıcı odaklı yazılım çözümleriyle markanızın dijital varlığını güçlendiriyoruz.',
-                        image: '/hero-slides/hero-growth.png',
+                        image: '/hero-slides/hero-growth.png?v=2',
                         ctaText: 'Proje Başlatın',
                         ctaLink: '#contact'
                     }
