@@ -15,11 +15,11 @@ interface HeroData {
 
 const HeroEditor: React.FC = () => {
     const [data, setData] = useState<HeroData>({
-        badge: 'Premium Dijital Çözümler',
-        title1: 'Düşüncenin',
-        title2: 'Ötesinde',
-        subtitle: 'Nevşehir ve Kapadokya bölgesinden tüm Türkiye\'ye...',
-        cta1Text: 'Projeye Başla',
+        badge: 'HMZ Solutions • Nevşehir',
+        title1: 'Global',
+        title2: 'Dijital Çözümler',
+        subtitle: 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz. Nevşehir merkezli ekibimizle, markanız için ölçeklenebilir ve sürdürülebilir bir dijital altyapı kuruyoruz.',
+        cta1Text: 'Teklif Alın',
         cta2Text: 'Portföyü Keşfet'
     });
     const [loading, setLoading] = useState(true);

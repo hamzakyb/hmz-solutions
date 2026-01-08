@@ -36,7 +36,7 @@ const SettingsEditor: React.FC = () => {
     const [data, setData] = useState<SiteSettings>({
         siteTitle: 'HMZ Solutions | Nevşehir Yazılım Şirketi',
         metaDescription: 'Nevşehir\'in lider yazılım şirketi HMZ Solutions...',
-        footerDescription: 'Vizyonları dijital gerçekliklere dönüştürmek için en çağdaş teknolojiyi...',
+        footerDescription: 'Yenilikçi vizyon, profesyonel uygulama. Dijital dünyada ölçülebilir başarı hedefleyen markalar için güvenilir teknoloji ortağı.',
         socialLinks: {
             github: '#',
             linkedin: '#',
@@ -57,7 +57,7 @@ const SettingsEditor: React.FC = () => {
             welcomeMessage: 'Merhaba! HMZ Solutions hizmetleri hakkında bilgi almak istiyorum.'
         },
         chatbot: {
-            greeting: 'Merhaba! 👋 Ben Hamza, HMZ Solutions kurucusu ve dijital çözüm uzmanınızım. Projelerinizi hayata geçirmek için buradayım. Size nasıl yardımcı olabilirim?'
+            greeting: 'HMZ Solutions Digital Concierge servisine hoş geldiniz. İşletmenizin dijital altyapısını global ölçekte nasıl güçlendirebileceğimizi konuşmak için buradayım.'
         }
     });
     const [loading, setLoading] = useState(true);

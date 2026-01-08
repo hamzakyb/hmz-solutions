@@ -28,15 +28,17 @@ interface AboutData {
 
 const AboutEditor: React.FC = () => {
     const [data, setData] = useState<AboutData>({
-        badge: 'Hakkımızda',
-        title1: 'Yenilikçi',
-        title2: 'Dijital Çözümler',
-        description: 'Yaratıcı yaklaşımımız ve teknolojiye olan tutkumuzla...',
-        philosophy: 'Mükemmel dijital deneyimler, sadece teknolojiyle değil...',
+        badge: 'Stratejik Çözüm Ortağınız',
+        title1: 'Stratejik',
+        title2: 'Çözüm Ortağınız',
+        description: 'HMZ Solutions, işletmelerin dijital dönüşüm süreçlerine liderlik eden profesyonel bir teknoloji şirketidir. Karmaşık iş problemlerini, kullanıcı odaklı tasarım ve güçlü yazılım mimarisiyle çözüyoruz. Amacımız, markanızı dijital dünyada güvenilir ve lider bir konuma taşımaktır.',
+        philosophy: 'Başarı tesadüf değildir; doğru strateji ve kusursuz uygulamanın sonucudur.',
         mainImage: '',
         stats: [
-            { number: 'Yenilikçi', label: 'Yaklaşımlar' },
-            { number: 'Özgün', label: 'Çözümler' }
+            { number: 'Profesyonel', label: 'Yaklaşım' },
+            { number: 'Yüksek', label: 'Teknoloji' },
+            { number: 'Sürdürülebilir', label: 'Büyüme' },
+            { number: 'Garantili', label: 'Sonuç' }
         ],
         values: [
             { title: 'Stratejik Yaklaşım', description: 'Her projeye özel stratejiler...' }

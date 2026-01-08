@@ -133,7 +133,7 @@ const Chatbot = () => {
               </div>
 
               {/* Vertical Text */}
-              <span className="text-xs text-white/80 font-medium tracking-[0.2em] uppercase writing-vertical-rl rotate-180 group-hover:text-white transition-colors">
+              <span className="text-xs text-white/80 font-medium tracking-[0.2em] uppercase writing-vertical-rl group-hover:text-white transition-colors">
                 İletişim
               </span>
             </div>
@@ -214,8 +214,8 @@ const Chatbot = () => {
                         </span>
                       )}
                       <div className={`p-4 rounded-2xl text-sm leading-relaxed ${msg.isBot
-                          ? 'bg-white/5 border border-white/10 text-gray-300 rounded-tl-none'
-                          : 'bg-[#AF9C64] text-black font-medium rounded-tr-none'
+                        ? 'bg-white/5 border border-white/10 text-gray-300 rounded-tl-none'
+                        : 'bg-[#AF9C64] text-black font-medium rounded-tr-none'
                         }`}>
                         {msg.text}
                       </div>
