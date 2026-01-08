@@ -246,7 +246,7 @@ const Chatbot = () => {
               </div>
 
               {/* Vertical Text */}
-              <span className="text-[12px] text-white/80 font-medium tracking-[0.3em] uppercase writing-vertical-rl group-hover:text-white transition-colors whitespace-nowrap">
+              <span className="text-[12px] text-white/80 font-medium tracking-[0.3em] uppercase [writing-mode:vertical-rl] group-hover:text-white transition-colors whitespace-nowrap">
                 İletişim
               </span>
             </div>
