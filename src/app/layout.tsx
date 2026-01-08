@@ -14,40 +14,32 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://hmzsolutions.com'),
   title: {
-    default: "Nevşehir Web Tasarım & Yazılım Şirketi | HMZ Solutions",
-    template: "%s | HMZ Solutions Nevşehir Yazılım"
+    default: "HMZ Solutions | Global Teknoloji ve Yazılım Şirketi - Nevşehir",
+    template: "%s | HMZ Solutions Teknoloji"
   },
-  description: "Nevşehir'un lider yazılım şirketi HMZ Solutions. Profesyonel web tasarım, mobil uygulama, SEO ve e-ticaret çözümleriyle işletmenizi dijitalde zirveye taşıyoruz. Hemen teklif alın!",
+  description: "İşletmenizi geleceğe taşıyan profesyonel yazılım çözümleri. Web Tasarım, Mobil Uygulama, Yapay Zeka, Bulut Sistemleri ve E-Ticaret ile dijital dönüşümünüze liderlik ediyoruz. Hemen keşfedin!",
   keywords: [
     "nevşehir yazılım şirketi",
-    "kapadokya web tasarım",
-    "nevşehir dijital çözümler",
-    "avu015fanos yazılım",
-    "göreme web sitesi",
-    "üchisar mobil uygulama",
-    "ortahisar e-ticaret",
-    "mustafapaşa web tasarım",
-    "ak tepe yazılım",
-    "kayseri yazılım",
-    "niğde web tasarım",
-    "kırşehir dijital pazarlama",
-    "yozgat e-ticaret",
-    "ankara yazılım geliştirme",
-    "türkiye yazılım şirketi",
-    "web tasarım türkiye",
+    "profesyonel web tasarım",
     "mobil uygulama geliştirme",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "dijital dönüşüm",
-    "e-ticaret",
-    "kurumsal yazılım",
-    "seo nevşehir",
-    "dijital pazarlama kapadokya"
+    "yapay zeka çözümleri",
+    "bulut bilişim sistemleri",
+    "e-ticaret altyapısı",
+    "kurumsal seo danışmanlığı",
+    "ui/ux tasarım ajansı",
+    "özel yazılım geliştirme",
+    "devops hizmetleri",
+    "kapadokya dijital ajans",
+    "türkiye yazılım ihracatı",
+    "React Native",
+    "Next.js Uzmanı",
+    "Full Stack Development",
+    "SaaS Geliştirme",
+    "dijital pazarlama stratejileri"
   ],
-  authors: [{ name: "HMZ Solutions Nevşehir" }],
+  authors: [{ name: "HMZ Solutions Team" }],
   creator: "HMZ Solutions",
-  publisher: "HMZ Solutions Nevşehir Yazılım Şirketi",
+  publisher: "HMZ Solutions Technology Inc.",
   formatDetection: {
     telephone: true,
     email: true,
@@ -57,6 +49,7 @@ export const metadata: Metadata = {
     canonical: 'https://hmzsolutions.com',
     languages: {
       'tr-TR': 'https://hmzsolutions.com',
+      'en-US': 'https://hmzsolutions.com/en',
     },
   },
   robots: {
@@ -75,23 +68,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'tr_TR',
     url: 'https://hmzsolutions.com',
-    siteName: 'HMZ Solutions - Nevşehir Yazılım Şirketi',
-    title: 'Nevşehir Web Tasarım & Yazılım Şirketi | HMZ Solutions',
-    description: 'Nevşehir\'in en profesyonel yazılım şirketi HMZ Solutions. Web tasarım, mobil uygulama, SEO ve e-ticaret çözümlerimizle işletmenizi dijitalde 1. sıraya taşıyoruz.',
+    siteName: 'HMZ Solutions - Global Teknoloji Ortağınız',
+    title: 'HMZ Solutions | Geleceğin Teknolojilerini Bugünden Kullanın',
+    description: 'Web, Mobil, AI ve Bulut çözümleriyle işinizi dijitalleştirin. Nevşehir merkezli global yazılım şirketi.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'HMZ Solutions - Nevşehir Yazılım Şirketi | Web Sitesi ve Mobil Uygulama Geliştirme',
+        alt: 'HMZ Solutions - Teknoloji ve Yazılım Çözümleri',
         type: 'image/jpeg',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nevşehir Web Tasarım & Yazılım Şirketi | HMZ Solutions',
-    description: 'Nevşehir\'in lider yazılım şirketi HMZ Solutions. Web tasarım, mobil uygulama ve SEO çözümleriyle işletmenizi büyütün.',
+    title: 'HMZ Solutions | Teknoloji ve İnovasyon',
+    description: 'Yenilikçi yazılım çözümleri ile işinizi büyütün. Web, Mobil, AI ve daha fazlası.',
     images: ['/og-image.jpg'],
     creator: '@hmzsolutions',
   },
@@ -105,6 +98,7 @@ export const metadata: Metadata = {
     'geo.position': '38.6244;34.7239',
     'ICBM': '38.6244, 34.7239',
   },
+  category: 'technology',
 };
 
 export default function RootLayout({
@@ -118,11 +112,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <meta name="theme-color" content="#007aff" />
+        <meta name="theme-color" content="#black" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
         {/* Structured Data - LocalBusiness Schema */}
@@ -131,11 +123,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
+              "@type": "ProfessionalService",
               "@id": "https://hmzsolutions.com/#organization",
-              "name": "HMZ Solutions - Nevşehir Web Tasarım & Yazılım",
-              "alternateName": "HMZ Yazılım Nevşehir",
-              "description": "Nevşehir'in lider yazılım şirketi. Web tasarım, mobil uygulama geliştirme, e-ticaret ve SEO çözümleri sunan profesyonel dijital ajans.",
+              "name": "HMZ Solutions - Teknoloji ve Yazılım",
+              "alternateName": "HMZ Solutions",
+              "description": "Nevşehir merkezli global yazılım ve teknoloji şirketi. Web, mobil, yapay zeka ve bulut çözümleri sunuyoruz.",
               "url": "https://hmzsolutions.com",
               "logo": "https://hmzsolutions.com/logo.png",
               "image": "https://hmzsolutions.com/og-image.jpg",
@@ -154,33 +146,8 @@ export default function RootLayout({
                 "latitude": "38.6244",
                 "longitude": "34.7239"
               },
-              "areaServed": [
-                {
-                  "@type": "City",
-                  "name": "Nevşehir"
-                },
-                {
-                  "@type": "City",
-                  "name": "Avanos"
-                },
-                {
-                  "@type": "City",
-                  "name": "Ürgüp"
-                },
-                {
-                  "@type": "City",
-                  "name": "Göreme"
-                },
-                {
-                  "@type": "State",
-                  "name": "Kapadokya"
-                },
-                {
-                  "@type": "Country",
-                  "name": "Türkiye"
-                }
-              ],
-              "priceRange": "$$",
+              "areaServed": ["Türkiye", "Global"],
+              "priceRange": "$$$",
               "openingHoursSpecification": [
                 {
                   "@type": "OpeningHoursSpecification",
@@ -196,46 +163,54 @@ export default function RootLayout({
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "Yazılım Hizmetleri",
+                "name": "Dijital Hizmetler",
                 "itemListElement": [
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Web Sitesi Tasarımı",
-                      "description": "Profesyonel, modern ve SEO uyumlu web sitesi tasarımı"
+                      "name": "Web Geliştirme",
+                      "description": "Modern, hızlı ve SEO uyumlu web uygulamaları."
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Mobil Uygulama Geliştirme",
-                      "description": "iOS ve Android mobil uygulama geliştirme hizmetleri"
+                      "name": "Mobil Uygulama",
+                      "description": "iOS ve Android için native ve cross-platform çözümler."
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "E-Ticaret Çözümleri",
-                      "description": "Kapsamlı e-ticaret platformları ve online satış sistemleri"
+                      "name": "Yapay Zeka Çözümleri",
+                      "description": "İş süreçleri için AI entegrasyonu ve veri analitiği."
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Kurumsal Yazılım",
-                      "description": "Özel kurumsal yazılım ve ERP çözümleri"
+                      "name": "E-Ticaret Sistemleri",
+                      "description": "Ölçeklenebilir, güvenli B2B ve B2C e-ticaret altyapıları."
                     }
                   },
                   {
                     "@type": "Offer",
                     "itemOffered": {
                       "@type": "Service",
-                      "name": "Dijital Pazarlama & SEO",
-                      "description": "SEO, sosyal medya yönetimi ve dijital pazarlama hizmetleri"
+                      "name": "UI/UX Tasarım",
+                      "description": "Kullanıcı odaklı arayüz ve deneyim tasarımı."
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Bulut & DevOps",
+                      "description": "AWS, Azure ve Google Cloud üzerinde ölçeklenebilir mimariler."
                     }
                   }
                 ]
@@ -252,7 +227,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "HMZ Solutions",
-              "legalName": "HMZ Solutions Yazılım Şirketi",
+              "legalName": "HMZ Solutions Teknoloji A.Ş.",
               "url": "https://hmzsolutions.com",
               "logo": "https://hmzsolutions.com/logo.png",
               "foundingDate": "2020",
@@ -262,45 +237,18 @@ export default function RootLayout({
                   "name": "Hamza Koybasi"
                 }
               ],
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Nevşehir Merkez",
-                "addressLocality": "Nevşehir",
-                "addressRegion": "Nevşehir",
-                "postalCode": "50000",
-                "addressCountry": "TR"
-              },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+90-XXX-XXX-XXXX",
-                "contactType": "customer service",
-                "areaServed": "TR",
+                "telephone": "+90-505-095-9950",
+                "contactType": "sales",
+                "areaServed": ["TR", "US", "EU"],
                 "availableLanguage": ["Turkish", "English"]
               },
               "sameAs": [
                 "https://www.linkedin.com/company/hmzsolutions",
                 "https://twitter.com/hmzsolutions",
-                "https://www.instagram.com/hmzsolutions"
+                "https://www.instagram.com/hmz_solutions"
               ]
-            })
-          }}
-        />
-
-        {/* Structured Data - WebSite Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "HMZ Solutions",
-              "alternateName": "Nevşehir Yazılım Şirketi",
-              "url": "https://hmzsolutions.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://hmzsolutions.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
             })
           }}
         />
@@ -328,8 +276,8 @@ export default function RootLayout({
                 {
                   "@type": "ListItem",
                   "position": 3,
-                  "name": "Hakkımızda",
-                  "item": "https://hmzsolutions.com/#about"
+                  "name": "Blog",
+                  "item": "https://hmzsolutions.com/blog"
                 },
                 {
                   "@type": "ListItem",
