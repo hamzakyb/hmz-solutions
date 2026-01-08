@@ -19,6 +19,7 @@ export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
     const [contactContent, setContactContent] = useState<any>(null)
+    const [settings, setSettings] = useState<any>(null)
 
     useEffect(() => {
         // Fetch Settings
@@ -51,7 +52,33 @@ export default function ContactPage() {
         fetchContactContent()
     }, [])
 
-    // ... handleSubmit ...
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setIsSubmitting(true)
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formState),
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                setToast({ message: 'Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağız.', type: 'success' })
+                setFormState({ name: '', email: '', company: '', message: '' })
+            } else {
+                setToast({ message: data.error || 'Mesaj gönderilemedi.', type: 'error' })
+            }
+        } catch {
+            setToast({ message: 'Bir bağlantı hatası oluştu.', type: 'error' })
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
 
     const title = contactContent?.title || 'Bizimle Geleceği Kurun'
     const subtitle = contactContent?.subtitle || 'Projenizi dinlemek ve size özel çözümler üretmek için sabırsızlanıyoruz. Teknoloji ortağınız olarak yanınızdayız.'
