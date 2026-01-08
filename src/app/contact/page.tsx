@@ -82,6 +82,11 @@ export default function ContactPage() {
 
     const title = contactContent?.title || 'Bizimle Geleceği Kurun'
     const subtitle = contactContent?.subtitle || 'Projenizi dinlemek ve size özel çözümler üretmek için sabırsızlanıyoruz. Teknoloji ortağınız olarak yanınızdayız.'
+    const infoHeaders = contactContent?.infoHeaders || { address: 'Genel Merkez', email: 'E-posta', phone: 'Telefon' }
+    const formLabels = contactContent?.form?.labels || { name: 'Ad Soyad', email: 'E-posta', company: 'Şirket (Opsiyonel)', message: 'Mesajınız' }
+    const formPlaceholders = contactContent?.form?.placeholders || { name: 'Adınız Soyadınız', email: 'ornek@sirket.com', company: 'Şirket Adı', message: 'Projenizden bahsedin...' }
+    const formButtons = contactContent?.form?.button || { submit: 'Mesajı Gönder', submitting: 'Gönderiliyor...' }
+
     const titleFirstWord = title.split(' ')[0]
     const titleRest = title.split(' ').slice(1).join(' ')
 
@@ -128,7 +133,7 @@ export default function ContactPage() {
                                         <MapPinIcon className="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-colors" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-bold text-lg mb-1">Genel Merkez</h3>
+                                        <h3 className="text-white font-bold text-lg mb-1">{infoHeaders.address}</h3>
                                         <p className="text-gray-500 font-light leading-relaxed">
                                             {settings?.contactInfo?.address || 'Bekdik, Millet Cd. No:38, 50040\nNevşehir Merkez/Nevşehir'}
                                         </p>
@@ -140,7 +145,7 @@ export default function ContactPage() {
                                         <EnvelopeIcon className="w-6 h-6 text-gray-400 group-hover:text-purple-400 transition-colors" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-bold text-lg mb-1">E-posta</h3>
+                                        <h3 className="text-white font-bold text-lg mb-1">{infoHeaders.email}</h3>
                                         <a href={`mailto:${settings?.contactInfo?.email || 'info@hmzsolutions.com'}`} className="text-gray-500 hover:text-white transition-colors text-lg">
                                             {settings?.contactInfo?.email || 'info@hmzsolutions.com'}
                                         </a>
@@ -152,7 +157,7 @@ export default function ContactPage() {
                                         <PhoneIcon className="w-6 h-6 text-gray-400 group-hover:text-green-400 transition-colors" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-bold text-lg mb-1">Telefon</h3>
+                                        <h3 className="text-white font-bold text-lg mb-1">{infoHeaders.phone}</h3>
                                         <a href={`tel:${settings?.contactInfo?.phone || '+905050959950'}`} className="text-gray-500 hover:text-white transition-colors text-lg">
                                             {settings?.contactInfo?.phone || '+90 (505) 095 99 50'}
                                         </a>
@@ -173,7 +178,7 @@ export default function ContactPage() {
 
                             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                                 <div className="space-y-2">
-                                    <label htmlFor="name" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">Ad Soyad</label>
+                                    <label htmlFor="name" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">{formLabels.name}</label>
                                     <input
                                         type="text"
                                         id="name"
@@ -181,12 +186,12 @@ export default function ContactPage() {
                                         value={formState.name}
                                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                                         className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500/50 transition-colors"
-                                        placeholder="Adınız Soyadınız"
+                                        placeholder={formPlaceholders.name}
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="email" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">E-posta</label>
+                                    <label htmlFor="email" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">{formLabels.email}</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -194,24 +199,24 @@ export default function ContactPage() {
                                         value={formState.email}
                                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                                         className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500/50 transition-colors"
-                                        placeholder="ornek@sirket.com"
+                                        placeholder={formPlaceholders.email}
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="company" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">Şirket (Opsiyonel)</label>
+                                    <label htmlFor="company" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">{formLabels.company}</label>
                                     <input
                                         type="text"
                                         id="company"
                                         value={formState.company}
                                         onChange={(e) => setFormState({ ...formState, company: e.target.value })}
                                         className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500/50 transition-colors"
-                                        placeholder="Şirket Adı"
+                                        placeholder={formPlaceholders.company}
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="message" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">Mesajınız</label>
+                                    <label htmlFor="message" className="text-xs font-bold text-white/40 uppercase tracking-widest pl-1">{formLabels.message}</label>
                                     <textarea
                                         id="message"
                                         required
@@ -219,7 +224,7 @@ export default function ContactPage() {
                                         value={formState.message}
                                         onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                                         className="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
-                                        placeholder="Projenizden bahsedin..."
+                                        placeholder={formPlaceholders.message}
                                     />
                                 </div>
 
@@ -229,7 +234,7 @@ export default function ContactPage() {
                                     className="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-gray-200 transition-all transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 mt-4"
                                 >
                                     {isSubmitting && <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />}
-                                    <span>{isSubmitting ? 'Gönderiliyor...' : 'Mesajı Gönder'}</span>
+                                    <span>{isSubmitting ? formButtons.submitting : formButtons.submit}</span>
                                 </button>
                             </form>
                         </motion.div>
