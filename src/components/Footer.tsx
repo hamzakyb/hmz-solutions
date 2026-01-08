@@ -139,9 +139,7 @@ const Footer = () => {
               boxShadow: '0 4px 16px rgba(175, 160, 98, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)'
             }}
           >
-            <SparklesIcon className="w-4 sm:w-5 h-4 sm:h-5 animate-pulse" style={{ color: 'rgb(175, 160, 98)' }} />
             <span className="text-gray-800 font-medium text-sm sm:text-base">İletişimde Kalın</span>
-            <StarIcon className="w-3 sm:w-4 h-3 sm:h-4" style={{ color: 'rgb(195, 180, 118)' }} />
           </motion.div>
 
           <motion.h2
@@ -305,7 +303,6 @@ const Footer = () => {
                         href={link.href}
                         className="group/link flex items-start space-x-3 text-gray-600 hover:text-gray-900 transition-colors duration-300"
                       >
-                        <PaperAirplaneIcon className="w-4 h-4 mt-0.5 opacity-0 group-hover/link:opacity-100 transition-opacity duration-300" />
                         <div>
                           <div className="font-medium">{link.label}</div>
                           <div className="text-xs text-gray-500">{link.description}</div>
@@ -437,9 +434,7 @@ const Footer = () => {
             className="text-center mt-8"
           >
             <div className="inline-flex items-center space-x-2 text-gray-500 text-xs">
-              <StarIcon className="w-3 h-3" />
               <span>Yenilikçi Teknoloji Çözümleri</span>
-              <StarIcon className="w-3 h-3" />
             </div>
           </motion.div>
         </motion.div>
