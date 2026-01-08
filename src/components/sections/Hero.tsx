@@ -1,31 +1,61 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '../ui/Button'
-import { ArrowRightIcon } from '@heroicons/react/24/outline'
-import { useEffect, useState } from 'react'
+import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import { useEffect, useState, useRef } from 'react'
+
+interface HeroSlide {
+  id: string;
+  badge: string;
+  title1: string;
+  title2: string;
+  subtitle: string;
+  image?: string;
+  ctaText: string;
+  ctaLink: string;
+}
 
 const Hero = () => {
-  const [content, setContent] = useState({
-    title1: 'Global',
-    title2: 'Dijital Çözümler',
-    subtitle: 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz. Nevşehir merkezli ekibimizle, markanız için ölçeklenebilir ve sürdürülebilir bir dijital altyapı kuruyoruz.',
-    ctaText: 'Teklif Alın'
-  })
+  const [slides, setSlides] = useState<HeroSlide[]>([])
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
         const response = await fetch('/api/content?section=hero')
         const result = await response.json()
-        if (result.content?.data) {
-          setContent({
-            title1: result.content.data.title1 || 'Global',
-            title2: result.content.data.title2 || 'Dijital Çözümler',
-            subtitle: result.content.data.subtitle || 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz. Nevşehir merkezli ekibimizle, markanız için ölçeklenebilir ve sürdürülebilir bir dijital altyapı kuruyoruz.',
-            ctaText: result.content.data.cta1Text || 'Teklif Alın'
-          })
+        const data = result.content?.data
+
+        if (data?.slides && Array.isArray(data.slides) && data.slides.length > 0) {
+          setSlides(data.slides)
+        } else if (data) {
+          // Fallback for legacy data
+          setSlides([{
+            id: 'legacy',
+            badge: data.badge || 'HMZ Solutions • Nevşehir',
+            title1: data.title1 || 'Global',
+            title2: data.title2 || 'Dijital Çözümler',
+            subtitle: data.subtitle || 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz.',
+            ctaText: data.cta1Text || 'Teklif Alın',
+            ctaLink: '#contact'
+          }])
+        } else {
+          // Default initial state
+          setSlides([{
+            id: 'default',
+            badge: 'HMZ Solutions',
+            title1: 'Dijital',
+            title2: 'Gelecek',
+            subtitle: 'Henüz içerik eklenmedi.',
+            ctaText: 'İletişime Geç',
+            ctaLink: '#contact'
+          }])
         }
+        setIsLoaded(true)
       } catch (error) {
         console.error('Failed to fetch hero content:', error)
       }
@@ -33,74 +63,203 @@ const Hero = () => {
     fetchContent()
   }, [])
 
+  useEffect(() => {
+    if (isPlaying && slides.length > 1) {
+      timerRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length)
+      }, 5000)
+    }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
+  }, [isPlaying, slides.length])
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    resetTimer()
+  }
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    resetTimer()
+  }
+
+  const resetTimer = () => {
+    if (isPlaying && slides.length > 1) {
+      if (timerRef.current) clearInterval(timerRef.current)
+      timerRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length)
+      }, 5000)
+    }
+  }
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  if (!isLoaded || slides.length === 0) return (
+    <div className="h-screen bg-[#0a0a0a] flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-gold-500/30 border-t-gold-500 rounded-full animate-spin" />
+    </div>
+  )
+
+  const slide = slides[currentSlide]
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-[#0a0a0a] overflow-hidden px-6">
-      {/* Abstract Background - CSS Only, No JS Overhead */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 to-black" />
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-20%] w-[600px] h-[600px] rounded-full bg-yellow-500/[0.02] blur-3xl pointer-events-none" />
-      </div>
+    <section className="relative h-screen flex items-center overflow-hidden bg-[#050505]">
+      {/* Dynamic Background */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={slide.id + '-bg'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 z-0"
+        >
+          {slide.image ? (
+            <>
+              <div className="absolute inset-0 bg-black/60 z-10" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={slide.image} alt={slide.title1} className="w-full h-full object-cover" />
+            </>
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-br from-neutral-950 via-[#0a0a0a] to-black" />
+              {/* Premium Golden Glows */}
+              <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-gold-400/[0.03] blur-[120px] pointer-events-none mix-blend-screen" />
+              <div className="absolute bottom-[-10%] left-[-20%] w-[600px] h-[600px] rounded-full bg-gold-600/[0.02] blur-[100px] pointer-events-none mix-blend-screen" />
+            </>
+          )}
+        </motion.div>
+      </AnimatePresence>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="flex flex-col items-start max-w-4xl">
-          {/* Minimalist Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-8 overflow-hidden"
-          >
-            <span className="inline-block py-1 px-3 border border-white/20 rounded-full text-xs font-medium tracking-widest text-white/60 uppercase">
-              HMZ Solutions • Nevşehir
-            </span>
-          </motion.div>
-
-          {/* Cinematic Typography */}
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter text-white leading-[0.9] mb-8">
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="block"
+      {/* Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 h-full flex flex-col justify-center">
+        <div className="flex flex-col items-start max-w-5xl">
+          {/* Animated Content */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.8, ease: "circOut" }}
+              className="space-y-8"
             >
-              {content.title1}
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="block text-white/50"
-            >
-              {content.title2}
-            </motion.span>
-          </h1>
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center space-x-2 overflow-hidden"
+              >
+                <div className="h-[1px] w-8 bg-gold-500/50" />
+                <span className="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">
+                  {slide.badge}
+                </span>
+              </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="text-lg md:text-xl text-white/60 max-w-xl font-light leading-relaxed mb-12"
-          >
-            {content.subtitle}
-          </motion.p>
+              {/* Cinematic Title */}
+              <div className="space-y-2">
+                <motion.h1
+                  className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-white leading-[0.9]"
+                >
+                  <span className="block">{slide.title1}</span>
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400">
+                    {slide.title2}
+                  </span>
+                </motion.h1>
+              </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <Button
-              size="lg"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group bg-white text-black hover:bg-neutral-200 border-0 rounded-full px-10 py-6 text-lg tracking-wide transition-all duration-300"
-            >
-              {content.ctaText}
-              <ArrowRightIcon className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-lg md:text-xl text-neutral-400 max-w-2xl font-light leading-relaxed pl-1"
+              >
+                {slide.subtitle}
+              </motion.p>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="pt-4"
+              >
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    if (slide.ctaLink.startsWith('#')) {
+                      document.getElementById(slide.ctaLink.substring(1))?.scrollIntoView({ behavior: 'smooth' })
+                    } else {
+                      window.open(slide.ctaLink, '_blank')
+                    }
+                  }}
+                  className="group bg-gold-500 hover:bg-gold-400 text-black border-0 rounded-full px-10 py-7 text-lg font-bold tracking-wide transition-all duration-300 shadow-[0_0_40px_-10px_rgba(212,175,55,0.3)] hover:shadow-[0_0_60px_-10px_rgba(212,175,55,0.5)] transform hover:-translate-y-1"
+                >
+                  {slide.ctaText}
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
+
+      {/* Slider Controls */}
+      {slides.length > 1 && (
+        <div className="absolute bottom-12 right-6 md:right-12 z-20 flex items-center space-x-6">
+          {/* Pagination Dots */}
+          <div className="flex items-center space-x-3">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => { setCurrentSlide(index); resetTimer(); }}
+                className={`h-1 transition-all duration-300 rounded-full ${currentSlide === index ? 'w-8 bg-gold-500' : 'w-2 bg-white/20 hover:bg-white/40'
+                  }`}
+              />
+            ))}
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={handlePrev}
+              className="p-3 rounded-full border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-white/60 hover:text-gold-400 transition-all backdrop-blur-sm"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={togglePlay}
+              className="p-3 rounded-full border border-white/10 hover:border-white/30 text-white/60 hover:text-white transition-all backdrop-blur-sm"
+            >
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={handleNext}
+              className="p-3 rounded-full border border-white/10 hover:border-gold-500/50 hover:bg-gold-500/10 text-white/60 hover:text-gold-400 transition-all backdrop-blur-sm"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Progress Bar */}
+      {slides.length > 1 && isPlaying && (
+        <div className="absolute bottom-0 left-0 h-1 bg-white/5 w-full">
+          <motion.div
+            key={currentSlide}
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 5, ease: "linear" }}
+            className="h-full bg-gold-500"
+          />
+        </div>
+      )}
     </section>
   )
 }
