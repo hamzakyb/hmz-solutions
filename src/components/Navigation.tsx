@@ -92,12 +92,12 @@ const Navigation = () => {
               className="flex items-center space-x-3 cursor-pointer group"
               onClick={() => handleNavClick('/', 'home', true)}
             >
-              <div className="relative w-8 h-8 md:w-10 md:h-10 opacity-90 transition-opacity group-hover:opacity-100">
+              <div className="relative w-8 h-8 md:w-10 md:h-10">
                 <Image
                   src={settings.navigation.logoImage}
                   alt="HMZ"
                   fill
-                  className="object-contain invert"
+                  className="object-contain"
                   priority
                 />
               </div>

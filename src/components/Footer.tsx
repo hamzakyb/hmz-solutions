@@ -68,12 +68,12 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-5 space-y-8 pr-0 lg:pr-12">
             <div className="flex items-center space-x-4">
-              <div className="relative w-12 h-12 grayscale opacity-90">
+              <div className="relative w-12 h-12">
                 <Image
                   src="/logo.png"
                   alt="HMZ Solutions"
                   fill
-                  className="object-contain invert" // white logo
+                  className="object-contain"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                   }}
