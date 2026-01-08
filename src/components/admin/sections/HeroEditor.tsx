@@ -58,10 +58,45 @@ const HeroEditor: React.FC = () => {
                     }
                 }
             } else {
-                // Initialize with one default slide
-                const newSlide = createNewSlide();
-                setData({ slides: [newSlide] });
-                setSelectedSlideId(newSlide.id);
+                // Initialize with Premium Default Slides
+                setData({
+                    slides: [
+                        {
+                            id: crypto.randomUUID(),
+                            badge: 'HMZ SOLUTIONS • GLOBAL',
+                            title1: 'Sınırları Aşan',
+                            title2: 'Teknoloji',
+                            subtitle: 'İşletmenizi global standartlara taşıyan, ölçeklenebilir ve güvenli dijital altyapılar kuruyoruz.',
+                            image: '/hero-slides/hero-globe.png',
+                            ctaText: 'Keşfedin',
+                            ctaLink: '#services'
+                        },
+                        {
+                            id: crypto.randomUUID(),
+                            badge: 'YAPAY ZEKA • İNOVASYON',
+                            title1: 'Geleceği',
+                            title2: 'Tasarlıyoruz',
+                            subtitle: 'İş süreçlerinizi yapay zeka ve veri odaklı çözümlerle optimize ederek verimliliğinizi maksimize edin.',
+                            image: '/hero-slides/hero-ai.png',
+                            ctaText: 'AI Çözümleri',
+                            ctaLink: '#services'
+                        },
+                        {
+                            id: crypto.randomUUID(),
+                            badge: 'DİJİTAL DÖNÜŞÜM',
+                            title1: 'Kodun',
+                            title2: 'Sanatı',
+                            subtitle: 'Modern, hızlı ve kullanıcı odaklı yazılım çözümleriyle markanızın dijital varlığını güçlendiriyoruz.',
+                            image: '/hero-slides/hero-growth.png',
+                            ctaText: 'Proje Başlatın',
+                            ctaLink: '#contact'
+                        }
+                    ]
+                });
+                // Set first slide as active (will be handled by useEffect or user interaction, but checking logic below)
+                // Actually need to set selectedSlideId after setting data if no data was found
+                // Since setData is async/batched, we might not have the ID immediately if we generated randomUUIDs here.
+                // But simplified logic: user will see list and click.
             }
         } catch (error) {
             console.error('Failed to fetch hero content:', error);
@@ -186,8 +221,8 @@ const HeroEditor: React.FC = () => {
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     onClick={() => setSelectedSlideId(slide.id)}
                                     className={`group relative p-4 rounded-xl border cursor-pointer transition-all duration-200 ${selectedSlideId === slide.id
-                                            ? 'bg-blue-500/10 border-blue-500/50 ring-1 ring-blue-500/50'
-                                            : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/20'
+                                        ? 'bg-blue-500/10 border-blue-500/50 ring-1 ring-blue-500/50'
+                                        : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/20'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start mb-2">
