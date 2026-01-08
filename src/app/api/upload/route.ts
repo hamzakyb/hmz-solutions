@@ -6,6 +6,15 @@ export async function POST(request: Request): Promise<NextResponse> {
   const body = (await request.json()) as HandleUploadBody;
 
   try {
+    // 1. Check for Environment Variable
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      console.error('BLOB_READ_WRITE_TOKEN is missing in environment variables.');
+      return NextResponse.json(
+        { error: 'Server configuration error: BLOB_READ_WRITE_TOKEN is missing.' },
+        { status: 500 }
+      );
+    }
+
     const jsonResponse = await handleUpload({
       body,
       request,
@@ -15,6 +24,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         // we might need to cast or adapt it since requireAuth expects NextRequest
         const admin = requireAuth(request as any);
         if (!admin) {
+          console.error('Upload unauthorized: No valid admin token found.');
           throw new Error('Unauthorized');
         }
 

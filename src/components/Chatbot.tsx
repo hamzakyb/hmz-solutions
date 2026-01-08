@@ -233,20 +233,20 @@ const Chatbot = () => {
             className="fixed right-0 top-1/2 transform -translate-y-1/2 z-50 flex items-center group cursor-pointer"
           >
             {/* The Tab/Pill */}
-            <div className="bg-[#0a0a0a]/90 backdrop-blur-xl border-l border-t border-b border-white/10 shadow-2xl rounded-l-2xl py-6 px-3 flex flex-col items-center gap-4 transition-all duration-300 group-hover:border-[#AF9C64]/50 group-hover:bg-black">
+            <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border-l border-t border-b border-white/10 shadow-2xl rounded-l-lg py-10 px-1.5 flex flex-col items-center gap-6 transition-all duration-300 group-hover:border-[#AF9C64]/50 group-hover:bg-black group-hover:pl-2.5">
               {/* Icon */}
-              <div className="relative">
+              <div className="relative transform rotate-0">
                 <div className="absolute inset-0 bg-[#AF9C64] blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
-                <ChatBubbleLeftRightIcon className="w-6 h-6 text-white group-hover:text-[#AF9C64] transition-colors relative z-10" />
+                <ChatBubbleLeftRightIcon className="w-5 h-5 text-white/90 group-hover:text-[#AF9C64] transition-colors relative z-10" />
                 {/* Status Dot */}
-                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                <span className="absolute -top-1 -right-1 flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#AF9C64] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#AF9C64]"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#AF9C64]"></span>
                 </span>
               </div>
 
               {/* Vertical Text */}
-              <span className="text-xs text-white/80 font-medium tracking-[0.2em] uppercase writing-vertical-rl group-hover:text-white transition-colors">
+              <span className="text-[11px] text-white/80 font-medium tracking-[0.3em] uppercase writing-vertical-rl rotate-180 group-hover:text-white transition-colors whitespace-nowrap">
                 İletişim
               </span>
             </div>
