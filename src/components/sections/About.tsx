@@ -7,16 +7,16 @@ import { useState, useEffect } from 'react'
 
 const About = () => {
   const [data, setData] = useState({
-    title1: 'Yenilikçi',
-    title2: 'Dijital Çözümler',
-    description: 'Yaratıcı yaklaşımımız ve teknolojiye olan tutkumuzla, işletmenizin dijital dünyadaki yolculuğunu şekillendiriyoruz. Her fikri benzersiz bir dijital deneyime dönüştürüyoruz.',
-    philosophy: 'Mükemmel dijital deneyimler, sadece teknolojiyle değil, aynı zamanda insan odaklı yaklaşımla da mümkündür.',
+    title1: 'Stratejik',
+    title2: 'Çözüm Ortağınız',
+    description: 'HMZ Solutions, işletmelerin dijital dönüşüm süreçlerine liderlik eden profesyonel bir teknoloji şirketidir. Karmaşık iş problemlerini, kullanıcı odaklı tasarım ve güçlü yazılım mimarisiyle çözüyoruz. Amacımız, markanızı dijital dünyada güvenilir ve lider bir konuma taşımaktır.',
+    philosophy: 'Başarı tesadüf değildir; doğru strateji ve kusursuz uygulamanın sonucudur.',
     mainImage: '',
     stats: [
-      { number: 'Yenilikçi', label: 'Yaklaşımlar' },
-      { number: 'Özgün', label: 'Çözümler' },
-      { number: 'Müşteri', label: 'Odaklılık' },
-      { number: 'Sürekli', label: 'Gelişim' }
+      { number: 'Profesyonel', label: 'Yaklaşım' },
+      { number: 'Yüksek', label: 'Teknoloji' },
+      { number: 'Sürdürülebilir', label: 'Büyüme' },
+      { number: 'Garantili', label: 'Sonuç' }
     ]
   })
 

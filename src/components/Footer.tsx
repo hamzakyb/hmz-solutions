@@ -8,7 +8,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const [data, setData] = useState({
-    footerDescription: 'Vizyonları dijital gerçekliklere dönüştürmek için en çağdaş teknolojiyi, olağanüstü tasarımı ve mükemmelliğe olan sarsılmaz bağlılığı kullanıyoruz.',
+    footerDescription: 'Yenilikçi vizyon, profesyonel uygulama. Dijital dünyada ölçülebilir başarı hedefleyen markalar için güvenilir teknoloji ortağı.',
     socialLinks: {
       github: '#',
       linkedin: '#',

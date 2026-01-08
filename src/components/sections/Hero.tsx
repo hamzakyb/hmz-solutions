@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react'
 
 const Hero = () => {
   const [content, setContent] = useState({
-    title1: 'Nevşehir\'in',
-    title2: 'Dijital Zanaatkarı',
-    subtitle: 'Markanız için sadece bir web sitesi değil, kusursuz bir dijital miras inşa ediyoruz.',
-    ctaText: 'Projeyi Başlat'
+    title1: 'Global',
+    title2: 'Dijital Çözümler',
+    subtitle: 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz. Nevşehir merkezli ekibimizle, markanız için ölçeklenebilir ve sürdürülebilir bir dijital altyapı kuruyoruz.',
+    ctaText: 'Teklif Alın'
   })
 
   useEffect(() => {
@@ -20,10 +20,10 @@ const Hero = () => {
         const result = await response.json()
         if (result.content?.data) {
           setContent({
-            title1: result.content.data.title1 || 'Nevşehir\'in',
-            title2: result.content.data.title2 || 'Dijital Zanaatkarı',
-            subtitle: result.content.data.subtitle || 'Markanız için sadece bir web sitesi değil, kusursuz bir dijital miras inşa ediyoruz.',
-            ctaText: result.content.data.cta1Text || 'Projeyi Başlat'
+            title1: result.content.data.title1 || 'Global',
+            title2: result.content.data.title2 || 'Dijital Çözümler',
+            subtitle: result.content.data.subtitle || 'İşletmenizi dijital çağın gereklilikleriyle donatıyor, yüksek performanslı web teknolojileri geliştiriyoruz. Nevşehir merkezli ekibimizle, markanız için ölçeklenebilir ve sürdürülebilir bir dijital altyapı kuruyoruz.',
+            ctaText: result.content.data.cta1Text || 'Teklif Alın'
           })
         }
       } catch (error) {
