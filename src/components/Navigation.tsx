@@ -6,6 +6,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 interface NavItem {
   label: string
@@ -18,6 +19,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const pathname = usePathname()
   const [settings, setSettings] = useState({
     navigation: {
       logoText: 'HMZ Solutions',
@@ -57,21 +59,31 @@ const Navigation = () => {
 
   const navItems: NavItem[] = [
     { label: 'Ana Sayfa', href: '/', id: 'home', external: true },
-    { label: 'Hizmetler', href: '/#services', id: 'services' },
+    { label: 'Hizmetler', href: '/services', id: 'services', external: true },
     { label: 'Hakkımızda', href: '/#about', id: 'about' },
     { label: 'Blog', href: '/blog', id: 'blog', external: true },
-    { label: 'İletişim', href: '/#contact', id: 'contact' },
+    { label: 'İletişim', href: '/contact', id: 'contact', external: true },
   ]
 
   const handleNavClick = (href: string, id: string, external?: boolean) => {
     setActiveSection(id)
     setIsMobileMenuOpen(false)
-    if (external || href.startsWith('/') && !href.startsWith('/#')) {
+
+    // Helper to check if it's an anchor link
+    const isAnchor = href.includes('#')
+
+    // If it's a direct page link OR we are not on home and trying to go to an anchor
+    if ((!isAnchor) || (isAnchor && pathname !== '/')) {
       if (typeof window !== 'undefined') window.location.href = href
       return
     }
-    const element = document.getElementById(href.replace('/#', ''))
-    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+    // If we are on home and it's an anchor, smooth scroll
+    if (isAnchor && pathname === '/') {
+      const targetId = href.split('#')[1]
+      const element = document.getElementById(targetId)
+      element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   return (
@@ -127,7 +139,7 @@ const Navigation = () => {
               ))}
               <Button
                 size="sm"
-                onClick={() => handleNavClick('/#contact', 'contact')}
+                onClick={() => handleNavClick('/contact', 'contact', true)}
                 className="bg-white text-black hover:bg-gray-200 border-none rounded-full px-6 py-2 text-xs font-bold uppercase tracking-wider transition-colors"
               >
                 Teklif Al

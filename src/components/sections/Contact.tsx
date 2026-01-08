@@ -1,8 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react'
+
+import Toast from '../ui/Toast' // Import Toast
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -11,7 +13,7 @@ const Contact = () => {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null) // Toast state
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,24 +28,34 @@ const Contact = () => {
         body: JSON.stringify(formState),
       })
 
+      const data = await response.json() // Parse response
+
       if (response.ok) {
-        setSubmitStatus('success')
+        setToast({ message: 'Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağız.', type: 'success' })
         setFormState({ name: '', email: '', message: '' })
       } else {
-        setSubmitStatus('error')
-        console.error('Failed to send message')
+        setToast({ message: data.error || 'Mesaj gönderilemedi. Lütfen tekrar deneyin.', type: 'error' })
+        console.error('Failed to send message:', data.error)
       }
     } catch (error) {
       console.error('Error sending message:', error)
-      setSubmitStatus('error')
+      setToast({ message: 'Bir bağlantı hatası oluştu. Lütfen daha sonra tekrar deneyin.', type: 'error' })
     } finally {
       setIsSubmitting(false)
-      setTimeout(() => setSubmitStatus('idle'), 3000)
     }
   }
 
   return (
-    <section id="contact" className="py-24 sm:py-32 bg-white border-t border-gray-100">
+    <section id="contact" className="py-24 sm:py-32 bg-white border-t border-gray-100 relative">
+      <AnimatePresence>
+        {toast && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={() => setToast(null)}
+          />
+        )}
+      </AnimatePresence>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start gap-16 lg:gap-24">
           {/* Contact Info - Editorial Style */}
@@ -139,9 +151,10 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-full font-medium hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-full font-medium hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
-                {isSubmitting ? 'Gönderiliyor...' : submitStatus === 'success' ? 'Mesaj Gönderildi' : 'Gönder'}
+                {isSubmitting && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+                <span>{isSubmitting ? 'Gönderiliyor...' : 'Gönder'}</span>
               </button>
             </form>
           </div>
