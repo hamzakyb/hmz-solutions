@@ -43,7 +43,7 @@ const Hero = () => {
               title1: 'Sınırları Aşan',
               title2: 'Teknoloji',
               subtitle: 'İşletmenizi global standartlara taşıyan, ölçeklenebilir ve güvenli dijital altyapılar kuruyoruz.',
-              image: '/hero-slides/hero-globe.png?v=3',
+              image: '/hero-slides/hero-globe.png?v=4',
               ctaText: 'Keşfedin',
               ctaLink: '#services'
             },
@@ -53,7 +53,7 @@ const Hero = () => {
               title1: 'Geleceği',
               title2: 'Tasarlıyoruz',
               subtitle: 'İş süreçlerinizi yapay zeka ve veri odaklı çözümlerle optimize ederek verimliliğinizi maksimize edin.',
-              image: '/hero-slides/hero-ai.png?v=3',
+              image: '/hero-slides/hero-ai.png?v=4',
               ctaText: 'AI Çözümleri',
               ctaLink: '#services'
             },
@@ -63,7 +63,7 @@ const Hero = () => {
               title1: 'Kodun',
               title2: 'Sanatı',
               subtitle: 'Modern, hızlı ve kullanıcı odaklı yazılım çözümleriyle markanızın dijital varlığını güçlendiriyoruz.',
-              image: '/hero-slides/hero-growth.png?v=3',
+              image: '/hero-slides/hero-growth.png?v=4',
               ctaText: 'Proje Başlatın',
               ctaLink: '#contact'
             }
