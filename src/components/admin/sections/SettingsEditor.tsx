@@ -18,6 +18,7 @@ interface SiteSettings {
         phone: string;
         address: string;
         hours: string;
+        googleMapsUrl?: string;
     };
     navigation: {
         logoText: string;
@@ -46,7 +47,8 @@ const SettingsEditor: React.FC = () => {
             email: 'info@hmzsolutions.com',
             phone: '+90 (505) 095 99 50',
             address: 'Bekdik, Millet Cd. No:38, 50040 Nevşehir Merkez/Nevşehir',
-            hours: 'Pzt-Cum 09:00-18:00'
+            hours: 'Pzt-Cum 09:00-18:00',
+            googleMapsUrl: ''
         },
         navigation: {
             logoText: 'HMZ Solutions',
@@ -252,6 +254,16 @@ const SettingsEditor: React.FC = () => {
                                 value={data.contactInfo.hours}
                                 onChange={(e) => setData({ ...data, contactInfo: { ...data.contactInfo, hours: e.target.value } })}
                             />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Google Maps Embed URL</label>
+                            <input
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-xs font-mono text-gray-400"
+                                value={data.contactInfo.googleMapsUrl || ''}
+                                onChange={(e) => setData({ ...data, contactInfo: { ...data.contactInfo, googleMapsUrl: e.target.value } })}
+                                placeholder="<iframe src='...'> veya sadece https://..."
+                            />
+                            <p className="text-[10px] text-white/20">Google Maps > Paylaş > Harita Yerleştir > src içindeki linki yapıştırın.</p>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import Toast from '@/components/ui/Toast'
 
+import { useEffect } from 'react' // Import useEffect
+
 export default function ContactPage() {
     const [formState, setFormState] = useState({
         name: '',
@@ -16,8 +18,25 @@ export default function ContactPage() {
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
+    const [settings, setSettings] = useState<any>(null)
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const response = await fetch('/api/content?section=settings')
+                const result = await response.json()
+                if (result.content?.data) {
+                    setSettings(result.content.data)
+                }
+            } catch (error) {
+                console.error('Failed to fetch settings:', error)
+            }
+        }
+        fetchSettings()
+    }, [])
 
     const handleSubmit = async (e: React.FormEvent) => {
+        // ... (keep existing handleSubmit logic)
         e.preventDefault()
         setIsSubmitting(true)
 
@@ -65,7 +84,7 @@ export default function ContactPage() {
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-900/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
 
                         {/* Left Column: Info */}
                         <motion.div
@@ -91,8 +110,7 @@ export default function ContactPage() {
                                     <div>
                                         <h3 className="text-white font-bold text-lg mb-1">Genel Merkez</h3>
                                         <p className="text-gray-500 font-light leading-relaxed">
-                                            Bekdik, Millet Cd. No:38, 50040<br />
-                                            Nevşehir Merkez/Nevşehir
+                                            {settings?.contactInfo?.address || 'Bekdik, Millet Cd. No:38, 50040\nNevşehir Merkez/Nevşehir'}
                                         </p>
                                     </div>
                                 </div>
@@ -103,8 +121,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="text-white font-bold text-lg mb-1">E-posta</h3>
-                                        <a href="mailto:info@hmzsolutions.com" className="text-gray-500 hover:text-white transition-colors text-lg">
-                                            info@hmzsolutions.com
+                                        <a href={`mailto:${settings?.contactInfo?.email || 'info@hmzsolutions.com'}`} className="text-gray-500 hover:text-white transition-colors text-lg">
+                                            {settings?.contactInfo?.email || 'info@hmzsolutions.com'}
                                         </a>
                                     </div>
                                 </div>
@@ -115,8 +133,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="text-white font-bold text-lg mb-1">Telefon</h3>
-                                        <a href="tel:+905050959950" className="text-gray-500 hover:text-white transition-colors text-lg">
-                                            +90 (505) 095 99 50
+                                        <a href={`tel:${settings?.contactInfo?.phone || '+905050959950'}`} className="text-gray-500 hover:text-white transition-colors text-lg">
+                                            {settings?.contactInfo?.phone || '+90 (505) 095 99 50'}
                                         </a>
                                     </div>
                                 </div>
@@ -130,6 +148,7 @@ export default function ContactPage() {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="bg-[#0A0A0A] p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden"
                         >
+                            {/* ... (keep form code) */}
                             {/* Glass Effect Overlay */}
                             <div className="absolute inset-0 bg-white/5 opacity-50 pointer-events-none" />
 
@@ -196,6 +215,28 @@ export default function ContactPage() {
                             </form>
                         </motion.div>
                     </div>
+
+                    {/* Google Map Section */}
+                    {settings?.contactInfo?.googleMapsUrl && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="w-full h-[400px] rounded-3xl overflow-hidden border border-white/5 shadow-2xl relative"
+                        >
+                            <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Loading state placeholder */}
+                            <iframe
+                                src={settings.contactInfo.googleMapsUrl.match(/src="([^"]+)"/)?.[1] || settings.contactInfo.googleMapsUrl}
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                className="relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
+                            ></iframe>
+                        </motion.div>
+                    )}
                 </div>
             </section>
 
