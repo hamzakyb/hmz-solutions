@@ -119,7 +119,7 @@ const Chatbot = () => {
       name: 'HMZ Solutions',
       title: 'Digital Concierge',
       avatar: '', // No personal avatar
-      greeting: 'HMZ Solutions Digital Concierge servisine hoş geldiniz. İşletmenizin dijital altyapısını global ölçekte nasıl güçlendirebileceğimizi konuşmak için buradayım.'
+      greeting: 'HMZ Solutions Digital Concierge servisine hoş geldiniz. İşletmenizin dijital altyapısını hem yerel hem de global ölçekte nasıl güçlendirebileceğimizi konuşmak için buradayım.'
     }
   }
 
