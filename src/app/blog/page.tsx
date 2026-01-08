@@ -12,14 +12,12 @@ interface BlogPost {
   title: string
   slug: string
   excerpt: string
-  coverImage: string
-  category: string
-  publishedAt: string
-  author: {
-    name: string
-    avatar: string
-  }
-  readTime: string
+  featuredImage: string
+  category: string // Note: API might not return this, check usage
+  publishedAt: string // Note: API returns createdAt
+  createdAt: string
+  author: string
+  readTime: string // Note: API doesn't return this, calculated on client usually
 }
 
 export default function BlogPage() {
@@ -27,6 +25,7 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
+  const limit = 9
 
   useEffect(() => {
     fetchPosts()
@@ -34,12 +33,18 @@ export default function BlogPage() {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch(`/api/blog?page=${page}&limit=9`)
+      const skip = (page - 1) * limit
+      const res = await fetch(`/api/blog?skip=${skip}&limit=${limit}&published=true`)
       const data = await res.json()
+
       if (page === 1) {
         setPosts(data.posts)
       } else {
-        setPosts(prev => [...prev, ...data.posts])
+        // Filter out potential duplicates just in case
+        setPosts(prev => {
+          const newPosts = data.posts.filter((p: BlogPost) => !prev.some(existing => existing._id === p._id))
+          return [...prev, ...newPosts]
+        })
       }
       setHasMore(data.hasMore)
     } catch (err) {
@@ -47,6 +52,13 @@ export default function BlogPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const calculateReadTime = (text: string) => {
+    // Simple fallback if readTime isn't in API
+    const wordsPerMinute = 200;
+    const noOfWords = text ? text.split(/\s/g).length : 0;
+    return Math.ceil(noOfWords / wordsPerMinute);
   }
 
   return (
@@ -77,18 +89,24 @@ export default function BlogPage() {
             >
               <Link href={`/blog/${post.slug}`}>
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-900 mb-6">
-                  <Image
-                    src={post.coverImage}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  {post.featuredImage ? (
+                    <Image
+                      src={post.featuredImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-800 flex items-center justify-center text-gray-600">
+                      Görsel Yok
+                    </div>
+                  )}
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3 text-xs font-medium uppercase tracking-widest text-[#AF9C64]">
-                    <span>{post.category}</span>
+                    <span>{post.category || 'Teknoloji'}</span>
                     <span className="w-1 h-1 rounded-full bg-current" />
-                    <span>{post.readTime} OKUMA</span>
+                    <span>{post.readTime || '3'} DK OKUMA</span>
                   </div>
                   <h2 className="text-2xl font-light leading-snug text-white group-hover:text-gray-300 transition-colors">
                     {post.title}
