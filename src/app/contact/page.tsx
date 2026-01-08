@@ -236,6 +236,7 @@ export default function ContactPage() {
                     </div>
 
                     {/* Google Map Section */}
+                    {/* Always render map now that we have a default */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -254,7 +255,6 @@ export default function ContactPage() {
                             className="relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
                         ></iframe>
                     </motion.div>
-                    )}
                 </div>
             </section>
 
