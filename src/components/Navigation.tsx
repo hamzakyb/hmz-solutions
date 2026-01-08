@@ -101,7 +101,7 @@ const Navigation = () => {
                   priority
                 />
               </div>
-              <span className="text-white font-bold tracking-tight text-lg md:text-xl transform origin-left transition-transform duration-300">
+              <span className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent transform origin-left transition-transform duration-300">
                 {settings.navigation.logoText}
               </span>
             </div>
