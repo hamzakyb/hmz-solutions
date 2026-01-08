@@ -84,10 +84,11 @@ const AboutEditor: React.FC = () => {
             const newBlob = await upload(file.name, file, {
                 access: 'public',
                 handleUploadUrl: '/api/upload',
+                addRandomSuffix: true,
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            });
+            } as any);
 
             setData({ ...data, mainImage: newBlob.url });
         } catch (error) {
