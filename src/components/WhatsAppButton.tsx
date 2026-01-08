@@ -45,7 +45,7 @@ const WhatsAppButton = () => {
           className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50 flex items-center group cursor-pointer"
         >
           {/* The Tab/Pill */}
-          <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border-r border-t border-b border-white/10 shadow-2xl rounded-r-lg py-10 px-1.5 flex flex-col items-center gap-6 transition-all duration-300 group-hover:border-green-500/50 group-hover:bg-black group-hover:pr-2.5">
+          <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border-r border-t border-b border-white/10 shadow-2xl rounded-r-md py-14 px-2 flex flex-col items-center gap-8 transition-all duration-300 group-hover:border-green-500/50 group-hover:bg-black group-hover:pr-3">
             {/* Icon */}
             <div className="relative transform rotate-0">
               <div className="absolute inset-0 bg-green-500 blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
@@ -64,7 +64,7 @@ const WhatsAppButton = () => {
             </div>
 
             {/* Vertical Text */}
-            <span className="text-[11px] text-white/80 font-medium tracking-[0.3em] uppercase writing-vertical-rl group-hover:text-white transition-colors whitespace-nowrap">
+            <span className="text-[12px] text-white/80 font-medium tracking-[0.3em] uppercase writing-vertical-lr group-hover:text-white transition-colors whitespace-nowrap">
               WhatsApp
             </span>
           </div>
