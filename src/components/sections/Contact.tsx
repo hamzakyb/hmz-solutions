@@ -45,7 +45,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-1">Ofis</h4>
-                  <p className="text-gray-600 font-light">Güzelyurt Mah. Zübeyde Hanım Cad.<br />Nevşehir, Türkiye</p>
+                  <p className="text-gray-600 font-light">Bekdik, Millet Cd. No:38, 50040<br />Nevşehir Merkez/Nevşehir</p>
                 </div>
               </div>
 
@@ -67,8 +67,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-1">Telefon</h4>
-                  <a href="tel:+905555555555" className="text-gray-600 font-light hover:text-black transition-colors">
-                    +90 (555) 555 55 55
+                  <a href="tel:+905050959950" className="text-gray-600 font-light hover:text-black transition-colors">
+                    +90 (505) 095 99 50
                   </a>
                 </div>
               </div>

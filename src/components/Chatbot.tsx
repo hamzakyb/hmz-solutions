@@ -85,7 +85,7 @@ const knowledgeBase = {
   },
   contact: {
     keywords: ['iletişim', 'telefon', 'mail', 'adres', 'nerede', 'ulaşım', 'konum', 'ofis', 'yeriniz'],
-    response: "Nevşehir merkez ofisimize kahveye bekleriz! ☕\n\n📍 **Adres:** Güzelyurt Mah. Zübeyde Hanım Cad.\n📞 **Tel:** +90 (505) 095 99 50\n📧 **Mail:** info@hmzsolutions.com"
+    response: "Nevşehir merkez ofisimize kahveye bekleriz! ☕\n\n📍 **Adres:** Bekdik, Millet Cd. No:38, 50040 Nevşehir Merkez/Nevşehir\n📞 **Tel:** +90 (505) 095 99 50\n📧 **Mail:** info@hmzsolutions.com"
   },
   meeting: {
     keywords: ['toplantı', 'görüşme', 'randevu', 'yüz yüze', 'ziyaret', 'zoom', 'online'],

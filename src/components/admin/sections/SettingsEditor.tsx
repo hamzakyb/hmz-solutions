@@ -45,7 +45,7 @@ const SettingsEditor: React.FC = () => {
         contactInfo: {
             email: 'info@hmzsolutions.com',
             phone: '+90 (505) 095 99 50',
-            address: 'Nevşehir Merkez, Türkiye',
+            address: 'Bekdik, Millet Cd. No:38, 50040 Nevşehir Merkez/Nevşehir',
             hours: 'Pzt-Cum 09:00-18:00'
         },
         navigation: {
