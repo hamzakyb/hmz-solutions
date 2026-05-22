@@ -35,26 +35,6 @@ const row1Projects: Project[] = [
   },
 ]
 
-const row2Projects: Project[] = [
-  {
-    title: 'Akıllı Yapay Zeka SaaS Platformu',
-    category: 'Yapay Zeka (Yakında)',
-    description: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',
-    tags: ['Next.js', 'OpenAI API', 'Python', 'Tailwind', 'SaaS'],
-    image: '/projects/ai.png',
-    link: '/projects',
-    icon: Cpu,
-  },
-  {
-    title: 'Step Filtre B2B E-Ticaret Platformu',
-    category: 'B2B & E-Ticaret',
-    description: 'Filtre imalatçıları için B2B cari takipli, kademeli iskonto motorlu, OEM çapraz referans aramalı, dekont bildirimli ve canlı stoklu e-ticaret portalı.',
-    tags: ['Vite SPA', 'Node.js', 'Cari Takip', 'OEM Arama', 'Dekont Bildirimi', 'jsPDF'],
-    image: '/projects/step_filtre.png',
-    link: '/projects',
-    icon: ShoppingBag,
-  },
-]
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const Icon = project.icon
@@ -115,7 +95,6 @@ const ProjectCard = ({ project }: { project: Project }) => {
 const ProjectsSlider = () => {
   // Double arrays for seamless marquee loop
   const doubleRow1 = [...row1Projects, ...row1Projects, ...row1Projects]
-  const doubleRow2 = [...row2Projects, ...row2Projects, ...row2Projects]
 
   return (
     <section id="projects" className="py-24 md:py-32 bg-black relative overflow-hidden">
@@ -169,15 +148,6 @@ const ProjectsSlider = () => {
           <div className="flex gap-6 md:gap-8 pr-6 md:pr-8 animate-marquee hover:[animation-play-state:paused] min-w-full">
             {doubleRow1.map((project, idx) => (
               <ProjectCard key={`row1-${idx}`} project={project} />
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2: Right moving */}
-        <div className="w-full overflow-hidden flex select-none py-4">
-          <div className="flex gap-6 md:gap-8 pr-6 md:pr-8 animate-marquee-reverse hover:[animation-play-state:paused] min-w-full">
-            {doubleRow2.map((project, idx) => (
-              <ProjectCard key={`row2-${idx}`} project={project} />
             ))}
           </div>
         </div>
