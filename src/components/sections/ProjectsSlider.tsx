@@ -25,6 +25,15 @@ const row1Projects: Project[] = [
     icon: ShoppingBag,
   },
   {
+    title: 'barkOne Mobilya E-Ticaret & CMS',
+    category: 'E-Ticaret & CMS',
+    description: 'Lüks ahşap ve raf sistemleri için dynamic CMS, iyzico 3D secure kart ödemeli ve Vercel Blob entegrasyonlu e-ticaret platformu.',
+    tags: ['Next.js 14', 'Tailwind v4', 'iyzico API', 'Vercel Blob', 'CMS Panel'],
+    image: '/projects/bark_one.png',
+    link: '/projects',
+    icon: Globe,
+  },
+  {
     title: 'Akıllı Yapay Zeka SaaS Platformu',
     category: 'Yapay Zeka (Yakında)',
     description: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',

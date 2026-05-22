@@ -102,10 +102,44 @@ const projectsData: CaseStudy[] = [
       'Akıllı Veri Analitiği Dashboard Arayüzü',
       'Özelleştirilebilir Slack ve E-Posta Entegrasyonları'
     ]
+  },
+  {
+    id: 'bark-one',
+    title: 'barkOne Mobilya E-Ticaret & CMS Platformu',
+    category: 'E-Ticaret & CMS',
+    shortDescription: 'Lüks masif ahşap ve modüler raf sistemleri için dynamic CMS altyapılı, iyzico 3D secure entegrasyonlu ve Vercel Blob destekli e-ticaret platformu.',
+    description: 'barkOne Mobilya için tasarlanan bu premium sistem, el işçiliği masif ve metal duvar raflarının satış, sipariş ve içerik akışlarını uçtan uca dijitalleştiren özel bir e-ticaret ve CMS (İçerik Yönetim) platformudur. Altyapı, adminlerin kod yazmadan ana sayfa slider görsellerinden hakkımızda değerlerine kadar tüm marka varlıklarını MongoDB üzerinden anlık yönetebildiği dinamik bir panel, iyzico kart ödeme geçidi entegrasyonu ve bulut tabanlı Vercel Blob Storage medya yönetim modülü barındırmaktadır.',
+    problem: 'Müşterilerin özel ölçü ve farklı ahşap/metal renk kombinasyonlarındaki modüler duvar raflarını incelerken yaşadığı kafa karışıklığı ve telefon trafiği; site içeriğinde (logo, banner, hakkımızda ekibi, sosyal medya adresleri, banka bilgileri) yapılacak en ufak güncellemede dahi yazılımcıya bağımlı olunması ve taksitli online ödeme altyapısının bulunmaması.',
+    solution: 'Next.js (App Router) mimarisiyle sıfırdan inşa edilmiş, Tailwind CSS v4 ve Framer Motion ile tasarlanan yüksek hızlı kullanıcı arayüzü; MongoDB/Mongoose veri katmanında çalışan esnek SiteSettings CMS yönetim modeli, iyzico API ödeme entegrasyonu ve bulut tabanlı dosya yükleme için @vercel/blob servis entegrasyonu.',
+    results: [
+      'SiteSettings dinamik şeması sayesinde yöneticilerin site görsel ve metinlerini 5 saniyede güncelleyebilmesiyle yazılımcı bağımlılığının %100 sıfırlanması.',
+      'iyzico 3D Secure kredi/banka kartı entegrasyonu ve otomatik sipariş takipli Havale/EFT kanallarıyla sipariş dönüşüm oranında %45 artış.',
+      '@vercel/blob entegrasyonu sayesinde ürün görsel yüklemelerinin optimize edilmesi ve CDN üzerinden ultra hızlı servis edilerek sayfa açılış hızının 0.8 saniyeye düşürülmesi.',
+      'Admin performans özet paneli (Gelir Eğrisi, En Çok Satanlar, Sipariş Durumları) ile operasyon ve envanter kararlarının tamamen veriye dayalı hale gelmesi.'
+    ],
+    metrics: [
+      { label: 'Sayfa Açılışı', value: '0.8s' },
+      { label: 'Sipariş Artışı', value: '+%45' },
+      { label: 'Yazılımcı Bağımlılığı', value: '%0' }
+    ],
+    tags: ['Next.js', 'Tailwind v4', 'MongoDB', 'Mongoose', 'iyzico API', 'Vercel Blob', 'Framer Motion', 'Embla Carousel'],
+    image: '/projects/bark_one.png',
+    icon: Globe,
+    features: [
+      'Dinamik CMS & Site Ayarları Yönetim Paneli (Real-time SiteSettings CMS)',
+      'iyzico 3D Secure Kredi Kartı Ödeme Geçidi Entegrasyonu',
+      'Banka Transferi (Havale/EFT) & Benzersiz Referans Sipariş Takibi',
+      '@vercel/blob Entegre Medya Dosyası Yükleme ve CDN Servisi',
+      'Gelişmiş Satış & Gelir Analitiği Dashboard Göstergeleri (Card & Charts)',
+      'En Çok Satan Ürünler ve Günlük/Haftalık Ciro Dağılım Grafikleri',
+      'Modüler Ürün Kataloğu, Filtrelenebilir Arama ve Detay Sayfası',
+      'Zod ile Şema Tabanlı Form & Güvenlik Validasyonu (Bcryptjs & JWT)'
+    ],
+    liveUrl: 'https://www.barkone.com.tr/'
   }
 ]
 
-const categories = ['Tümü', 'B2B & E-Ticaret', 'Yapay Zeka']
+const categories = ['Tümü', 'B2B & E-Ticaret', 'E-Ticaret & CMS', 'Yapay Zeka']
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState('Tümü')
