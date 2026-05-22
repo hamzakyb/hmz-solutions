@@ -354,4 +354,35 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
+
+  /* Infinite Marquee Animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee 60s linear infinite reverse;
+  }
+
+  /* Gold Glow Shadows */
+  .shadow-glow-gold {
+    box-shadow: 
+      0 10px 30px -10px rgba(175, 160, 100, 0.15),
+      0 1px 1px 0 rgba(175, 160, 100, 0.1);
+  }
+
+  .shadow-glow-gold-hover:hover {
+    box-shadow: 
+      0 25px 50px -12px rgba(175, 160, 98, 0.35),
+      0 0 30px -5px rgba(175, 160, 98, 0.2);
+  }
 }
