@@ -28,6 +28,18 @@ const Navigation = () => {
   })
 
   useEffect(() => {
+    if (pathname === '/projects') {
+      setActiveSection('projects')
+    } else if (pathname === '/services') {
+      setActiveSection('services')
+    } else if (pathname === '/contact') {
+      setActiveSection('contact')
+    } else if (pathname === '/blog') {
+      setActiveSection('blog')
+    }
+  }, [pathname])
+
+  useEffect(() => {
     const fetchSettings = async () => {
       try {
         const response = await fetch('/api/content?section=settings')
@@ -60,6 +72,7 @@ const Navigation = () => {
   const navItems: NavItem[] = [
     { label: 'Ana Sayfa', href: '/', id: 'home', external: true },
     { label: 'Hizmetler', href: '/services', id: 'services', external: true },
+    { label: 'Projeler', href: '/projects', id: 'projects', external: true },
     { label: 'Hakkımızda', href: '/#about', id: 'about' },
     { label: 'Blog', href: '/blog', id: 'blog', external: true },
     { label: 'İletişim', href: '/contact', id: 'contact', external: true },
