@@ -18,8 +18,8 @@ const row1Projects: Project[] = [
   {
     title: 'Step Filtre B2B E-Ticaret Platformu',
     category: 'B2B & E-Ticaret',
-    description: 'Filtre üreticileri için B2B cari takipli, Excel entegrasyonlu ve Socket.io destekli tam kapsamlı e-ticaret yönetim merkezi.',
-    tags: ['React (Vite)', 'Node.js', 'Socket.io', 'Cari Hesap', 'XLSX Parser'],
+    description: 'Filtre imalatçıları için B2B cari takipli, kademeli iskonto motorlu, OEM çapraz referans aramalı, dekont bildirimli ve canlı stoklu e-ticaret portalı.',
+    tags: ['Vite SPA', 'Node.js', 'Cari Takip', 'OEM Arama', 'Dekont Bildirimi', 'jsPDF'],
     image: '/projects/step_filtre.png',
     link: '/projects',
     icon: ShoppingBag,
@@ -48,8 +48,8 @@ const row2Projects: Project[] = [
   {
     title: 'Step Filtre B2B E-Ticaret Platformu',
     category: 'B2B & E-Ticaret',
-    description: 'Filtre üreticileri için B2B cari takipli, Excel entegrasyonlu ve Socket.io destekli tam kapsamlı e-ticaret yönetim merkezi.',
-    tags: ['React (Vite)', 'Node.js', 'Socket.io', 'Cari Hesap', 'XLSX Parser'],
+    description: 'Filtre imalatçıları için B2B cari takipli, kademeli iskonto motorlu, OEM çapraz referans aramalı, dekont bildirimli ve canlı stoklu e-ticaret portalı.',
+    tags: ['Vite SPA', 'Node.js', 'Cari Takip', 'OEM Arama', 'Dekont Bildirimi', 'jsPDF'],
     image: '/projects/step_filtre.png',
     link: '/projects',
     icon: ShoppingBag,

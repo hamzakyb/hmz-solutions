@@ -44,13 +44,14 @@ const projectsData: CaseStudy[] = [
     title: 'Step Filtre B2B E-Ticaret Platformu',
     category: 'B2B & E-Ticaret',
     shortDescription: 'Filtre üreticileri için B2B cari takipli, Excel entegrasyonlu ve Socket.io destekli tam kapsamlı e-ticaret yönetim merkezi.',
-    description: 'Step Filtre için özel olarak geliştirilen bu sistem, filtre imalatı ve toptan dağıtım süreçlerindeki tüm bayi ağını (B2B) ve sipariş akışlarını (B2C) dijitalleştiren uçtan uca kurumsal bir platformdur. Proje, bayilere özel dinamik fiyat listelerinden, saniyeler içinde binlerce ürünü güncelleyen Excel toplu yükleme motoruna ve canlı cari borç/bakiye takibine kadar geniş bir finansal ve operasyonel hacmi tek panelden yönetmektedir.',
-    problem: 'Geleneksel yöntemlerle yönetilen otomotiv ve sanayi filtre kataloğunda, binlerce farklı modelin stok ve fiyat listelerini manuel güncellemenin yarattığı zaman kaybı, telefonla sipariş almada yaşanan stok çakışmaları ve bayilerin cari borç/limit mutabakatlarının Excel tablolarıyla elle yürütülmesinden kaynaklanan yüksek operasyonel hatalar.',
-    solution: 'React (Vite SPA) frontend ve Node.js + Express.js backend mimarisi üzerinde, Mongoose/MongoDB veritabanı, gerçek zamanlı WebSocket (Socket.io) bildirim mekanizmaları ve XLSX tabanlı toplu veri işleme servisleri ile entegre, rol tabanlı erişim denetimli (RBAC) yüksek performanslı kurumsal otomasyon paneli.',
+    description: 'Step Filtre için özel olarak geliştirilen bu sistem, filtre imalatı ve toptan dağıtım süreçlerindeki tüm bayi ağını (B2B) ve sipariş akışlarını dijitalleştiren uçtan uca kurumsal bir platformdur. Proje, bayilere özel dinamik kademeli fiyat listelerinden (1., 2. ve 3. iskonto kademeleri), saniyeler içinde binlerce ürünü güncelleyen Excel veri motoruna, canlı cari borç/bakiye takibine ve bayilerin banka transfer (Havale/EFT) ödeme dekontlarını sisteme yükleyip finans ekibine anında iletebildiği modern bir Bayi/Müşteri Portalı barındırmaktadır.',
+    problem: 'Geleneksel yöntemlerle yönetilen otomotiv ve sanayi filtre kataloğunda, binlerce farklı modelin stok ve fiyat listelerini manuel güncellemenin yarattığı zaman kaybı, telefonla sipariş almada yaşanan stok çakışmaları, bayilerin muadil filtre OEM kodlarını ararken yaşadığı zorluklar ve cari borç/limit mutabakatlarının Excel tablolarıyla elle yürütülmesinden kaynaklanan yüksek operasyonel hatalar.',
+    solution: 'React (Vite SPA) frontend ve Node.js + Express.js backend mimarisi üzerinde, Mongoose/MongoDB veritabanı, gerçek zamanlı WebSocket (Socket.io) bildirim mekanizmaları, banka Havale/EFT dekont bildirim altyapısı, araç & filtre OEM kodlarına göre çapraz muadil arama motoru ve XLSX tabanlı toplu veri işleme servisleri ile entegre, rol tabanlı erişim denetimli (RBAC) yüksek performanslı kurumsal otomasyon paneli.',
     results: [
       'Toplu ürün/fiyat ve stok güncellemelerinde (10.000+ kalem) XLSX veri motoru sayesinde %98 zaman tasarrufu (ortalama 1.5 saniye işlem süresi).',
       'Anlık WebSocket stok bildirimleri sayesinde mükerrer veya stokta kalmayan ürün siparişi hata oranının tamamen sıfırlanması (%0 sipariş hatası).',
       'Bayilerin kendi panellerinden bakiye, kredi limiti, vadesi gelen ödemeler ve geçmiş ödeme dekontlarını sorgulayabilmesiyle finans ekibinin mutabakat iş yükünde %75 azalma.',
+      'Bayilerin araç/makine filtre OEM numaralarını girerek muadil filtreleri saniyeler içinde bulmasını sağlayan çapraz referans arama motoru ile bayi sipariş tamamlama hızında %80 artış.',
       'Sipariş özetleri, proforma faturalar ve cari hesap ekstrelerinin tarayıcı tarafında jsPDF ve AutoTable entegrasyonuyla anında indirilebilir dinamik PDF belgelere dönüştürülmesi.'
     ],
     metrics: [
@@ -58,13 +59,16 @@ const projectsData: CaseStudy[] = [
       { label: 'Sipariş Hatası', value: '%0' },
       { label: 'Muhasebe İş Yükü', value: '-%75' }
     ],
-    tags: ['React (Vite)', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Stripe', 'jsPDF', 'XLSX Parser'],
+    tags: ['React (Vite)', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Stripe', 'jsPDF', 'XLSX Parser', 'Ant Design', 'Material UI'],
     image: '/projects/step_filtre.png',
     icon: ShoppingBag,
     features: [
-      'Toplu Ürün ve Fiyat Güncelleme Motoru (Multer & XLSX Entegrasyonu)',
-      'Bayi Cari Hesap & Finansal Bakiye Takip Sistemi (Debt, Paid, Credit Limit)',
+      'Bayi Özel Fiyatlandırma & Kademeli İskonto Motoru (1., 2. ve 3. İskonto)',
+      'Araç & Filtre OEM Çapraz Referans Arama ve Muadil Eşleştirme Sistemi',
+      'Bayi Cari Hesap & Finansal Bakiye Takip Paneli (Debt, Paid, Credit Limit)',
+      'Banka Transferi (Havale/EFT) & Online Dekont Gönderim Modülü',
       'Ödeme Vadeleri ve Ödeme Söz Tarihleri İzleme (DueDate & PromiseDate)',
+      'Dinamik Sipariş Takip Zaman Çizelgesi (Timeline Tracker - 5 Aşamalı)',
       'Gerçek Zamanlı Kritik Stok ve Sipariş Bildirimleri (Socket.io)',
       'Sipariş Özeti ve Cari Hesap Ekstresi PDF Motoru (jsPDF & AutoTable)',
       'Kupon, İskonto ve Kampanya Yönetimi (Coupons Service)',
