@@ -16,61 +16,43 @@ interface Project {
 
 const row1Projects: Project[] = [
   {
-    title: 'Nouveau Luxury E-Commerce',
-    category: 'E-Ticaret',
-    description: 'Yüksek dönüşüm oranlı, global ödeme altyapılı ve Headless mimariye sahip lüks moda e-ticaret platformu.',
-    tags: ['Next.js', 'Stripe', 'GraphQL', 'Tailwind CSS'],
-    image: '/projects/ecommerce.png',
-    link: '#contact',
+    title: 'Step Filtre B2B E-Ticaret Platformu',
+    category: 'B2B & E-Ticaret',
+    description: 'Filtre üreticileri için B2B ve E-Ticaret sistemini birleştiren, anlık stok ve gelişmiş Excel entegrasyonlu tek panelden yönetim platformu.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Excel Parser'],
+    image: '/projects/step_filtre.png',
+    link: '/projects',
     icon: ShoppingBag,
   },
   {
-    title: 'Sentinet AI CRM & Analytics',
-    category: 'Yapay Zeka',
-    description: 'Akıllı müşteri ilişkileri analizi, anlık duygu tahmini ve satış eğilimlerini raporlayan AI gösterge paneli.',
-    tags: ['OpenAI API', 'Python', 'React', 'MongoDB'],
+    title: 'Akıllı Yapay Zeka SaaS Platformu',
+    category: 'Yapay Zeka (Yakında)',
+    description: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',
+    tags: ['Next.js', 'OpenAI API', 'Python', 'Tailwind', 'SaaS'],
     image: '/projects/ai.png',
-    link: '#contact',
+    link: '/projects',
     icon: Cpu,
-  },
-  {
-    title: 'Zenith Holding Corporate Portal',
-    category: 'Kurumsal Web Sitesi',
-    description: 'Çok dilli, 3D animasyonlu ve yüksek performanslı global holding prestij web platformu.',
-    tags: ['Next.js', 'Framer Motion', 'Three.js', 'SEO Uyumlu'],
-    image: '/projects/corporate.png',
-    link: '#contact',
-    icon: Globe,
   },
 ]
 
 const row2Projects: Project[] = [
   {
-    title: 'AeroParts B2B Supply Chain',
-    category: 'B2B Platformu',
-    description: 'Havacılık yedek parçaları için gerçek zamanlı stok takipli ve ERP entegrasyonlu toptan satış platformu.',
-    tags: ['React', 'NestJS', 'PostgreSQL', 'SAP Integration'],
-    image: '/projects/b2b.png',
-    link: '#contact',
-    icon: Layers,
+    title: 'Akıllı Yapay Zeka SaaS Platformu',
+    category: 'Yapay Zeka (Yakında)',
+    description: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',
+    tags: ['Next.js', 'OpenAI API', 'Python', 'Tailwind', 'SaaS'],
+    image: '/projects/ai.png',
+    link: '/projects',
+    icon: Cpu,
   },
   {
-    title: 'Cloud Insights SaaS Dashboard',
-    category: 'SaaS Çözümü',
-    description: 'Bulut altyapı kaynaklarını, veri akışını ve sistem sağlığını anlık izleyen SaaS veri analitiği paneli.',
-    tags: ['TypeScript', 'Apache Kafka', 'Recharts', 'Tailwind'],
-    image: '/projects/saas.png',
-    link: '#contact',
-    icon: LineChart,
-  },
-  {
-    title: 'Valor Fintek Mobile Wallet',
-    category: 'Mobil Uygulama',
-    description: 'Güvenli, hızlı ve kullanıcı dostu varlık yönetimi sunan iOS & Android fintek cüzdan uygulaması.',
-    tags: ['React Native', 'Node.js', 'Redis', 'Biometrics Secure'],
-    image: '/projects/mobile.png',
-    link: '#contact',
-    icon: Smartphone,
+    title: 'Step Filtre B2B E-Ticaret Platformu',
+    category: 'B2B & E-Ticaret',
+    description: 'Filtre üreticileri için B2B ve E-Ticaret sistemini birleştiren, anlık stok ve gelişmiş Excel entegrasyonlu tek panelden yönetim platformu.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Excel Parser'],
+    image: '/projects/step_filtre.png',
+    link: '/projects',
+    icon: ShoppingBag,
   },
 ]
 
@@ -78,7 +60,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
   const Icon = project.icon
 
   return (
-    <div className="w-[380px] md:w-[420px] flex-shrink-0 group relative rounded-3xl bg-neutral-900/40 backdrop-blur-xl border border-white/5 p-6 hover:border-gold-500/30 transition-all duration-500 shadow-glow-gold hover:shadow-glow-gold-hover flex flex-col justify-between overflow-hidden">
+    <a
+      href={project.link}
+      className="w-[380px] md:w-[420px] flex-shrink-0 group relative rounded-3xl bg-neutral-900/40 backdrop-blur-xl border border-white/5 p-6 hover:border-gold-500/30 transition-all duration-500 shadow-glow-gold hover:shadow-glow-gold-hover flex flex-col justify-between overflow-hidden cursor-pointer"
+    >
       {/* Glow Effect */}
       <div className="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-gold-500/5 blur-[80px] group-hover:bg-gold-500/15 transition-all duration-700 pointer-events-none" />
       
@@ -123,7 +108,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           </span>
         ))}
       </div>
-    </div>
+    </a>
   )
 }
 

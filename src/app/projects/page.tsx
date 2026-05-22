@@ -35,180 +35,70 @@ interface CaseStudy {
   image: string
   icon: any
   features: string[]
+  liveUrl?: string
 }
 
 const projectsData: CaseStudy[] = [
   {
-    id: 'ecommerce',
-    title: 'Nouveau Luxury E-Commerce',
-    category: 'E-Ticaret',
-    shortDescription: 'Yüksek dönüşüm oranlı, global ödeme altyapılı ve Headless mimariye sahip lüks moda e-ticaret platformu.',
-    description: 'Nouveau Luxury markası için sıfır gecikmeli, 3D saat modellerinin sergilenebildiği ve global çapta yüksek trafik altındayken bile performans kaybetmeyen bir e-ticaret altyapısı geliştirdik.',
-    problem: 'Mevcut hazır e-ticaret altyapısının yavaşlığı, yüksek görsel kalitede yüklenen saat modellerinde yaşanan takılmalar ve global ödeme entegrasyonlarının yetersizliği marka prestijini olumsuz etkiliyordu.',
-    solution: 'Next.js 16 App Router ve Headless Shopify mimarisi ile sıfır sunucu bekleme süreli bir arayüz oluşturduk. Stripe entegrasyonu ve çoklu para birimi / dil desteğiyle küresel sipariş akışını optimize ettik.',
+    id: 'step-filtre',
+    title: 'Step Filtre B2B E-Ticaret Platformu',
+    category: 'B2B & E-Ticaret',
+    shortDescription: 'Filtre üreticileri için B2B ve E-Ticaret sistemini birleştiren, anlık stok ve gelişmiş Excel entegrasyonlu tek panelden yönetim platformu.',
+    description: 'Step Filtre için özel olarak geliştirilen, filtre üretim sektörünün tüm tedarik zincirini ve bayi ağını dijitalleştiren uçtan uca B2B ve E-ticaret platformu. Sistem; bayilere özel dinamik fiyatlandırmadan, saniyeler içinde binlerce ürünü güncelleyen Excel motoruna kadar tüm operasyonu tek elden yönetmektedir.',
+    problem: 'Filtre üreticilerinin binlerce farklı ebat ve modeldeki ürün kataloglarının, dinamik bayi fiyatlandırmalarının ve stok bilgilerinin manuel olarak takibindeki zorluklar, sipariş hataları ve operasyonel iş yükünün büyüklüğü.',
+    solution: 'React ve Node.js mimarisiyle, anlık veri akışı sağlayan ve gelişmiş bir toplu işlem motoruna (Excel Parser) sahip, B2B ve B2C süreçlerini birleştiren yüksek performanslı entegre kontrol paneli.',
     results: [
-      'Sayfa yüklenme hızlarında (LCP) %75 oranında iyileşme.',
-      'Global ödeme geçitleriyle sepeti terk etme oranında %35 azalma.',
-      'Organik arama motoru sıralamasında (SEO) birinci sayfaya yükseliş.'
+      'Toplu fiyat ve stok güncellemelerinde %95 oranında zaman tasarrufu.',
+      'Bayi sipariş takibi ve stok hata oranının sıfıra indirilmesi.',
+      'Step Filtre\'nin tüm operasyon süreçlerinin tamamen dijitalleşmesi ve hızlanması.'
     ],
     metrics: [
-      { label: 'Dönüşüm Artışı', value: '+%45' },
-      { label: 'Mobil Performans', value: '%99' },
-      { label: 'Sayfa Açılış Hızı', value: '0.4s' }
+      { label: 'Stok Güncelleme', value: '1.5s' },
+      { label: 'Sipariş Hatası', value: '%0' },
+      { label: 'Operasyonel Hız', value: '10x' }
     ],
-    tags: ['Next.js', 'Headless Shopify', 'Stripe', 'Tailwind CSS', 'GraphQL'],
-    image: '/projects/ecommerce.png',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Excel Parser'],
+    image: '/projects/step_filtre.png',
     icon: ShoppingBag,
     features: [
-      'Gelişmiş 3D Model Görüntüleyici',
-      'Tek Tıkla Hızlı Ödeme (One-Click Checkout)',
-      'Çoklu Para Birimi & Dinamik Vergi Hesaplama',
-      'Kişiselleştirilmiş Akıllı Arama Algoritması'
-    ]
+      'Gelişmiş Excel Toplu Ürün ve Fiyat Güncelleme Motoru',
+      'Bayi Bazlı Dinamik Fiyatlandırma & İskonto Altyapısı',
+      'Tek Panelden Entegre B2B & B2C Sipariş Yönetimi',
+      'Anlık Stok Değişimi ve Akıllı Ürün Kontrol Algoritması',
+      'Canlı Sistem Entegrasyonu (stepfiltre.com.tr)'
+    ],
+    liveUrl: 'https://www.stepfiltre.com.tr/'
   },
   {
-    id: 'ai',
-    title: 'Sentinet AI CRM & Analytics',
+    id: 'ai-saas',
+    title: 'Akıllı Yapay Zeka SaaS Platformu',
     category: 'Yapay Zeka',
-    shortDescription: 'Akıllı müşteri ilişkileri analizi, anlık duygu tahmini ve satış eğilimlerini raporlayan AI gösterge paneli.',
-    description: 'Müşteri destek taleplerini, sosyal medya geri bildirimlerini ve e-postaları yapay zeka ile süzerek anlık müşteri memnuniyeti ölçen ve akıllı biletleme yapan bir SaaS platformu geliştirdik.',
-    problem: 'Müşteri hizmetleri ekibinin yüzlerce talebi manuel olarak sınıflandırması zaman alıyor, öncelikli sorunlar gözden kaçıyor ve veriye dayalı satış kararları alınamıyordu.',
-    solution: 'GPT-4 ve özel eğitilmiş Doğal Dil İşleme (NLP) modellerini entegre ederek tüm yazılı müşteri etkileşimlerini anlık analiz eden ve müşteri duygusunu (sentiman) ölçen bir yapay zeka paneli kurduk.',
+    shortDescription: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',
+    description: 'Sıradaki büyük projemiz için çalışmalarımız devam ediyor. Gelişmiş veri analitiği ve akıllı otomasyon çözümlerini içeren yeni platformumuzu yakında burada paylaşacağız.',
+    problem: 'Modern işletmelerin büyük veri ve yapay zeka entegrasyonlarını kendi süreçlerine hızlı ve verimli bir şekilde adapte edememesi.',
+    solution: 'Özel eğitilmiş yapay zeka modelleri ve kolay entegre edilebilir API altyapısıyla donatılmış yeni nesil SaaS platformu.',
     results: [
-      'Müşteri destek yanıt süresinde %70 oranında düşüş.',
-      'Sorun çözüm doğruluğunda %92 başarı artışı.',
-      'Yapay zeka biletleme ile operasyonel maliyetlerde %40 tasarruf.'
+      'Geliştirme süreci aktif olarak devam etmektedir.',
+      'Yapay zeka modellerinin entegrasyonu tamamlanmıştır.',
+      'Yakında gerçek müşteri verileriyle yayına alınacaktır.'
     ],
     metrics: [
-      { label: 'Yanıt Süresi İyileşmesi', value: '%70' },
-      { label: 'Doğruluk Oranı', value: '%92' },
-      { label: 'Maliyet Tasarrufu', value: '%40' }
+      { label: 'Durum', value: 'Geliştiriliyor' },
+      { label: 'Yapay Zeka', value: 'GPT-4' },
+      { label: 'Tamamlanma', value: '%85' }
     ],
-    tags: ['OpenAI API', 'Python', 'React', 'MongoDB', 'Node.js'],
+    tags: ['Next.js', 'OpenAI API', 'Python', 'Tailwind', 'SaaS'],
     image: '/projects/ai.png',
     icon: Cpu,
     features: [
-      'Anlık Duygu Analizi (Sentiment Analysis)',
-      'Otomatik Bilet Sınıflandırma & Yönlendirme',
-      'Akıllı Gelir ve Talep Tahminleme Modülü',
-      'Özelleştirilebilir AI Chatbot Entegrasyonu'
-    ]
-  },
-  {
-    id: 'corporate',
-    title: 'Zenith Holding Corporate Portal',
-    category: 'Kurumsal',
-    shortDescription: 'Çok dilli, 3D animasyonlu ve yüksek performanslı global holding prestij web platformu.',
-    description: 'Zenith Holding\'in küresel gücünü ve prestijini yansıtan, etkileşimli 3D grafikler, yatırımcı ilişkileri araçları ve sürdürülebilirlik raporları içeren üst düzey kurumsal web platformu.',
-    problem: 'Holdingin eski web sitesi mobil uyumlu değildi, yatırımcı ilişkileri verileri statikti ve modern küresel marka vizyonunu yansıtmakta zayıf kalıyordu.',
-    solution: 'Three.js ve Framer Motion kullanarak 3D interaktif holding haritası ve canlı hisse senedi takip modülleri içeren, tamamen responsive ve erişilebilir bir deneyim tasarladık.',
-    results: [
-      'Yatırımcı ilişkileri sayfalarında kalma süresinde %120 artış.',
-      'Sürdürülebilirlik raporu indirmelerinde %85 artış.',
-      'Uluslararası tasarım ve erişilebilirlik standartlarına tam uyumluluk.'
-    ],
-    metrics: [
-      { label: 'Ziyaretçi Etkileşimi', value: '+%120' },
-      { label: 'Hisse Takip Gecikmesi', value: '1.2s' },
-      { label: 'Erişilebilirlik Skoru', value: '100/100' }
-    ],
-    tags: ['Next.js', 'Framer Motion', 'Three.js', 'Tailwind', 'REST APIs'],
-    image: '/projects/corporate.png',
-    icon: Globe,
-    features: [
-      'Three.js Tabanlı İnteraktif 3D Grafikler',
-      'Canlı Hisse Senedi & Döviz Entegrasyonu',
-      'Çok Dilli Dinamik İçerik Yönetimi (CMS)',
-      'Gelişmiş Sürdürülebilirlik Veri Görselleştirmeleri'
-    ]
-  },
-  {
-    id: 'b2b',
-    title: 'AeroParts B2B Supply Chain',
-    category: 'B2B',
-    shortDescription: 'Havacılık yedek parçaları için gerçek zamanlı stok takipli ve ERP entegrasyonlu toptan satış platformu.',
-    description: 'AeroParts havacılık bayileri için dünya genelinde binlerce parça stokunun anlık takip edilebildiği, teklif oluşturma ve lojistik entegrasyonlu devasa bir B2B tedarik zinciri portalı.',
-    problem: 'Stok güncellemelerinin günde bir kez yapılması nedeniyle mükerrer siparişler alınıyor, kargo takip süreçleri manuel yürütülüyor ve bayi sipariş yönetimi yavaş ilerliyordu.',
-    solution: 'SAP ERP sistemi ile doğrudan çift yönlü entegrasyon sağladık. PostgreSQL veri tabanı ve Redis önbellek mekanizması ile milisaniyeler bazında stok sorgulama altyapısı kurduk.',
-    results: [
-      'Hatalı veya çakışan sipariş sayısında %95 azalma.',
-      'Bayi sipariş onay sürelerinin 2 günden 10 saniyeye inmesi.',
-      'Yıllık toptan satış cirosunda otomatik işlemler sayesinde %28 artış.'
-    ],
-    metrics: [
-      { label: 'Sipariş Hata Düşüşü', value: '%95' },
-      { label: 'İşlem Süresi', value: '10s' },
-      { label: 'Ciro Artışı', value: '+%28' }
-    ],
-    tags: ['React', 'NestJS', 'PostgreSQL', 'SAP SDK', 'Redis'],
-    image: '/projects/b2b.png',
-    icon: Layers,
-    features: [
-      'SAP ERP ile Gerçek Zamanlı Çift Yönlü Entegrasyon',
-      'Bayilere Özel Dinamik Fiyatlandırma Modülü',
-      'Otomatik Gümrük ve Lojistik Evrak Oluşturma',
-      'Toplu Sipariş Girişi ve Excel Aktarım Motoru'
-    ]
-  },
-  {
-    id: 'saas',
-    title: 'Cloud Insights SaaS Dashboard',
-    category: 'SaaS',
-    shortDescription: 'Bulut altyapı kaynaklarını, veri akışını ve sistem sağlığını anlık izleyen SaaS veri analitiği paneli.',
-    description: 'Büyük ölçekli bulut mimarilerini, sunucu tüketim verilerini ve API performanslarını tek bir ekrandan anlık izleyen yüksek verimli bir SaaS izleme ve analiz kontrol paneli geliştirdik.',
-    problem: 'Farklı bulut sağlayıcılarındaki sunucu verilerinin ayrı ayrı ekranlardan takip edilmesi zorluğu ve aşırı kaynak kullanımı durumunda anlık alarm mekanizmalarının olmaması.',
-    solution: 'Apache Kafka ile anlık veri akışını işleyen, React ve Recharts kütüphaneleriyle milisaniyelik veri güncellemelerini ekrana yansıtan tam kapsamlı bir SaaS arayüzü kodladık.',
-    results: [
-      'Kaynak takibi sayesinde gereksiz sunucu maliyetlerinde %30 tasarruf.',
-      'Olası sunucu çökmelerini %80 oranında önceden tahmin eden alarm yapısı.',
-      'Sistem yöneticilerinin hata tespit süresinde %65 kısalma.'
-    ],
-    metrics: [
-      { label: 'Maliyet Tasarrufu', value: '%30' },
-      { label: 'Arıza Önleme', value: '%80' },
-      { label: 'Hata Tespit Hızı', value: '%65' }
-    ],
-    tags: ['TypeScript', 'Apache Kafka', 'Recharts', 'Tailwind', 'Node.js'],
-    image: '/projects/saas.png',
-    icon: LineChart,
-    features: [
-      'Anlık Apache Kafka Veri Akış Entegrasyonu',
-      'Özelleştirilebilir Sürükle-Bırak Grafik Düzenleyici',
-      'Slack ve E-Posta Uyumlu Akıllı Alarm Sistemi',
-      'Otomatik Sunucu Optimizasyon Öneri Motoru'
-    ]
-  },
-  {
-    id: 'mobile',
-    title: 'Valor Fintek Mobile Wallet',
-    category: 'Mobil',
-    shortDescription: 'Güvenli, hızlı ve kullanıcı dostu varlık yönetimi sunan iOS & Android fintek cüzdan uygulaması.',
-    description: 'Çoklu para birimi desteği, anında QR kodla ödeme, hisse senedi / kripto varlık alım satımı ve üst düzey biyometrik güvenlik sunan yeni nesil mobil finans cüzdanı.',
-    problem: 'Finansal işlemlerin yavaşlığı, karmaşık arayüzler ve özellikle düşük internet hızlarında para transferi sırasında yaşanan kopmalar kullanıcı kaybına yol açıyordu.',
-    solution: 'React Native ile cross-platform, hafif ve yüksek performanslı bir mobil arayüz kodladık. Redis önbellek ve mikro hizmet mimarisiyle transfer sürelerini milisaniyelere düşürdük.',
-    results: [
-      'Uygulama mağazalarında 1 milyondan fazla indirilme.',
-      'Para transferi tamamlama süresinde %85 hızlanma.',
-      'Kullanıcı memnuniyet skorunda (NPS) 4.8 / 5 başarı derecesi.'
-    ],
-    metrics: [
-      { label: 'Aktif İndirilme', value: '1M+' },
-      { label: 'İşlem Hızlanması', value: '%85' },
-      { label: 'NPS Skoru', value: '4.8/5' }
-    ],
-    tags: ['React Native', 'Node.js', 'Redis', 'WebSockets', 'Biometrics'],
-    image: '/projects/mobile.png',
-    icon: Smartphone,
-    features: [
-      'Gelişmiş Biyometrik (FaceID / TouchID) Güvenlik',
-      'Milisaniyelik Anlık QR Kod Para Transferi',
-      'Detaylı Kişisel Finans Raporlama & Grafik Modülü',
-      'Gömülü Kripto ve Hisse Senedi Yatırım Arayüzü'
+      'Yapay Zeka Destekli Tahminleme Modülleri',
+      'Akıllı Veri Analitiği Dashboard Arayüzü',
+      'Özelleştirilebilir Slack ve E-Posta Entegrasyonları'
     ]
   }
 ]
 
-const categories = ['Tümü', 'Yapay Zeka', 'E-Ticaret', 'SaaS', 'B2B', 'Kurumsal', 'Mobil']
+const categories = ['Tümü', 'B2B & E-Ticaret', 'Yapay Zeka']
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState('Tümü')
@@ -501,6 +391,21 @@ export default function ProjectsPage() {
                       ))}
                     </ul>
                   </div>
+
+                  {/* Live Website Button */}
+                  {activeProject.liveUrl && (
+                    <div className="pt-6 border-t border-white/5 flex">
+                      <a
+                        href={activeProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center space-x-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-black font-bold text-xs tracking-widest uppercase transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] group/btn w-full sm:w-auto"
+                      >
+                        <span>Canlı Siteyi Ziyaret Et</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                      </a>
+                    </div>
+                  )}
 
                 </div>
               </div>
