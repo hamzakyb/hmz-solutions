@@ -51,47 +51,44 @@ const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <a
       href={project.link}
-      className="w-[380px] md:w-[420px] flex-shrink-0 group relative rounded-3xl bg-neutral-900/40 backdrop-blur-xl border border-white/5 p-6 hover:border-gold-500/30 transition-all duration-500 shadow-glow-gold hover:shadow-glow-gold-hover flex flex-col justify-between overflow-hidden cursor-pointer"
+      className="w-[380px] md:w-[420px] flex-shrink-0 group relative rounded-xl bg-zinc-900/20 backdrop-blur-xl border border-zinc-800/80 p-6 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer"
     >
-      {/* Glow Effect */}
-      <div className="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-gold-500/5 blur-[80px] group-hover:bg-gold-500/15 transition-all duration-700 pointer-events-none" />
-      
       <div>
         {/* Project Image */}
-        <div className="relative w-full h-[200px] rounded-2xl overflow-hidden mb-6 border border-white/5">
+        <div className="relative w-full h-[200px] rounded-lg overflow-hidden mb-6 border border-zinc-800/50">
           <Image
             src={project.image}
             alt={project.title}
             fill
             sizes="(max-width: 768px) 100vw, 400px"
-            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            className="object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
           />
           {/* Tag Badge */}
-          <div className="absolute top-4 left-4 z-10 flex items-center space-x-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/10">
-            <Icon className="w-3.5 h-3.5 text-gold-400" />
-            <span className="text-[10px] font-bold uppercase tracking-wider text-gold-400">
+          <div className="absolute top-4 left-4 z-10 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-zinc-950/90 backdrop-blur-md border border-zinc-800">
+            <Icon className="w-3.5 h-3.5 text-zinc-400" />
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-300">
               {project.category}
             </span>
           </div>
         </div>
 
         {/* Content */}
-        <h3 className="text-xl font-bold text-white group-hover:text-gold-400 transition-colors duration-300 flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-white tracking-tight group-hover:text-zinc-200 transition-colors duration-200 flex items-center justify-between">
           {project.title}
-          <ArrowUpRight className="w-5 h-5 text-neutral-500 group-hover:text-gold-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+          <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-zinc-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
         </h3>
         
-        <p className="text-neutral-400 text-sm font-light mt-3 leading-relaxed min-h-[60px]">
+        <p className="text-zinc-400 text-sm font-normal mt-3 leading-relaxed min-h-[60px]">
           {project.description}
         </p>
       </div>
 
       {/* Tech Tags */}
-      <div className="mt-6 pt-4 border-t border-white/5 flex flex-wrap gap-2">
+      <div className="mt-6 pt-4 border-t border-zinc-800/80 flex flex-wrap gap-2">
         {project.tags.map((tag, idx) => (
           <span
             key={idx}
-            className="text-[10px] font-semibold text-neutral-500 group-hover:text-gold-300/80 bg-white/[0.02] border border-white/5 px-2.5 py-1 rounded-full transition-colors duration-300"
+            className="text-[10px] font-medium text-zinc-400 bg-zinc-950 border border-zinc-800 px-2.5 py-1 rounded-md transition-colors duration-300"
           >
             {tag}
           </span>
@@ -108,8 +105,8 @@ const ProjectsSlider = () => {
   return (
     <section id="projects" className="py-24 md:py-32 bg-black relative overflow-hidden">
       {/* Premium Background Atmosphere */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gold-500/[0.02] blur-[150px] pointer-events-none mix-blend-screen" />
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-gold-400/[0.01] blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-zinc-800/[0.02] blur-[150px] pointer-events-none mix-blend-screen" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-zinc-900/[0.01] blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 mb-16 relative z-10">
         <div className="flex flex-col items-center text-center space-y-4">
@@ -119,8 +116,8 @@ const ProjectsSlider = () => {
             viewport={{ once: true }}
             className="inline-flex items-center space-x-2"
           >
-            <Sparkles className="w-4 h-4 text-gold-400 animate-pulse" />
-            <span className="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">
+            <Sparkles className="w-4 h-4 text-zinc-400" />
+            <span className="text-zinc-400 text-xs font-semibold tracking-[0.2em] uppercase">
               PORTFOLYO & REFERANSLAR
             </span>
           </motion.div>
@@ -133,7 +130,7 @@ const ProjectsSlider = () => {
             className="text-4xl md:text-6xl font-bold tracking-tight text-white"
           >
             Dijital Dünyada{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 via-zinc-300 to-zinc-500">
               İmzamız
             </span>
           </motion.h2>
@@ -143,7 +140,7 @@ const ProjectsSlider = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="max-w-2xl text-neutral-400 text-base md:text-lg font-light leading-relaxed"
+            className="max-w-2xl text-zinc-400 text-base md:text-lg font-light leading-relaxed"
           >
             Global markalar ve vizyoner girişimler için geliştirdiğimiz, iş hedeflerini geleceğe taşıyan yüksek kaliteli projelerimiz.
           </motion.p>
@@ -153,7 +150,7 @@ const ProjectsSlider = () => {
       {/* Slider Tracks */}
       <div className="space-y-8 md:space-y-12 relative z-10 w-full">
         {/* Row 1: Left moving */}
-        <div className="w-full overflow-hidden flex select-none py-4 border-y border-white/[0.02]">
+        <div className="w-full overflow-hidden flex select-none py-4 border-y border-zinc-800/20">
           <div className="flex gap-6 md:gap-8 pr-6 md:pr-8 animate-marquee hover:[animation-play-state:paused] min-w-full">
             {doubleRow1.map((project, idx) => (
               <ProjectCard key={`row1-${idx}`} project={project} />
