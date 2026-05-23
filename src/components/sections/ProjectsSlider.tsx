@@ -43,9 +43,9 @@ const row1Projects: Project[] = [
     icon: Globe,
   },
   {
-    title: 'Deqoin Mimarlık & Yüzey Tasarımı',
+    title: 'Deqoin İç Mimarlık',
     category: 'B2B & E-Ticaret',
-    description: 'Mimari tasarım, yüzey kaplama malzemeleri ve ince yapı inşaatı yapan Deqoin için Next.js 15, Lenis smooth scroll ve Cloudinary CDN entegrasyonlu mimari platform.',
+    description: 'İç mimari tasarım, lüks yüzey kaplama malzemeleri ve ince yapı inşaatı yapan Deqoin için Next.js 15, Lenis smooth scroll ve Cloudinary CDN entegrasyonlu mimari platform.',
     tags: ['Next.js 15', 'React 19', 'Lenis Scroll', 'Cloudinary CDN', 'Mimari Hub'],
     image: '/projects/deqoin.png',
     link: '/projects',
