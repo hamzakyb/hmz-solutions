@@ -42,15 +42,6 @@ const row1Projects: Project[] = [
     link: '/projects',
     icon: Globe,
   },
-  {
-    title: 'Akıllı Yapay Zeka SaaS Platformu',
-    category: 'Yapay Zeka (Yakında)',
-    description: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',
-    tags: ['Next.js', 'OpenAI API', 'Python', 'Tailwind', 'SaaS'],
-    image: '/projects/ai.png',
-    link: '/projects',
-    icon: Cpu,
-  },
 ]
 
 

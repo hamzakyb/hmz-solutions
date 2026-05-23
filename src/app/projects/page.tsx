@@ -76,33 +76,7 @@ const projectsData: CaseStudy[] = [
     ],
     liveUrl: 'https://www.stepfiltre.com.tr/'
   },
-  {
-    id: 'ai-saas',
-    title: 'Akıllı Yapay Zeka SaaS Platformu',
-    category: 'Yapay Zeka',
-    shortDescription: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',
-    description: 'Sıradaki büyük projemiz için çalışmalarımız devam ediyor. Gelişmiş veri analitiği ve akıllı otomasyon çözümlerini içeren yeni platformumuzu yakında burada paylaşacağız.',
-    problem: 'Modern işletmelerin büyük veri ve yapay zeka entegrasyonlarını kendi süreçlerine hızlı ve verimli bir şekilde adapte edememesi.',
-    solution: 'Özel eğitilmiş yapay zeka modelleri ve kolay entegre edilebilir API altyapısıyla donatılmış yeni nesil SaaS platformu.',
-    results: [
-      'Geliştirme süreci aktif olarak devam etmektedir.',
-      'Yapay zeka modellerinin entegrasyonu tamamlanmıştır.',
-      'Yakında gerçek müşteri verileriyle yayına alınacaktır.'
-    ],
-    metrics: [
-      { label: 'Durum', value: 'Geliştiriliyor' },
-      { label: 'Yapay Zeka', value: 'GPT-4' },
-      { label: 'Tamamlanma', value: '%85' }
-    ],
-    tags: ['Next.js', 'OpenAI API', 'Python', 'Tailwind', 'SaaS'],
-    image: '/projects/ai.png',
-    icon: Cpu,
-    features: [
-      'Yapay Zeka Destekli Tahminleme Modülleri',
-      'Akıllı Veri Analitiği Dashboard Arayüzü',
-      'Özelleştirilebilir Slack ve E-Posta Entegrasyonları'
-    ]
-  },
+
   {
     id: 'bark-one',
     title: 'barkOne Mobilya E-Ticaret & CMS Platformu',
@@ -173,7 +147,7 @@ const projectsData: CaseStudy[] = [
   }
 ]
 
-const categories = ['Tümü', 'B2B & E-Ticaret', 'E-Ticaret & CMS', 'Yapay Zeka']
+const categories = ['Tümü', 'B2B & E-Ticaret', 'E-Ticaret & CMS']
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState('Tümü')
