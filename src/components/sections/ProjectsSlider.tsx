@@ -34,6 +34,15 @@ const row1Projects: Project[] = [
     icon: Globe,
   },
   {
+    title: 'Uren Global B2B İhracat Platformu',
+    category: 'B2B & E-Ticaret',
+    description: 'Küresel tarım gıdaları ihracatı için Next.js 16 Server Actions, Mongoose Category şeması ve jose JWT entegrasyonlu B2B portalı.',
+    tags: ['Next.js 16', 'React 19', 'Server Actions', 'Mongoose', 'B2B Trade'],
+    image: '/projects/uren_global.png',
+    link: '/projects',
+    icon: Globe,
+  },
+  {
     title: 'Akıllı Yapay Zeka SaaS Platformu',
     category: 'Yapay Zeka (Yakında)',
     description: 'Veri analitiği ve yapay zeka entegrasyonlu yeni nesil SaaS platformumuz çok yakında burada sergilenecektir.',

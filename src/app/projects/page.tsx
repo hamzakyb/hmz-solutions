@@ -136,6 +136,40 @@ const projectsData: CaseStudy[] = [
       'Zod ile Şema Tabanlı Form & Güvenlik Validasyonu (Bcryptjs & JWT)'
     ],
     liveUrl: 'https://www.barkone.com.tr/'
+  },
+  {
+    id: 'uren-global',
+    title: 'Uren Global B2B Tarım Emtia & İhracat Platformu',
+    category: 'B2B & E-Ticaret',
+    shortDescription: 'Küresel tarım gıdaları ve emtia ihracatı yapan Uren Global için; Next.js 16 Server Actions, Mongoose dynamic Category/Variety şemaları ve Vercel Blob entegrasyonlu B2B ihracat portalı.',
+    description: 'Uren Global Endüstriyel Makine ve Dış Ticaret şirketi için tasarlanan bu B2B portalı, küresel tarım gıdaları (taze meyveler, narenciye, yumuşak çekirdekli meyveler vb.) ve endüstriyel ihracat emtialarının tüm küresel dağıtım, lojistik, sertifikasyon ve katalog akışlarını dijitalleştiren uçtan uca modern bir kurumsal ticaret platformudur. Sistem, en son teknoloji olan Next.js 16 ve Server Actions veri kanalı, Mongoose dynamic Category şeması ve jose kütüphanesi tabanlı esnek JWT oturum yönetimi ile donatılmıştır.',
+    problem: 'Küresel ithalatçıların farklı dillerde taze meyve, çekirdekli meyveler veya sert kabuklu yemişler için menşei (origin), hasat dönemleri (harvest), lojistik teslim süreleri (leadTime) ve ambalaj standartlarına (packaging) kolayca erişememesi, statik sayfaların küresel operasyonel dinamikleri yavaşlatması.',
+    solution: 'Next.js 16 (App Router) ve React 19 mimarisiyle sıfırdan inşa edilmiş, Tailwind CSS v4 ve SASS ile kodlanmış yüksek performanslı kullanıcı arayüzü; MongoDB veritabanı üzerinde çalışan esnek Category & Variety modeli, Server Actions veri iletişim katmanı, Vercel Blob bulut medya entegrasyonu ve jose ile yerel JWT session yönetim kalkanı.',
+    results: [
+      'Next.js 16 Server Actions entegrasyonu sayesinde veritabanı veri iletişim yanıt süresinin 0.5 saniyenin altına düşürülmesi.',
+      'Sektörde yenilikçi Next.js 16, React 19 ve Tailwind CSS v4 mimarisi ile sıfır hata derlenen %100 modern ve sürdürülebilir teknolojik standartlar.',
+      'Küresel alıcıların menşei, hasat ayları ve lojistik (FOB/CIF, FCL) verilerine tek tıkla ulaşmasıyla B2B müşteri talep/lead oluşturma oranlarında %55 artış.',
+      'Dinamik CMS paneli üzerinden tüm ürün ambalaj, sertifika ve PDF belgelerinin kod yazmadan anlık yönetilebilmesi.'
+    ],
+    metrics: [
+      { label: 'Sayfa Tepki Süresi', value: '0.5s' },
+      { label: 'Talep Dönüşümü', value: '+%55' },
+      { label: 'Next.js Sürümü', value: 'v16.1' }
+    ],
+    tags: ['Next.js 16', 'React 19', 'Tailwind v4', 'Server Actions', 'MongoDB', 'Mongoose', 'Vercel Blob', 'jose JWT'],
+    image: '/projects/uren_global.png',
+    icon: Globe,
+    features: [
+      'Dinamik B2B Tarım Emtia & Ürün Kataloğu Yönetimi (Category Model)',
+      'Next.js 16 Server Actions Tabanlı Yüksek Performanslı Veri İletişim Modeli',
+      'Menşei (Origin), Hasat Periyodu ve Çeşit (Variety) İzleme Altyapısı',
+      'Global Lojistik ve Ticaret Bilgileri Paneli (TradeInfo: LeadTime, FOB/CIF)',
+      'Gıda Güvenliği ve Sertifikasyon Uyum Sistemleri (Compliance & Documents)',
+      'Vercel Blob ile Bulut Medya Entegrasyonu ve Küresel CDN Servisi',
+      'jose Kütüphanesi ile Native Runtime JWT Oturum ve Rol Yetkilendirme',
+      'Zod ile Form Validasyonu ve Next.js Middleware Güvenlik Kalkanı'
+    ],
+    liveUrl: 'https://www.urenglobal.com/'
   }
 ]
 
