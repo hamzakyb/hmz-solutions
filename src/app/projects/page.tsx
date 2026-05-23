@@ -153,9 +153,9 @@ export default function ProjectsPage() {
   return (
     <main className="bg-black min-h-screen relative overflow-hidden text-white">
       {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-gold-500/[0.03] to-transparent pointer-events-none" />
-      <div className="absolute top-1/3 right-[-10%] w-[600px] h-[600px] rounded-full bg-gold-400/[0.02] blur-[150px] pointer-events-none mix-blend-screen" />
-      <div className="absolute bottom-1/4 left-[-10%] w-[500px] h-[500px] rounded-full bg-gold-500/[0.01] blur-[120px] pointer-events-none mix-blend-screen" />
+      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-zinc-800/[0.03] to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 right-[-10%] w-[600px] h-[600px] rounded-full bg-zinc-900/[0.02] blur-[150px] pointer-events-none mix-blend-screen" />
+      <div className="absolute bottom-1/4 left-[-10%] w-[500px] h-[500px] rounded-full bg-zinc-950/[0.01] blur-[120px] pointer-events-none mix-blend-screen" />
 
       <Navigation />
 
@@ -168,8 +168,8 @@ export default function ProjectsPage() {
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center space-x-2"
             >
-              <Sparkles className="w-4 h-4 text-gold-400 animate-pulse" />
-              <span className="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">
+              <Sparkles className="w-4 h-4 text-zinc-400" />
+              <span className="text-zinc-400 text-xs font-semibold tracking-[0.2em] uppercase">
                 BAŞARI HİKAYELERİMİZ
               </span>
             </motion.div>
@@ -181,7 +181,7 @@ export default function ProjectsPage() {
               className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]"
             >
               Dijital Dünyada{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-100 to-gold-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 via-zinc-300 to-zinc-500">
                 İmzamız
               </span>
             </motion.h1>
@@ -190,7 +190,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-neutral-400 leading-relaxed font-light"
+              className="text-lg md:text-xl text-zinc-400 leading-relaxed font-light"
             >
               Global iş ortaklarımızın dijital altyapılarını baştan inşa ettik, ölçeklenebilir ve yüksek performanslı çözümlerle hedeflerine ulaştırdık.
             </motion.p>
@@ -201,7 +201,7 @@ export default function ProjectsPage() {
       {/* Filters Section */}
       <section className="py-8 relative z-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 bg-zinc-950/40 p-2 rounded-lg border border-zinc-900 max-w-2xl mx-auto">
             {categories.map((cat, idx) => (
               <motion.button
                 key={cat}
@@ -209,10 +209,10 @@ export default function ProjectsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
+                className={`px-4 py-2 rounded-md text-xs font-medium transition-all duration-200 border ${
                   selectedCategory === cat
-                    ? 'bg-gold-500 text-black border-gold-400 font-bold shadow-[0_0_30px_-5px_rgba(212,175,55,0.4)]'
-                    : 'bg-white/[0.02] text-neutral-400 border-white/5 hover:text-white hover:border-white/10 hover:bg-white/[0.05]'
+                    ? 'bg-white text-black border-zinc-200 font-semibold shadow-sm'
+                    : 'bg-transparent text-zinc-400 border-transparent hover:text-zinc-100 hover:bg-zinc-900/50'
                 }`}
               >
                 {cat}
@@ -239,60 +239,57 @@ export default function ProjectsPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
                     onClick={() => setActiveProject(project)}
-                    className="group relative rounded-3xl bg-neutral-900/30 backdrop-blur-xl border border-white/5 p-6 hover:border-gold-500/20 transition-all duration-500 shadow-glow-gold hover:shadow-glow-gold-hover cursor-pointer flex flex-col justify-between overflow-hidden"
+                    className="group relative rounded-xl bg-zinc-900/20 backdrop-blur-xl border border-zinc-800/80 p-6 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
                   >
-                    {/* Glowing effect inside card */}
-                    <div className="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-gold-500/5 blur-[60px] group-hover:bg-gold-500/10 transition-all duration-700 pointer-events-none" />
-
                     <div>
                       {/* Project Image */}
-                      <div className="relative w-full h-[220px] rounded-2xl overflow-hidden mb-6 border border-white/5">
+                      <div className="relative w-full h-[220px] rounded-lg overflow-hidden mb-6 border border-zinc-800/50">
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
                           sizes="(max-width: 768px) 100vw, 400px"
-                          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                          className="object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                         />
                         {/* Category Tag */}
-                        <div className="absolute top-4 left-4 z-10 flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/10">
-                          <Icon className="w-3.5 h-3.5 text-gold-400" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-gold-400">
+                        <div className="absolute top-4 left-4 z-10 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-zinc-950/90 backdrop-blur-md border border-zinc-800">
+                          <Icon className="w-3 h-3 text-zinc-400" />
+                          <span className="text-[9px] font-semibold uppercase tracking-wider text-zinc-300">
                             {project.category}
                           </span>
                         </div>
                       </div>
 
                       {/* Info */}
-                      <h3 className="text-2xl font-bold text-white group-hover:text-gold-400 transition-colors duration-300">
+                      <h3 className="text-xl font-semibold text-white tracking-tight group-hover:text-zinc-200 transition-colors duration-200">
                         {project.title}
                       </h3>
                       
-                      <p className="text-neutral-400 text-sm font-light mt-3 leading-relaxed min-h-[60px]">
+                      <p className="text-zinc-400 text-sm font-normal mt-2 leading-relaxed min-h-[60px]">
                         {project.shortDescription}
                       </p>
                     </div>
 
                     {/* Metrics Row */}
-                    <div className="grid grid-cols-3 gap-2 mt-6 py-4 border-y border-white/5">
+                    <div className="grid grid-cols-3 gap-2 mt-6 py-3 border-y border-zinc-800/80">
                       {project.metrics.slice(0, 3).map((m, idx) => (
                         <div key={idx} className="text-center">
-                          <div className="text-gold-400 text-lg font-bold tracking-tight">{m.value}</div>
-                          <div className="text-[9px] text-neutral-500 uppercase font-semibold mt-0.5 tracking-wider truncate">{m.label}</div>
+                          <div className="text-zinc-100 text-base font-semibold tracking-tight">{m.value}</div>
+                          <div className="text-[9px] text-zinc-500 uppercase font-medium mt-0.5 tracking-widest truncate">{m.label}</div>
                         </div>
                       ))}
                     </div>
 
                     {/* CTAs */}
-                    <div className="mt-6 flex items-center justify-between text-neutral-500 group-hover:text-gold-400 transition-colors">
-                      <span className="text-xs font-bold uppercase tracking-widest group-hover:translate-x-1 transition-transform flex items-center">
-                        Detayları İncele <ArrowRight className="w-4 h-4 ml-2" />
+                    <div className="mt-6 flex items-center justify-between text-zinc-500 group-hover:text-zinc-300 transition-colors">
+                      <span className="text-xs font-medium uppercase tracking-widest group-hover:translate-x-0.5 transition-transform flex items-center">
+                        Detayları İncele <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                       </span>
                       <div className="flex gap-1.5">
                         {project.tags.slice(0, 2).map((t, idx) => (
-                          <span key={idx} className="text-[9px] bg-white/[0.02] border border-white/5 px-2 py-0.5 rounded text-neutral-500 group-hover:text-gold-300/80 transition-colors">
+                          <span key={idx} className="text-[9px] bg-zinc-950 border border-zinc-800 px-2 py-0.5 rounded text-zinc-400 transition-colors">
                             {t}
                           </span>
                         ))}
@@ -313,31 +310,31 @@ export default function ProjectsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm"
             onClick={() => setActiveProject(null)}
           >
             <motion.div
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
+              initial={{ scale: 0.97, y: 15, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 20, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 180 }}
+              exit={{ scale: 0.97, y: 15, opacity: 0 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 200 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl bg-neutral-950 border border-white/10 p-6 md:p-10 shadow-[0_0_80px_rgba(212,175,55,0.15)] scrollbar-thin"
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-xl bg-zinc-950 border border-zinc-800 p-6 md:p-8 shadow-2xl scrollbar-thin"
             >
               {/* Close Button */}
               <button
                 onClick={() => setActiveProject(null)}
-                className="absolute top-6 right-6 z-20 p-2.5 rounded-full bg-white/5 border border-white/10 text-neutral-400 hover:text-white hover:bg-white/10 transition-all"
+                className="absolute top-6 right-6 z-20 p-2.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-all"
               >
                 <X className="w-5 h-5" />
               </button>
 
               {/* Grid Content */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mt-4">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 mt-4">
                 
                 {/* Left Side: Image & Stats */}
                 <div className="lg:col-span-5 flex flex-col space-y-6">
-                  <div className="relative w-full h-[250px] md:h-[320px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
+                  <div className="relative w-full h-[250px] md:h-[320px] rounded-lg overflow-hidden border border-zinc-800/80 shadow-lg">
                     <Image
                       src={activeProject.image}
                       alt={activeProject.title}
@@ -345,29 +342,29 @@ export default function ProjectsPage() {
                       sizes="400px"
                       className="object-cover"
                     />
-                    <div className="absolute top-4 left-4 z-10 flex items-center space-x-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/10">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gold-400">
+                    <div className="absolute top-4 left-4 z-10 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-zinc-950/90 backdrop-blur-md border border-zinc-800">
+                      <span className="text-[9px] font-semibold uppercase tracking-wider text-zinc-300">
                         {activeProject.category}
                       </span>
                     </div>
                   </div>
 
                   {/* High Impact Metrics */}
-                  <div className="grid grid-cols-3 gap-3 bg-neutral-900/40 border border-white/5 p-5 rounded-2xl text-center">
+                  <div className="grid grid-cols-3 gap-3 bg-zinc-900/30 border border-zinc-800/80 p-4 rounded-lg text-center">
                     {activeProject.metrics.map((m, idx) => (
                       <div key={idx} className="space-y-1">
-                        <div className="text-gold-400 text-2xl font-black tracking-tight">{m.value}</div>
-                        <div className="text-[9px] text-neutral-500 uppercase tracking-widest font-bold font-sans">{m.label}</div>
+                        <div className="text-white text-xl font-bold tracking-tight">{m.value}</div>
+                        <div className="text-[9px] text-zinc-500 uppercase tracking-widest font-semibold">{m.label}</div>
                       </div>
                     ))}
                   </div>
 
                   {/* Technologies Used */}
-                  <div className="space-y-3">
-                    <div className="text-xs font-bold text-neutral-400 uppercase tracking-widest">KULLANILAN TEKNOLOJİLER</div>
-                    <div className="flex flex-wrap gap-2">
+                  <div className="space-y-2.5">
+                    <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">KULLANILAN TEKNOLOJİLER</div>
+                    <div className="flex flex-wrap gap-1.5">
                       {activeProject.tags.map((t, idx) => (
-                        <span key={idx} className="text-xs bg-gold-950/20 border border-gold-500/20 px-3.5 py-1.5 rounded-full text-gold-400 font-medium">
+                        <span key={idx} className="text-xs bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-md text-zinc-300 font-medium">
                           {t}
                         </span>
                       ))}
@@ -376,58 +373,58 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Right Side: Case Study Narrative */}
-                <div className="lg:col-span-7 flex flex-col space-y-8">
-                  <div className="space-y-3">
-                    <span className="text-xs font-bold text-gold-500 uppercase tracking-[0.2em]">{activeProject.category} Vaka Analizi</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">{activeProject.title}</h2>
-                    <p className="text-neutral-400 text-base font-light leading-relaxed">{activeProject.description}</p>
+                <div className="lg:col-span-7 flex flex-col space-y-6">
+                  <div className="space-y-2">
+                    <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">{activeProject.category} Vaka Analizi</span>
+                    <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">{activeProject.title}</h2>
+                    <p className="text-zinc-400 text-sm font-normal leading-relaxed">{activeProject.description}</p>
                   </div>
 
                   {/* Problem & Solution block */}
-                  <div className="space-y-6">
-                    <div className="relative border-l-2 border-red-500/30 pl-5 space-y-2">
-                      <div className="flex items-center text-xs font-bold text-red-400 uppercase tracking-widest space-x-2">
+                  <div className="space-y-4">
+                    <div className="bg-red-950/10 border border-red-900/20 p-4 rounded-lg space-y-1.5">
+                      <div className="flex items-center text-xs font-semibold text-red-400 uppercase tracking-wider space-x-2">
                         <AlertCircle className="w-4 h-4" />
                         <span>Karşılaşılan Problem</span>
                       </div>
-                      <p className="text-neutral-400 text-sm font-light leading-relaxed">{activeProject.problem}</p>
+                      <p className="text-zinc-400 text-sm font-normal leading-relaxed">{activeProject.problem}</p>
                     </div>
 
-                    <div className="relative border-l-2 border-gold-500/40 pl-5 space-y-2">
-                      <div className="flex items-center text-xs font-bold text-gold-400 uppercase tracking-widest space-x-2">
-                        <Zap className="w-4 h-4" />
+                    <div className="bg-zinc-900/40 border border-zinc-800 p-4 rounded-lg space-y-1.5">
+                      <div className="flex items-center text-xs font-semibold text-zinc-100 uppercase tracking-wider space-x-2">
+                        <Zap className="w-4 h-4 text-amber-500" />
                         <span>Sunduğumuz Çözüm</span>
                       </div>
-                      <p className="text-neutral-400 text-sm font-light leading-relaxed">{activeProject.solution}</p>
+                      <p className="text-zinc-400 text-sm font-normal leading-relaxed">{activeProject.solution}</p>
                     </div>
                   </div>
 
                   {/* Highlights list */}
-                  <div className="space-y-4">
-                    <div className="text-xs font-bold text-neutral-400 uppercase tracking-widest">ÖNE ÇIKAN ÖZELLİKLER</div>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="space-y-3">
+                    <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">ÖNE ÇIKAN ÖZELLİKLER</div>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                       {activeProject.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start text-sm text-neutral-300">
-                          <div className="p-0.5 bg-gold-500/10 rounded-full border border-gold-500/30 text-gold-400 mr-3 flex-shrink-0 mt-0.5">
-                            <Check className="w-3.5 h-3.5" />
+                        <li key={idx} className="flex items-start text-sm text-zinc-300">
+                          <div className="p-0.5 bg-zinc-900 rounded border border-zinc-800 text-zinc-400 mr-2.5 flex-shrink-0 mt-0.5">
+                            <Check className="w-3 h-3" />
                           </div>
-                          <span className="font-light">{feature}</span>
+                          <span className="font-normal">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   {/* Metrics bullet list */}
-                  <div className="space-y-4 pt-4 border-t border-white/5">
-                    <div className="flex items-center text-xs font-bold text-neutral-400 uppercase tracking-widest space-x-2">
-                      <TrendingUp className="w-4 h-4 text-gold-400" />
+                  <div className="space-y-3 pt-5 border-t border-zinc-800/80">
+                    <div className="flex items-center text-xs font-semibold text-zinc-400 uppercase tracking-wider space-x-2">
+                      <TrendingUp className="w-4 h-4 text-zinc-400" />
                       <span>Elde Edilen Sonuçlar</span>
                     </div>
-                    <ul className="space-y-2.5">
+                    <ul className="space-y-2">
                       {activeProject.results.map((res, idx) => (
-                        <li key={idx} className="flex items-start text-sm text-neutral-400">
-                          <span className="text-gold-400 font-bold mr-3">{idx + 1}.</span>
-                          <span className="font-light leading-relaxed">{res}</span>
+                        <li key={idx} className="flex items-start text-sm text-zinc-400">
+                          <span className="text-zinc-500 font-medium mr-2.5">{idx + 1}.</span>
+                          <span className="font-normal leading-relaxed">{res}</span>
                         </li>
                       ))}
                     </ul>
@@ -435,15 +432,15 @@ export default function ProjectsPage() {
 
                   {/* Live Website Button */}
                   {activeProject.liveUrl && (
-                    <div className="pt-6 border-t border-white/5 flex">
+                    <div className="pt-5 border-t border-zinc-800/80 flex">
                       <a
                         href={activeProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center space-x-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-black font-bold text-xs tracking-widest uppercase transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] group/btn w-full sm:w-auto"
+                        className="inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-md bg-white hover:bg-zinc-200 text-black font-semibold text-xs tracking-wider uppercase transition-all duration-200 group/btn w-full sm:w-auto shadow-lg"
                       >
                         <span>Canlı Siteyi Ziyaret Et</span>
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
                       </a>
                     </div>
                   )}
