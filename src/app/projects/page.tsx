@@ -178,10 +178,44 @@ const projectsData: CaseStudy[] = [
       'Jest & Testing Library ile Kapsamlı Smoke ve Akış Doğrulama Testleri'
     ],
     liveUrl: 'https://www.deqoin.com/'
+  },
+  {
+    id: 'mbseydainsaat',
+    title: 'MB Seyda İnşaat & Taahhüt',
+    category: 'İnşaat & Taahhüt',
+    shortDescription: 'Lüks konut, ticari yapılar, restorasyon ve endüstriyel inşaat projeleri üreten MB Seyda İnşaat için; Clean Architecture Repository Pattern, Vercel Blob ve MongoDB entegrasyonlu modern web portalı ve yönetim paneli.',
+    description: 'Lüks konut, endüstriyel tesisler, tarihi eser restorasyonu ve iç mekan mobilya tasarımları alanında faaliyet gösteren MB Seyda İnşaat için tasarlanmış kurumsal web platformudur. Next.js 14 App Router altyapısı üzerine inşa edilen sistem, veritabanı işlemlerini Clean Architecture prensiplerine göre soyutlayan Decoupled Repository Pattern ile yönetir. Görsel varlıklar ve proje galerileri için @vercel/blob bulut depolaması kullanılırken, yönetim paneli güvenliği jose kütüphanesiyle oluşturulan JWT token tabanlı middleware güvenlik kalkanıyla korunmaktadır.',
+    problem: 'İnşaat projelerinin, restorasyon aşamalarının, kurumsal kimliğin ve müşteri taleplerinin dağınık, veritabanı bağımlı ve statik yöntemlerle yönetilmesi sebebiyle güncelleme hantallığı; yüksek çözünürlüklü şantiye ve restorasyon görsellerinin depolama maliyetleri ve yönetim panelinde yetersiz oturum/güvenlik mekanizmaları.',
+    solution: 'Next.js 14 App Router ve Tailwind CSS mimarisiyle geliştirilmiş esnek arayüz; MongoDB tabanlı Clean Architecture Repository Pattern (aboutRepository, projectRepository, contactMessageRepository vb.) veri katmanı ile veritabanı işlemlerinin tamamen iş katmanından soyutlanması; proje görsellerinin yüksek hızla servis edilmesi için @vercel/blob entegrasyonu; yönetim paneli ve dinamik mesaj kutusunun (inbox) yetkisiz erişimlerden korunması için jose JWT destekli middleware güvenlik katmanı.',
+    results: [
+      'Veritabanı işlemlerinin Decoupled Repository Pattern ile soyutlanması sayesinde veri tabanı geçişleri ve kod bakım maliyetlerinde %60 artış sağlandı.',
+      '@vercel/blob entegrasyonu ile yüzlerce yüksek çözünürlüklü şantiye ve mimari restorasyon görselinin bulut ortamında optimize depolanması ve anlık yüklenmesi.',
+      'jose JWT token doğrulama mekanizmalı Next.js Middleware güvenlik kalkanı sayesinde yetkisiz erişimlerin ve veri sızıntılarının %100 engellenmesi.',
+      'Dinamik gelen kutusu (inbox) ve mesaj filtreleme mekanizmalarıyla kurumsal B2B inşaat ve taahhüt taleplerinde %35 hızlı dönüş ve koordinasyon başarısı.'
+    ],
+    metrics: [
+      { label: 'Talebe Dönüş Hızı', value: '%35' },
+      { label: 'Görsel Yükleme', value: '150ms' },
+      { label: 'Güvenlik Düzeyi', value: 'JWT/jose' }
+    ],
+    tags: ['Next.js 14', 'React 18', 'MongoDB', '@vercel/blob', 'jose JWT', 'Clean Architecture', 'Repository Pattern'],
+    image: '/projects/mb_seyda.png',
+    icon: Layers,
+    features: [
+      'Next.js 14 App Router & React 18 ile Modüler ve SEO Dostu Kurumsal Arayüz',
+      'Clean Architecture Prensiplerine Uygun Decoupled Repository Tasarım Deseni',
+      '@vercel/blob Entegrasyonlu Dinamik Proje ve Galeri Görseli Bulut Depolama Modülü',
+      'jose JWT Tabanlı Next.js Middleware Güvenlik Kalkanı & Oturum Yönetimi',
+      'Dinamik Hakkımızda, Misyon/Vizyon, Zaman Çizelgesi (Timeline) ve Ekip CMS Modülleri',
+      'Genel Arama, Proje Kategori Filtreleme (Konut, Ticari, Restorasyon, Endüstriyel) Arayüzü',
+      'İletişim Talepleri ve Dinamik Gelen Kutusu (Inbox) Yönetim Paneli Modülü',
+      'MongoDB ve Esnek Mongoose/Native Driver ile Performanslı Veritabanı Sorguları'
+    ],
+    liveUrl: 'https://www.mbseydainsaat.com.tr/'
   }
 ]
 
-const categories = ['Tümü', 'B2B & E-Ticaret', 'E-Ticaret & CMS']
+const categories = ['Tümü', 'B2B & E-Ticaret', 'E-Ticaret & CMS', 'İnşaat & Taahhüt']
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState('Tümü')

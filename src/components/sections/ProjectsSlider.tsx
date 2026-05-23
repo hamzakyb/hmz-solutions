@@ -51,6 +51,15 @@ const row1Projects: Project[] = [
     link: '/projects',
     icon: Globe,
   },
+  {
+    title: 'MB Seyda İnşaat & Taahhüt',
+    category: 'İnşaat & Taahhüt',
+    description: 'Lüks konut, ticari, restorasyon ve endüstriyel inşaat için Next.js 14, MongoDB, Vercel Blob ve Clean Architecture altyapılı web portalı.',
+    tags: ['Next.js 14', 'MongoDB', '@vercel/blob', 'jose JWT', 'Repository Pattern'],
+    image: '/projects/mb_seyda.png',
+    link: '/projects',
+    icon: Layers,
+  },
 ]
 
 
