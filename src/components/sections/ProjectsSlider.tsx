@@ -42,6 +42,15 @@ const row1Projects: Project[] = [
     link: '/projects',
     icon: Globe,
   },
+  {
+    title: 'Deqoin Mimari & Lüks Yüzey Stüdyosu',
+    category: 'B2B & E-Ticaret',
+    description: 'Mimari tasarım ve lüks yüzey kaplama stüdyosu için Next.js 15, Lenis smooth scroll ve Cloudinary CDN entegrasyonlu mimari platform.',
+    tags: ['Next.js 15', 'React 19', 'Lenis Scroll', 'Cloudinary CDN', 'Mimari Hub'],
+    image: '/projects/deqoin.png',
+    link: '/projects',
+    icon: Globe,
+  },
 ]
 
 

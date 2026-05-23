@@ -144,6 +144,40 @@ const projectsData: CaseStudy[] = [
       'Zod ile Form Validasyonu ve Next.js Middleware Güvenlik Kalkanı'
     ],
     liveUrl: 'https://www.urenglobal.com/'
+  },
+  {
+    id: 'deqoin',
+    title: 'Deqoin Mimari Tasarım & Lüks Yüzey Stüdyosu',
+    category: 'B2B & E-Ticaret',
+    shortDescription: 'Mimari tasarım, yüzey kaplama ve ince yapı inşaatı yapan Deqoin kolektifi için; Next.js 15, Lenis smooth scroll ve Cloudinary CDN entegrasyonlu mimari hub.',
+    description: 'Deqoin Mimari Tasarım ve Lüks Yüzey Stüdyosu için geliştirilen bu kurumsal platform; mimari tasarım (designStudio), lüks yüzey kaplama malzemeleri (materialStudio) ve ince yapı inşaatı (executionStudio) alanlarındaki tüm projeleri, ekipleri ve iş süreçlerini tek bir merkezde birleştiren lüks bir kurumsal portal ve CMS sistemidir. Sistem, en son sürüm Next.js 15 App Router ve React 19 mimarisi ile inşa edilmiş olup, akıcı kaydırma kinetic\'leri için Lenis smooth scroll ve 4K görsel optimizasyonları için dynamic Cloudinary CDN kütüphaneleri barındırmaktadır.',
+    problem: 'Tasarım, Malzeme ve Uygulama stüdyolarının ayrı web siteleri veya dağınık PDF portfolyoları üzerinden yürütülmesi sebebiyle müşterilerin bütleşik hizmetleri kavrayamaması, yüksek çözünürlüklü iç mekan ve mimari görsellerin optimize edilememesi yüzünden sayfa yükleme sürelerinin aşırı uzaması ve yerinde keşif randevusu almak isteyen kurumsal müşteriler için entegre bir dijital akışın olmaması.',
+    solution: 'Next.js 15 (App Router) ve React 19 mimarisiyle sıfırdan inşa edilmiş, Tailwind CSS v4 ve SASS ile şekillendirilmiş yüksek performanslı kullanıcı arayüzü; MongoDB/Mongoose veri katmanında çalışan Project, StudioCard ve Appointment yönetim modelleri, görsel varlıkların CDN üzerinden hızlı sunumu için dynamic next-cloudinary optimizasyon motoru, akıcı sayfa kaydırma kinetics\'leri için Lenis smooth scroll entegrasyonu ve nodemailer destekli B2B yerinde keşif randevu talep modülü.',
+    results: [
+      'Lenis smooth scroll ve Framer Motion birleşimiyle web arayüzünde ipeksi akıcılıkta ultra lüks kullanıcı deneyimi ve kinetik animasyonlar.',
+      'Yüksek çözünürlüklü 4K iç mimari ve malzeme görsellerinin Cloudinary CDN üzerinden dinamik optimize servis edilmesiyle LCP (Largest Contentful Paint) yüklenme sürelerinin 1.2 saniyeye indirilmesi.',
+      'Mongoose Project şemasındaki publishTargets (çapraz yayın hedefleri) veri modeli sayesinde tek bir projeyi mimari, materyal veya ince yapı stüdyolarında tek tıkla çapraz ilişkilendirme kolaylığı.',
+      'Müşterilerin saha analizi, teknik fizibilite ve konsept öncesi aşamalar için randevu almasını sağlayan kesif booking modülü ile kurumsal taleplerde %40 artış.'
+    ],
+    metrics: [
+      { label: 'Görsel Yükleme (LCP)', value: '1.2s' },
+      { label: 'Keşif Talepleri', value: '+%40' },
+      { label: 'Kaydırma Hızı', value: '60fps' }
+    ],
+    tags: ['Next.js 15', 'React 19', 'Tailwind v4', 'Cloudinary CDN', 'Lenis Scroll', 'MongoDB', 'Mongoose', 'Nodemailer'],
+    image: '/projects/deqoin.png',
+    icon: Globe,
+    features: [
+      'Dinamik Çoklu Stüdyo Yayını & Portfolyo Yönetimi (Design, Material, Execution)',
+      'Lenis Smooth Scroll Entegrasyonu ile Silky-Smooth Akıcı Kaydırma Animasyonları',
+      'next-cloudinary ile 4K Görsellerin CDN Tabanlı Otomatik Sıkıştırma & Servisi',
+      'B2B Yerinde Keşif ve Analiz Randevu Rezervasyon Modülü (Kesif Stages)',
+      'Nodemailer Entegrasyonlu E-Posta Bildirim ve Talep İletişim Kanalları',
+      'Mongoose-MongoDB Tabanlı Esnek Settings & Slide CMS Altyapısı',
+      'Zod ile Şema Tabanlı Form Doğrulama ve Next.js Middleware Güvenlik Katmanı',
+      'Jest & Testing Library ile Kapsamlı Smoke ve Akış Doğrulama Testleri'
+    ],
+    liveUrl: 'https://www.deqoin.com/'
   }
 ]
 
